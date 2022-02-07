@@ -12,7 +12,7 @@ import {
 import { Search } from '@mui/icons-material';
 
 import nfpLogo from '../assets/img/nfp_logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const HeaderLink = ({ to, children }) => {
   return (
@@ -32,11 +32,12 @@ const HeaderLink = ({ to, children }) => {
 
 const Header = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(async () => {
     const token = localStorage.getItem('nfptoken');
     if (token === null || token === undefined) {
-      // history.push('/login');
+      history.push('/login');
     } else {
       // login 된 상태
     }
@@ -44,7 +45,6 @@ const Header = () => {
 
   return (
     <Box
-      maxWidth="xl"
       sx={{
         display: 'flex',
         paddingLeft: '40px',
@@ -59,7 +59,7 @@ const Header = () => {
           alt="Logo"
           style={{
             width: '100px',
-            height: '64px',
+            height: 'auto',
           }}
         />
       </Box>
