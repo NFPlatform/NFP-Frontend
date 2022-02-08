@@ -1,0 +1,77 @@
+@font-face {
+  font-family: 'BM Dohyeon';
+  font-weight: 400;
+  src:
+          /* IE6-IE8 */ url('DoHyeon-Regular.ttf') format('embedded-opentype'),
+    /* Super Modern Browsers */ url('DoHyeon-Regular.ttf') format('woff2'),
+    /* Modern Browsers */ url('DoHyeon-Regular.ttf') format('woff'),
+    /* Safari, Android, iOS */ url('DoHyeon-Regular.ttf') format('truetype'),
+    /* Legacy iOS */ url('DoHyeon-Regular.ttf') format('svg');
+}
+
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-weight: 100;
+  src:
+          /* IE6-IE8 */ url('NotoSansKR-Thin.otf') format('embedded-opentype'),
+    /* Super Modern Browsers */ url('NotoSansKR-Thin.otf') format('woff2'),
+    /* Modern Browsers */ url('NotoSansKR-Thin.otf') format('woff'),
+    /* Safari, Android, iOS */ url('NotoSansKR-Thin.otf') format('truetype'),
+    /* Legacy iOS */ url('NotoSansKR-Thin.otf') format('svg');
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-weight: 300;
+  src:
+          /* IE6-IE8 */ url('NotoSansKR-Light.otf') format('embedded-opentype'),
+    /* Super Modern Browsers */ url('NotoSansKR-Light.otf') format('woff2'),
+    /* Modern Browsers */ url('NotoSansKR-Light.otf') format('woff'),
+    /* Safari, Android, iOS */ url('NotoSansKR-Light.otf') format('truetype'),
+    /* Legacy iOS */ url('NotoSansKR-Light.otf') format('svg');
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-weight: 400;
+  src:
+        /* IE6-IE8 */ url('NotoSansKR-Regular.otf') format('embedded-opentype'),
+    /* Super Modern Browsers */ url('NotoSansKR-Regular.otf') format('woff2'),
+    /* Modern Browsers */ url('NotoSansKR-Regular.otf') format('woff'),
+    /* Safari, Android, iOS */ url('NotoSansKR-Regular.otf') format('truetype'),
+    /* Legacy iOS */ url('NotoSansKR-Regular.otf') format('svg');
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-weight: 500;
+  src:
+        /* IE6-IE8 */ url('NotoSansKR-Medium.otf') format('embedded-opentype'),
+    /* Super Modern Browsers */ url('NotoSansKR-Medium.otf') format('woff2'),
+    /* Modern Browsers */ url('NotoSansKR-Medium.otf') format('woff'),
+    /* Safari, Android, iOS */ url('NotoSansKR-Medium.otf') format('truetype'),
+    /* Legacy iOS */ url('NotoSansKR-Medium.otf') format('svg');
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-weight: 700;
+  src:
+        /* IE6-IE8 */ url('NotoSansKR-Bold.otf') format('embedded-opentype'),
+    /* Super Modern Browsers */ url('NotoSansKR-Bold.otf') format('woff2'),
+    /* Modern Browsers */ url('NotoSansKR-Bold.otf') format('woff'),
+    /* Safari, Android, iOS */ url('NotoSansKR-Bold.otf') format('truetype'),
+    /* Legacy iOS */ url('NotoSansKR-Bold.otf') format('svg');
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-weight: 900;
+  src:
+        /* IE6-IE8 */ url('NotoSansKR-Black.otf') format('embedded-opentype'),
+    /* Super Modern Browsers */ url('NotoSansKR-Black.otf') format('woff2'),
+    /* Modern Browsers */ url('NotoSansKR-Black.otf') format('woff'),
+    /* Safari, Android, iOS */ url('NotoSansKR-Black.otf') format('truetype'),
+    /* Legacy iOS */ url('NotoSansKR-Black.otf') format('svg');
+}

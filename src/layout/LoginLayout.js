@@ -38,6 +38,7 @@ const LoginLayout = () => {
             color: 'white',
             marginLeft: '8%',
             fontSize: '4rem',
+            fontFamily: 'BM Dohyeon'
           }}
         >
           <div style={{ fontSize: '1.7rem' }}>졸업작품 NFT 전시 플랫폼</div>
