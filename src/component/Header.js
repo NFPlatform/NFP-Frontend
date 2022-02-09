@@ -58,13 +58,22 @@ const Header = () => {
           src={nfpLogo}
           alt="Logo"
           style={{
-            width: '100px',
+            width: '80px',
             height: 'auto',
           }}
         />
       </Box>
       <TextField
-        sx={{ flexGrow: 1, marginRight: '15px' }}
+        sx={{
+          flexGrow: 1,
+          marginRight: '15px',
+          '& .MuiOutlinedInput-root': {
+            borderRadius: '50px',
+          },
+          '& .MuiOutlinedInput-input': {
+            fontFamily: 'Noto Sans KR',
+          },
+        }}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
