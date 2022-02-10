@@ -3,6 +3,7 @@ import Footer from '../component/Footer';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import HomePage from '../page/HomePage';
 import RegisterArtistPage from '../page/RegisterArtistPage';
+import MyPage from '../page/MyPage';
 
 const MainLayout = ({ match }) => {
   return (
@@ -10,7 +11,7 @@ const MainLayout = ({ match }) => {
       <Header />
       <div
         style={{
-          height: 'calc(100% - 87px)',
+          height: 'calc(100% - 107px)',
           display: 'flex',
           flexDirection: 'column',
         }}
@@ -28,6 +29,7 @@ const MainLayout = ({ match }) => {
               path={`${match.path}/register-artist`}
               component={RegisterArtistPage}
             />
+            <Route exact path={`${match.path}/my`} component={MyPage} />
           </Switch>
         </div>
         <Footer />

@@ -50,5 +50,5 @@
   "devDependencies": {
     "prettier": "^2.5.1"
   },
-  "proxy": "http://localhost:6040"
+  "proxy": "https://api.nfplatform.com"
 }

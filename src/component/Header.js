@@ -13,6 +13,7 @@ import { Search } from '@mui/icons-material';
 
 import nfpLogo from '../assets/img/nfp_logo.png';
 import { Link, useHistory } from 'react-router-dom';
+import { getUserInfoThunk } from '../features/user/UserThunks';
 
 const HeaderLink = ({ to, children }) => {
   return (
@@ -39,7 +40,7 @@ const Header = () => {
     if (token === null || token === undefined) {
       history.push('/login');
     } else {
-      // login 된 상태
+      await dispatch(getUserInfoThunk());
     }
   }, []);
 
@@ -47,9 +48,7 @@ const Header = () => {
     <Box
       sx={{
         display: 'flex',
-        paddingLeft: '40px',
-        paddingTop: '25px',
-        paddingRight: '80px',
+        padding: '25px 80px 20px 40px',
         alignItems: 'center',
         height: '62px',
       }}
@@ -99,11 +98,16 @@ const Header = () => {
       >
         🎨 작가등록
       </Button>
-      <Avatar
-        sx={{ marginX: 0.5 }}
-        alt="My"
-        src="https://mui.com/static/images/avatar/1.jpg"
-      />
+      <Link to="/main/my">
+        <Avatar
+          sx={{ marginX: 1 }}
+          alt="My"
+          src="https://mui.com/static/images/avatar/1.jpg"
+        />
+      </Link>
+      <Button sx={{ color: 'black' }} variant="text">
+        로그아웃
+      </Button>
     </Box>
   );
 };
