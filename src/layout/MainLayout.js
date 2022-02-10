@@ -1,9 +1,40 @@
 import Header from '../component/Header';
+import Footer from '../component/Footer';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import LoginLayout from './LoginLayout';
+import OauthLayout from './OauthLayout';
+import HomePage from '../page/HomePage';
+import RegisterArtistPage from '../page/RegisterArtistPage';
 
-const MainLayout = () => {
+const MainLayout = ({ match }) => {
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       <Header />
+      <div
+        style={{
+          height: 'calc(100% - 87px)',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <div style={{ flex: 1 }}>
+          <Switch>
+            <Route
+              exact
+              path={`${match.path}`}
+              render={() => <Redirect to="/main/home" />}
+            />
+            <Route exact path={`${match.path}/home`} component={HomePage} />
+            <Route
+              exact
+              path={`${match.path}/register-artist`}
+              component={RegisterArtistPage}
+            />
+          </Switch>
+          <div>Content</div>
+        </div>
+        <Footer />
+      </div>
     </div>
   );
 };

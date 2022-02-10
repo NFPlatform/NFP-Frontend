@@ -51,6 +51,7 @@ const Header = () => {
         paddingTop: '25px',
         paddingRight: '80px',
         alignItems: 'center',
+        height: '62px',
       }}
     >
       <Box sx={{ marginX: 1, marginRight: '60px', marginLeft: '30px' }}>
