@@ -10,7 +10,7 @@ function App() {
       <Route exact path="/" render={() => <Redirect to="/main" />} />
       <Route exact path="/login" component={LoginLayout} />
       <Route exact path="/oauth" component={OauthLayout} />
-      <Route exact path="/main" component={MainLayout} />
+      <Route path="/main" component={MainLayout} />
     </Switch>
   );
 }

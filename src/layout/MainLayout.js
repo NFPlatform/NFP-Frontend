@@ -1,8 +1,6 @@
 import Header from '../component/Header';
 import Footer from '../component/Footer';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import LoginLayout from './LoginLayout';
-import OauthLayout from './OauthLayout';
 import HomePage from '../page/HomePage';
 import RegisterArtistPage from '../page/RegisterArtistPage';
 
@@ -31,7 +29,6 @@ const MainLayout = ({ match }) => {
               component={RegisterArtistPage}
             />
           </Switch>
-          <div>Content</div>
         </div>
         <Footer />
       </div>
