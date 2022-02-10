@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Avatar,
   Box,
@@ -34,6 +34,8 @@ const HeaderLink = ({ to, children }) => {
 const Header = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const thumbnailImg = useSelector((state) => state.user.thumbnailImg);
 
   useEffect(async () => {
     const token = localStorage.getItem('nfptoken');
@@ -99,11 +101,7 @@ const Header = () => {
         🎨 작가등록
       </Button>
       <Link to="/main/my">
-        <Avatar
-          sx={{ marginX: 1 }}
-          alt="My"
-          src="https://mui.com/static/images/avatar/1.jpg"
-        />
+        <Avatar sx={{ marginX: 1 }} alt="My" src={thumbnailImg} />
       </Link>
       <Button sx={{ color: 'black' }} variant="text">
         로그아웃

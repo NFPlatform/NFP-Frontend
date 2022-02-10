@@ -1,0 +1,10 @@
+.my-page-avatar-edit {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+}
+
+.my-page-avatar-edit:hover {
+  background-color: #494949;
+  cursor: pointer;
+}
