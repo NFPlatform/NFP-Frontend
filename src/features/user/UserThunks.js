@@ -15,7 +15,6 @@ export const loginUserThunk = createAsyncThunk(
 export const getUserInfoThunk = createAsyncThunk(
   'user/getUserInfo',
   async (payload, { dispatch }) => {
-    console.log('hi?');
     const result = await getUserInfoApi();
     dispatch(userSlice.actions.setUserInfo(result.data));
   },
