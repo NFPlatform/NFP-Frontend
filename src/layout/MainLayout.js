@@ -26,7 +26,7 @@ const MainLayout = ({ match }) => {
             <Route exact path={`${match.path}/home`} component={HomePage} />
             <Route
               exact
-              path={`${match.path}/register-artist`}
+              path={`${match.path}/register/artist`}
               component={RegisterArtistPage}
             />
             <Route exact path={`${match.path}/my`} component={MyPage} />
