@@ -9,7 +9,7 @@ import { Avatar, Box, CardActionArea, Stack } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link } from 'react-router-dom';
 
-export default function PieceCard() {
+export default function AuctionCard() {
   return (
     <Card sx={{ maxWidth: 220, maxHeight: 320, borderRadius: 3 }}>
       <Link to={{ pathname: 'https://naver.com' }} target="_blank">

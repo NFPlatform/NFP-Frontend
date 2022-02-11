@@ -10,7 +10,7 @@ import mainRightImg3 from '../assets/img/home-main-right3.jpeg';
 import mainRightImg4 from '../assets/img/home-main-right4.png';
 import mainRightImg5 from '../assets/img/home-main-right5.jpeg';
 import mainRightImg6 from '../assets/img/home-main-right6.png';
-import PieceCard from '../component/PieceCard';
+import AuctionCard from '../component/AuctionCard';
 
 const images = [
   {
@@ -93,7 +93,7 @@ const ImageBackdrop = styled('span')(({ theme }) => ({
 const HomePage = () => {
   return (
     <>
-      <PieceCard />;
+      <AuctionCard />;
       <Box
         sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}
       >
