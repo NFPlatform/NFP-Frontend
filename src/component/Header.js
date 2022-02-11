@@ -53,14 +53,21 @@ const Header = () => {
       }}
     >
       <Box sx={{ marginX: 1, marginRight: '60px', marginLeft: '30px' }}>
-        <img
-          src={nfpLogo}
-          alt="Logo"
+        <Link
           style={{
             width: '80px',
-            height: 'auto',
           }}
-        />
+          to="/main"
+        >
+          <img
+            src={nfpLogo}
+            alt="Logo"
+            style={{
+              width: '80px',
+              height: 'auto',
+            }}
+          />
+        </Link>
       </Box>
       <TextField
         sx={{
