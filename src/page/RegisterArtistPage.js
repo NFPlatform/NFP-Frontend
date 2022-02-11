@@ -1,17 +1,49 @@
 import bannerArtistRegistrationIcon from '../assets/img/banner_artist_registration_icon.png';
-import { Button, TextField } from '@mui/material';
+import { Button, drawerClasses, TextField } from '@mui/material';
 import { useState } from 'react';
 import { DriveFolderUpload } from '@mui/icons-material';
 
 import '../styles/RegisterArtistPage.css';
 import '../assets/fonts/font.css';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { registerArtistThunk } from '../features/artist/ArtistThunks';
 
 const RegisterArtistPage = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const [artistName, setArtistName] = useState('');
   const [instagramId, setInstagramId] = useState('');
   const [bio, setBio] = useState('');
   const [document, setDocument] = useState(null);
   const [documentName, setDocumentName] = useState(null);
+
+  const registerArtist = async () => {
+    const data = {
+      name: artistName,
+      instagramId: instagramId,
+      bio: bio,
+    };
+
+    const formData = new FormData();
+    formData.append(
+      'data',
+      new Blob([JSON.stringify(data)], { type: 'application/json' }),
+    );
+    if (document) {
+      formData.append('file', document);
+    }
+
+    await dispatch(
+      registerArtistThunk({
+        data: formData,
+        afterCallback: () => {
+          history.push('/main');
+        },
+      }),
+    );
+  };
 
   return (
     <div style={{ width: '100%' }}>
@@ -207,6 +239,7 @@ const RegisterArtistPage = () => {
               fontFamily: 'BM Dohyeon',
             }}
             variant="contained"
+            onClick={registerArtist}
           >
             작가등록 신청
           </Button>
