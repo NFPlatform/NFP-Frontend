@@ -1,19 +1,13 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import {
-  Avatar,
-  Box,
-  Button,
-  Container,
-  Input,
-  InputAdornment,
-  TextField,
-} from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { Avatar, Box, Button, InputAdornment, TextField } from '@mui/material';
 import { Search } from '@mui/icons-material';
 
 import nfpLogo from '../assets/img/nfp_logo.png';
 import { Link, useHistory } from 'react-router-dom';
 import { getUserInfoThunk } from '../features/user/UserThunks';
+
+import '../assets/fonts/font.css';
 
 const HeaderLink = ({ to, children }) => {
   return (
@@ -22,6 +16,8 @@ const HeaderLink = ({ to, children }) => {
         style={{
           color: 'black',
           textDecoration: 'none',
+          fontFamily: 'BM Dohyeon',
+          fontSize: '1.1rem',
         }}
         to={to}
       >
@@ -34,6 +30,9 @@ const HeaderLink = ({ to, children }) => {
 const Header = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const isArtist = useSelector((state) => state.user.isArtist);
+  const thumbnailImg = useSelector((state) => state.user.thumbnailImg);
 
   useEffect(async () => {
     const token = localStorage.getItem('nfptoken');
@@ -54,14 +53,21 @@ const Header = () => {
       }}
     >
       <Box sx={{ marginX: 1, marginRight: '60px', marginLeft: '30px' }}>
-        <img
-          src={nfpLogo}
-          alt="Logo"
+        <Link
           style={{
             width: '80px',
-            height: 'auto',
           }}
-        />
+          to="/main"
+        >
+          <img
+            src={nfpLogo}
+            alt="Logo"
+            style={{
+              width: '80px',
+              height: 'auto',
+            }}
+          />
+        </Link>
       </Box>
       <TextField
         sx={{
@@ -88,24 +94,55 @@ const Header = () => {
       <HeaderLink to="/hi">전시회</HeaderLink>
       <HeaderLink to="/hi">커뮤티니</HeaderLink>
       <HeaderLink to="/hi">NFT카페</HeaderLink>
-      <Button
-        sx={{
-          borderRadius: '20px',
-          backgroundImage:
-            'linear-gradient(to right, #f0bbe8 0%, #deb1e3 25%, #d0a8de 51%, #c09eda 76%, #ad93d4 100%)',
-        }}
-        variant="contained"
-      >
-        🎨 작가등록
-      </Button>
+      {isArtist ? (
+        <Button
+          sx={{
+            borderRadius: '20px',
+            backgroundImage:
+              'linear-gradient(to right, #f091f7 0%, #f184d8 25%, #f279be 51%, #f36ea2 76%, #f4638a 100%)',
+          }}
+          variant="contained"
+        >
+          <Link
+            style={{
+              color: 'white',
+              textDecoration: 'none',
+              fontSize: '1.1rem',
+              fontFamily: 'BM Dohyeon',
+            }}
+          >
+            🖼️ 작품등록
+          </Link>
+        </Button>
+      ) : (
+        <Button
+          sx={{
+            borderRadius: '20px',
+            backgroundImage:
+              'linear-gradient(to right, #f0bbe8 0%, #deb1e3 25%, #d0a8de 51%, #c09eda 76%, #ad93d4 100%)',
+          }}
+          variant="contained"
+        >
+          <Link
+            to="/main/register/artist"
+            style={{
+              color: 'white',
+              textDecoration: 'none',
+              fontSize: '1.1rem',
+              fontFamily: 'BM Dohyeon',
+            }}
+          >
+            🎨 작가등록
+          </Link>
+        </Button>
+      )}
       <Link to="/main/my">
-        <Avatar
-          sx={{ marginX: 1 }}
-          alt="My"
-          src="https://mui.com/static/images/avatar/1.jpg"
-        />
+        <Avatar sx={{ marginX: 1 }} alt="My" src={thumbnailImg} />
       </Link>
-      <Button sx={{ color: 'black' }} variant="text">
+      <Button
+        sx={{ color: 'black', fontFamily: 'BM Dohyeon', fontSize: '1.1rem' }}
+        variant="text"
+      >
         로그아웃
       </Button>
     </Box>
