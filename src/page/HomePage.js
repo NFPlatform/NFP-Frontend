@@ -1,5 +1,7 @@
+import PieceCard from '../component/PieceCard';
+
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return <PieceCard />;
 };
 
 export default HomePage;
