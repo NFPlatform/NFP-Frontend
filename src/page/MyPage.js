@@ -3,13 +3,16 @@ import {
   Button,
   createTheme,
   Divider,
+  Grid,
   ThemeProvider,
 } from '@mui/material';
 import { Edit } from '@mui/icons-material';
+import { brown } from '@mui/material/colors';
+
 import { useSelector } from 'react-redux';
 
 import '../styles/MyPage.css';
-import { brown } from '@mui/material/colors';
+import AuctionCard from '../component/AuctionCard';
 
 const theme = createTheme({
   palette: {
@@ -96,16 +99,111 @@ const MyPage = () => {
       </div>
       <div
         style={{
-          width: '80%',
-          padding: '0 10%',
+          width: '60%',
+          padding: '0 20%',
         }}
       >
         <div style={{ marginBottom: '10px' }}>보유작품</div>
         <Divider color="grey" sx={{ width: '13%' }} />
-        <div style={{ margin: '50px 25px' }}>sdfsdfsdf</div>
+        <div style={{ margin: '50px 15px' }}>
+          <Grid
+            container
+            spacing={{ xs: 2, md: 2 }}
+            columns={{ xs: 4, sm: 9, md: 12 }}
+          >
+            {ownedPiece.map((value, i) => (
+              <Grid item xs={2} sm={3} md={3} key={i}>
+                <AuctionCard
+                  auctionId={value.auctionId}
+                  auctionTokenId={value.auctionTokenId}
+                  klay={value.klay}
+                  vote={value.vote}
+                  sellerId={value.sellerId}
+                  sellerName={value.sellerName}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
       </div>
     </div>
   );
 };
+
+const ownedPiece = [
+  {
+    auctionId: 1,
+    auctionTokenId: 'sdf',
+    klay: 120,
+    vote: 0,
+    category: 'art',
+    sellerName: 'wavvism',
+    sellerId: 1,
+  },
+  {
+    auctionId: 1,
+    auctionTokenId: 'sdf',
+    klay: 120,
+    vote: 0,
+    sellerName: 'wavvism',
+    sellerId: 1,
+  },
+  {
+    auctionId: 1,
+    auctionTokenId: 'sdf',
+    klay: 120,
+    vote: 0,
+    sellerName: 'wavvism',
+    sellerId: 1,
+  },
+  {
+    auctionId: 1,
+    auctionTokenId: 'sdf',
+    klay: 120,
+    vote: 0,
+    sellerName: 'wavvism',
+    sellerId: 1,
+  },
+  {
+    auctionId: 1,
+    auctionTokenId: 'sdf',
+    klay: 120,
+    vote: 0,
+    sellerName: 'wavvism',
+    sellerId: 1,
+  },
+  {
+    auctionId: 1,
+    auctionTokenId: 'sdf',
+    klay: 120,
+    vote: 0,
+    sellerName: 'wavvism',
+    sellerId: 1,
+  },
+  {
+    auctionId: 1,
+    auctionTokenId: 'sdf',
+    klay: 120,
+    vote: 0,
+    sellerName: 'wavvism',
+    sellerId: 1,
+  },
+  {
+    auctionId: 1,
+    auctionTokenId: 'sdf',
+    klay: 120,
+    vote: 0,
+    sellerName: 'wavvism',
+    sellerId: 1,
+  },
+  {
+    auctionId: 1,
+    auctionTokenId: 'sdf',
+    klay: 120,
+    vote: 0,
+    sellerName: 'wavvism',
+    sellerId: 1,
+  },
+];
 
 export default MyPage;

@@ -9,9 +9,16 @@ import { Avatar, Box, CardActionArea, Stack } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link } from 'react-router-dom';
 
-export default function AuctionCard() {
+const AuctionCard = ({
+  auctionId,
+  auctionTokenId,
+  klay,
+  vote,
+  sellerName,
+  sellerId,
+}) => {
   return (
-    <Card sx={{ maxWidth: 220, maxHeight: 320, borderRadius: 3 }}>
+    <Card sx={{ maxWidth: 220, maxHeight: 320, borderRadius: 3, marginX: 2 }}>
       <Link to={{ pathname: 'https://naver.com' }} target="_blank">
         <CardActionArea>
           <Box sx={{ padding: 2, paddingBottom: 0 }}>
@@ -37,7 +44,7 @@ export default function AuctionCard() {
                   variant="caption"
                   component="div"
                 >
-                  wavvism
+                  {sellerName}
                 </Typography>
                 <Typography
                   sx={{ lineHeight: '105%', letterSpacing: -0.1 }}
@@ -56,7 +63,7 @@ export default function AuctionCard() {
               color="#3871c5"
             >
               <Stack direction="row" spacing={2}>
-                <Typography sx={{ letterSpacing: -0.7 }}>120</Typography>
+                <Typography sx={{ letterSpacing: -0.7 }}>{klay}</Typography>
                 <Typography sx={{ letterSpacing: -0.7 }}>KLAY</Typography>
               </Stack>
               <Stack direction="row" spacing={0.5} alignItems="center">
@@ -66,7 +73,7 @@ export default function AuctionCard() {
                   sx={{ letterSpacing: -0.1 }}
                   color="#606060"
                 >
-                  000
+                  {vote}
                 </Typography>
               </Stack>
             </Stack>
@@ -75,4 +82,6 @@ export default function AuctionCard() {
       </Link>
     </Card>
   );
-}
+};
+
+export default AuctionCard;

@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { store } from './lib/store';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,9 +14,9 @@ ReactDOM.render(
       <BrowserRouter>
         <App />
         <ToastContainer
-          autoClose={4000}
+          autoClose={2000}
           closeOnClick
-          hideProgressBar={false}
+          hideProgressBar={true}
           pauseOnHover
           position="bottom-center"
           theme="colored"

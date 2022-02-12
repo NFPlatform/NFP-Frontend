@@ -110,6 +110,7 @@ const Header = () => {
               fontSize: '1.1rem',
               fontFamily: 'BM Dohyeon',
             }}
+            to="/main/home"
           >
             🖼️ 작품등록
           </Link>
