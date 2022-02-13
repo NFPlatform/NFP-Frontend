@@ -90,7 +90,7 @@ const Header = () => {
         size="small"
         placeholder="찾고 싶은 키워드나 작품을 검색해 주세요!"
       />
-      <HeaderLink to="/hi">작품구경</HeaderLink>
+      <HeaderLink to="/main/piece">작품구경</HeaderLink>
       <HeaderLink to="/hi">전시회</HeaderLink>
       <HeaderLink to="/hi">커뮤티니</HeaderLink>
       <HeaderLink to="/hi">NFT카페</HeaderLink>
@@ -143,6 +143,10 @@ const Header = () => {
       <Button
         sx={{ color: 'black', fontFamily: 'BM Dohyeon', fontSize: '1.1rem' }}
         variant="text"
+        onClick={() => {
+          localStorage.removeItem('nfptoken');
+          history.push('/login');
+        }}
       >
         로그아웃
       </Button>
