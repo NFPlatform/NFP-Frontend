@@ -4,54 +4,19 @@ import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 import mainLeftImg from '../assets/img/home-main-left.png';
-import mainRightImg1 from '../assets/img/home-main-right1.png';
-import mainRightImg2 from '../assets/img/home-main-right2.jpeg';
-import mainRightImg3 from '../assets/img/home-main-right3.jpeg';
-import mainRightImg4 from '../assets/img/home-main-right4.png';
-import mainRightImg5 from '../assets/img/home-main-right5.jpeg';
 import mainRightImg6 from '../assets/img/home-main-right6.png';
+import AuctionCard from '../component/AuctionCard';
+import categoryList from '../lib/category';
 
-const images = [
-  {
-    url: `${mainLeftImg}`,
-    title: '지금 가장 HOT한 아티스트',
-    width: '40%',
-  },
-  {
-    url: `${mainRightImg1}`,
-    title: '미술',
-    width: '30%',
-  },
-  {
-    url: `${mainRightImg2}`,
-    title: '음악',
-    width: '30%',
-  },
-  {
-    url: `${mainRightImg3}`,
-    title: '패션',
-    width: '30%',
-  },
-  {
-    url: `${mainRightImg4}`,
-    title: '건축',
-    width: '30%',
-  },
-  {
-    url: `${mainRightImg5}`,
-    title: '영화',
-    width: '30%',
-  },
-  {
-    url: `${mainRightImg6}`,
-    title: '이벤트',
-    width: '30%',
-  },
-];
+import { Grid } from '@mui/material';
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
-const ImageButton = styled(ButtonBase)(({ theme }) => ({
+const ImageButton = styled(ButtonBase)(({ height, theme }) => ({
   position: 'relative',
-  height: 200,
+  height: `${height}`,
+  width: 'calc(100% - 40px)',
+  margin: '0 20px',
   [theme.breakpoints.down('sm')]: {
     width: '100% !important', // Overrides inline-style
     height: 100,
@@ -65,9 +30,6 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
     '& .MuiImageMarked-root': {
       opacity: 0,
     },
-    // '& .MuiTypography-root': {
-    //   border: '4px solid currentColor',
-    // },
   },
 }));
 
@@ -81,18 +43,6 @@ const ImageSrc = styled('span')({
   backgroundPosition: 'center 40%',
 });
 
-const Image = styled('span')(({ theme }) => ({
-  position: 'absolute',
-  left: 0,
-  right: 0,
-  top: 0,
-  bottom: 0,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: theme.palette.common.white,
-}));
-
 const ImageBackdrop = styled('span')(({ theme }) => ({
   position: 'absolute',
   left: 0,
@@ -104,32 +54,24 @@ const ImageBackdrop = styled('span')(({ theme }) => ({
   transition: theme.transitions.create('opacity'),
 }));
 
-const ImageMarked = styled('span')(({ theme }) => ({
-  height: 3,
-  width: 18,
-  backgroundColor: theme.palette.common.white,
-  position: 'absolute',
-  bottom: -2,
-  left: 'calc(50% - 9px)',
-  transition: theme.transitions.create('opacity'),
-}));
-
 const HomePage = () => {
+  const history = useHistory();
+
   return (
-    <Box
-      sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}
-    >
-      {images.map((image) => (
+    <>
+      <Box sx={{ display: 'flex', minWidth: 300, paddingX: 16, paddingY: 3 }}>
         <ImageButton
           focusRipple
-          key={image.title}
           style={{
-            width: image.width,
+            flex: 2,
+          }}
+          height={'600px'}
+          onClick={() => {
+            toast.success('지원하지 않는 기능입니다.');
           }}
         >
-          <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
+          <ImageSrc style={{ backgroundImage: `url(${mainLeftImg})` }} />
           <ImageBackdrop className="MuiImageBackdrop-root" />
-          {/*<Image>*/}
           <Typography
             component="span"
             variant="h6"
@@ -138,19 +80,72 @@ const HomePage = () => {
               position: 'absolute',
               top: 15,
               left: 15,
-              '& .MuiTypography-root': {},
-              // p: 4,
-              // pt: 2,
-              // pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
             }}
           >
-            {image.title}
-            {/*<ImageMarked className="MuiImageMarked-root" />*/}
+            지금 가장 HOT한 아티스트
           </Typography>
-          {/*</Image>*/}
         </ImageButton>
-      ))}
-    </Box>
+        <div style={{ flex: 3, height: '600px' }}>
+          <Grid container rowSpacing={2} columns={{ md: 6 }}>
+            {categoryList.map((category, i) => (
+              <Grid key={i} item md={2}>
+                <ImageButton
+                  height={'292px'}
+                  focusRipple
+                  onClick={() => {
+                    history.push(`/main/piece?category=${category.key}`);
+                  }}
+                >
+                  <ImageSrc
+                    style={{ backgroundImage: `url(${category.img})` }}
+                  />
+                  <ImageBackdrop className="MuiImageBackdrop-root" />
+                  <Typography
+                    component="span"
+                    variant="h6"
+                    color="white"
+                    sx={{
+                      position: 'absolute',
+                      top: 15,
+                      left: 15,
+                    }}
+                  >
+                    {category.ko}
+                  </Typography>
+                </ImageButton>
+              </Grid>
+            ))}
+            <Grid item md={2}>
+              <ImageButton
+                height={'292px'}
+                focusRipple
+                onClick={() => {
+                  toast.success('지원하지 않는 기능입니다.');
+                }}
+              >
+                <ImageSrc
+                  style={{ backgroundImage: `url(${mainRightImg6})` }}
+                />
+                <ImageBackdrop className="MuiImageBackdrop-root" />
+                <Typography
+                  component="span"
+                  variant="h6"
+                  color="white"
+                  sx={{
+                    position: 'absolute',
+                    top: 15,
+                    left: 15,
+                  }}
+                >
+                  이벤트
+                </Typography>
+              </ImageButton>
+            </Grid>
+          </Grid>
+        </div>
+      </Box>
+      <AuctionCard />
+    </>
   );
 };
 

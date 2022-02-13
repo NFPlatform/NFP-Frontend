@@ -12,11 +12,13 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUserInfo(state, { payload }) {
-      console.log(payload);
       state.id = payload.id;
       state.thumbnailImg = `/user/${payload.id}/img`;
       state.name = payload.name;
       state.isArtist = payload.artist;
+    },
+    setArtist(state) {
+      state.isArtist = true;
     },
   },
 });

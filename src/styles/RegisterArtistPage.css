@@ -1,0 +1,16 @@
+.file-button {
+    flex: 0;
+    min-width: 280px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    color: rgba(0, 0, 0, 0.50);
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.file-button:hover {
+    cursor: pointer;
+}
