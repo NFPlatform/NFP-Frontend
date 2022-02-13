@@ -10,6 +10,7 @@ import categoryList from '../lib/category';
 
 import { Grid } from '@mui/material';
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
 const ImageButton = styled(ButtonBase)(({ height, theme }) => ({
   position: 'relative',
@@ -54,6 +55,8 @@ const ImageBackdrop = styled('span')(({ theme }) => ({
 }));
 
 const HomePage = () => {
+  const history = useHistory();
+
   return (
     <>
       <Box sx={{ display: 'flex', minWidth: 300, paddingX: 16, paddingY: 3 }}>
@@ -90,7 +93,7 @@ const HomePage = () => {
                   height={'292px'}
                   focusRipple
                   onClick={() => {
-                    toast.success('지원하지 않는 기능입니다.');
+                    history.push(`/main/piece?category=${category.key}`);
                   }}
                 >
                   <ImageSrc
