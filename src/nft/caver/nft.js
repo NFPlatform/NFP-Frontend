@@ -1,20 +1,20 @@
 import { caver, NFTContract } from './index';
 
-const getTokenPromise = async (address, i) => {
+const getNftTokenPromise = async (address, i) => {
   const id = await NFTContract.methods.tokenOfOwnerByIndex(address, i).call();
   const uri = await NFTContract.methods.tokenURI(id).call();
-  return { id: id, uri: uri };
+  return { tokenId: id, uri: uri };
 };
 
-export const getNftListOfAddress = async (address) => {
+export const getNftListOfAddressPromiseList = async (address) => {
   const balanceOfNft = await NFTContract.methods.balanceOf(address).call();
-  const getTokenPromiseList: Promise[] = [];
+  const getNftTokenPromiseList: Promise[] = [];
 
   for (let i = 0; i < balanceOfNft; i++) {
-    getTokenPromiseList.push(getTokenPromise(address, i));
+    getNftTokenPromiseList.push(getNftTokenPromise(address, i));
   }
 
-  return Promise.all(getTokenPromiseList);
+  return getNftTokenPromiseList;
 };
 
 export const getBalanceOfKlay = async (address) => {

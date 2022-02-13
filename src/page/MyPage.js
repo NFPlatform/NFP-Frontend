@@ -1,18 +1,27 @@
 import {
   Avatar,
+  Box,
   Button,
   createTheme,
   Divider,
   Grid,
+  Modal,
   ThemeProvider,
 } from '@mui/material';
 import { Edit } from '@mui/icons-material';
 import { brown } from '@mui/material/colors';
+import QRCode from 'qrcode.react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import '../styles/MyPage.css';
 import AuctionCard from '../component/AuctionCard';
+import {
+  getBalanceOfKlayThunk,
+  linkWithKlipWalletThunk,
+} from '../features/user/UserThunks';
+import { useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const theme = createTheme({
   palette: {
@@ -23,7 +32,21 @@ const theme = createTheme({
 });
 
 const MyPage = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const userInfo = useSelector((state) => state.user);
+
+  const [klipWalletRegisterModal, setKlipWalletRegisterModal] = useState(false);
+  const [klipWalletRegisterUrl, setKlipWalletRegisterUrl] = useState('');
+
+  useEffect(async () => {
+    if (userInfo.klipAddressHex !== '') {
+      await dispatch(
+        getBalanceOfKlayThunk({ address: userInfo.klipAddressHex }),
+      );
+    }
+  }, [userInfo.klipAddressHex]);
 
   return (
     <div style={{ width: '100%' }}>
@@ -90,11 +113,41 @@ const MyPage = () => {
             alignItems: 'center',
           }}
         >
-          <ThemeProvider theme={theme}>
-            <Button variant="contained" color="primary">
-              Klip 지갑 연결하기
-            </Button>
-          </ThemeProvider>
+          {userInfo.klipAddressHex === '' ? (
+            <ThemeProvider theme={theme}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(
+                    linkWithKlipWalletThunk({
+                      actionWithRedirectUrl: (redirectUrl) => {
+                        if (redirectUrl.startsWith('kakaotalk')) {
+                          history.push(redirectUrl);
+                        } else {
+                          setKlipWalletRegisterUrl(redirectUrl);
+                          setKlipWalletRegisterModal(true);
+                        }
+                      },
+                      afterResultCallback: async () => {
+                        setKlipWalletRegisterModal(false);
+                      },
+                    }),
+                  );
+                }}
+              >
+                Klip 지갑 연결하기
+              </Button>
+            </ThemeProvider>
+          ) : (
+            <div>
+              <div>address</div>
+              <div>{userInfo.klipAddressHex}</div>
+              <div>klay</div>
+              <div>{userInfo.balanceOfKlay}</div>
+            </div>
+          )}
         </div>
       </div>
       <div
@@ -126,6 +179,34 @@ const MyPage = () => {
           </Grid>
         </div>
       </div>
+      <Modal
+        open={klipWalletRegisterModal}
+        onClose={() => {
+          setKlipWalletRegisterModal(false);
+        }}
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'background.paper',
+            border: '2px solid #000000',
+            boxShadow: 2,
+            p: 4,
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <QRCode
+            value={klipWalletRegisterUrl}
+            size={350}
+            style={{ margin: 'auto' }}
+          />
+        </Box>
+      </Modal>
     </div>
   );
 };

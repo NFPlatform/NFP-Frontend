@@ -5,7 +5,10 @@ import { Search } from '@mui/icons-material';
 
 import nfpLogo from '../assets/img/nfp_logo.png';
 import { Link, useHistory } from 'react-router-dom';
-import { getUserInfoThunk } from '../features/user/UserThunks';
+import {
+  getUserInfoThunk,
+  setKlipWalletThunk,
+} from '../features/user/UserThunks';
 
 import '../assets/fonts/font.css';
 
@@ -40,6 +43,11 @@ const Header = () => {
       history.push('/login');
     } else {
       await dispatch(getUserInfoThunk());
+    }
+
+    const klaytnAddress = localStorage.getItem('klaytnAddress');
+    if (klaytnAddress !== null && klaytnAddress !== undefined) {
+      await dispatch(setKlipWalletThunk({ klaytnAddress: klaytnAddress }));
     }
   }, []);
 

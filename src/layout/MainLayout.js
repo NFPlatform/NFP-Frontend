@@ -8,8 +8,11 @@ import PieceListPage from '../page/PieceListPage';
 import RegisterPiecePage from '../page/RegisterPiecePage';
 import PieceDetailPage from '../page/PieceDetailPage';
 import ArtistDetailPage from '../page/ArtistDetailPage';
+import { useEffect } from 'react';
 
 const MainLayout = ({ match }) => {
+  useEffect(() => {}, []);
+
   return (
     <div style={{ height: '100%' }}>
       <Header />

@@ -5,6 +5,13 @@ const initialState = {
   thumbnailImg: '',
   name: '',
   isArtist: false,
+  klipAddressHex: '',
+  balanceOfKlay: 0,
+  ownedPieceList: [],
+  topArtist: {
+    id: -1,
+    name: '',
+  },
 };
 
 const userSlice = createSlice({
@@ -19,6 +26,19 @@ const userSlice = createSlice({
     },
     setArtist(state) {
       state.isArtist = true;
+    },
+    setKlipAddressHex(state, { payload }) {
+      state.klipAddressHex = payload;
+    },
+    setBalanceOfKlay(state, { payload }) {
+      state.balanceOfKlay = payload;
+    },
+    setTopArtist(state, { payload }) {
+      state.topArtist.id = payload.id;
+      state.topArtist.name = payload.name;
+    },
+    setOwnedPiece(state, { payload }) {
+      state.ownedPieceList = payload;
     },
   },
 });

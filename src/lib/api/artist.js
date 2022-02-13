@@ -7,3 +7,7 @@ export const registerArtistApi = (formData) => {
     },
   });
 };
+
+export const getTopArtistApi = () => {
+  return api.get('/artist/top');
+};

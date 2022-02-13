@@ -21,3 +21,13 @@ export const getTopCollectorApi = () => {
 export const getUserImg = (userId) => {
   return api.get(`/user/${userId}/img`);
 };
+
+export const linkWithKlipWalletApi = (address) => {
+  return api.post('/user/klip/register', {
+    address: address,
+  });
+};
+
+export const getOwnedPieceListApi = () => {
+  return api.get(`/user/piece`);
+};

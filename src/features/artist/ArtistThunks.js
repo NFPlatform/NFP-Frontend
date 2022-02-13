@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { registerArtistApi } from '../../lib/api/artist';
-import { getUserInfoThunk } from '../user/UserThunks';
+import { getTopArtistApi, registerArtistApi } from '../../lib/api/artist';
 import userSlice from '../user/UserSlice';
 
 export const registerArtistThunk = createAsyncThunk(
@@ -10,5 +9,13 @@ export const registerArtistThunk = createAsyncThunk(
     await registerArtistApi(data);
     await dispatch(userSlice.actions.setArtist());
     afterCallback();
+  },
+);
+
+export const getTopArtistThunk = createAsyncThunk(
+  'artist/getTopArtist',
+  async (payload, { dispatch }) => {
+    const result = await getTopArtistApi();
+    dispatch(userSlice.actions.setTopArtist(result.data));
   },
 );
