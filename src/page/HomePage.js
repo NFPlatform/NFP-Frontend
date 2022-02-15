@@ -8,7 +8,7 @@ import mainRightImg6 from '../assets/img/home-main-right6.png';
 import AuctionCard from '../component/AuctionCard';
 import categoryList from '../lib/category';
 
-import { Grid } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 
@@ -58,8 +58,8 @@ const HomePage = () => {
   const history = useHistory();
 
   return (
-    <>
-      <Box sx={{ display: 'flex', minWidth: 300, paddingX: 16, paddingY: 3 }}>
+    <Container>
+      <Box sx={{ display: 'flex', minWidth: 300, paddingBottom: 5 }}>
         <ImageButton
           focusRipple
           style={{
@@ -144,8 +144,13 @@ const HomePage = () => {
           </Grid>
         </div>
       </Box>
-      <AuctionCard />
-    </>
+      <Box sx={{ minWidth: 300, paddingBottom: 5 }}>
+        <Typography>내가 바로 TOP 콜렉터</Typography>
+      </Box>
+      <Box>
+        <AuctionCard />
+      </Box>
+    </Container>
   );
 };
 
