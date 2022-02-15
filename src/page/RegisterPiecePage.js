@@ -16,9 +16,9 @@ import '../styles/RegisterArtistPage.css';
 import '../assets/fonts/font.css';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { registerArtistThunk } from '../features/artist/ArtistThunks';
 import categoryList from '../lib/category';
 import { styled } from '@mui/material/styles';
+import { registerPieceThunk } from '../features/piece/PieceThunks';
 
 const RegisterPiecePage = () => {
   const dispatch = useDispatch();
@@ -34,26 +34,32 @@ const RegisterPiecePage = () => {
 
   const registerPiece = async () => {
     const data = {
-      category: selectedCategory,
+      title: 'title',
+      category: selectedCategory.split('|')[0],
       price: price,
       pieceName: pieceName,
-      pieceExplanation: pieceExplanation,
+      bio: pieceExplanation,
+      subLink: 'https://naver.com',
+      contractHex: '0XSD89FWD890F8W2EF',
     };
 
     const formData = new FormData();
     formData.append(
-      'data',
+      'registerForm',
       new Blob([JSON.stringify(data)], { type: 'application/json' }),
     );
     if (document) {
-      formData.append('file', document);
+      formData.append('img', document);
     }
 
     await dispatch(
-      registerArtistThunk({
+      registerPieceThunk({
         data: formData,
+        actionWithRedirectUrl: (redirectUrl) => {
+          console.log(redirectUrl);
+        },
         afterCallback: () => {
-          history.push('/main');
+          history.push('/main/piece');
         },
       }),
     );
@@ -113,8 +119,16 @@ const RegisterPiecePage = () => {
               <Input
                 accept="image/*"
                 id="contained-button-file"
-                multiple
+                multiple={false}
                 type="file"
+                onChange={(event) => {
+                  event.preventDefault();
+                  if (event.target.files) {
+                    const file = event.target.files.item(0);
+                    setDocument(file);
+                    setDocumentName(file.name);
+                  }
+                }}
               />
               <Button
                 component="div"

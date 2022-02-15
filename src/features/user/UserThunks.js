@@ -1,16 +1,13 @@
 import {
   getOwnedPieceListApi,
   getUserInfoApi,
-  linkWithKlipWalletApi,
   loginUserApi,
 } from '../../lib/api/user';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import userSlice from './UserSlice';
 import { getKlipAddressApi } from '../../nft/klipApi';
-import {
-  getBalanceOfKlay,
-  getNftListOfAddressPromiseList,
-} from '../../nft/caver';
+import { getBalanceOfKlay, getNftListOfAddress } from '../../nft/caver';
+import { toast } from 'react-toastify';
 
 export const loginUserThunk = createAsyncThunk(
   'user/loginUser',
@@ -40,7 +37,6 @@ export const linkWithKlipWalletThunk = createAsyncThunk(
 
       localStorage.setItem('klaytnAddress', klaytnAddress);
       dispatch(userSlice.actions.setKlipAddressHex(klaytnAddress));
-      // await linkWithKlipWalletApi(klaytnAddress);
       await afterResultCallback();
     });
   },
@@ -69,29 +65,18 @@ export const getBalanceOfKlayThunk = createAsyncThunk(
 
 export const getOwnedPieceListThunk = createAsyncThunk(
   'user/getOwnedPieceList',
-  async (payload, { dispatch }) => {
-    const { address } = payload;
-    const getNftTokenPromiseList: Promise[] =
-      await getNftListOfAddressPromiseList(address);
+  async (payload, { state, dispatch, rejectWithValue }) => {
+    const userWallet = state.user.klipAddressHex;
+    if (userWallet === '') {
+      toast.error('지갑 연동이 필요합니다.');
+      rejectWithValue('지갑 연동이 필요합니다.');
+      return;
+    }
 
-    const pieceListFromChain = await Promise.all(getNftTokenPromiseList);
-
-    const pieceListFromBackendResult = await getOwnedPieceListApi();
-    const pieceListFromBackend = pieceListFromBackendResult.data;
-
-    const pieceList = pieceListFromChain.map((pieceFromChain) => {
-      const { tokenId, uri } = pieceFromChain;
-      const matchPiece = pieceListFromBackend.filter(
-        (pieceFromBackend) => pieceFromBackend.tokenId === tokenId,
-      );
-      if (matchPiece.length === 0) {
-        return { tokenId: tokenId, uri: uri };
-      } else {
-        const piece = matchPiece[0];
-        piece.uri = uri;
-        return piece;
-      }
-    });
+    const pieceList = await getNftListOfAddress(
+      userWallet,
+      getOwnedPieceListApi,
+    );
 
     dispatch(userSlice.actions.setOwnedPiece(pieceList));
   },

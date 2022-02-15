@@ -7,7 +7,7 @@ export const registerArtistThunk = createAsyncThunk(
   async (payload, { dispatch }) => {
     const { data, afterCallback } = payload;
     await registerArtistApi(data);
-    await dispatch(userSlice.actions.setArtist());
+    dispatch(userSlice.actions.setArtist());
     afterCallback();
   },
 );

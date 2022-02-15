@@ -34,7 +34,7 @@ export const executeContractApi = (
 ) => {
   return klipWalletA2AApi
     .post('/prepare', {
-      bAppName: {
+      bapp: {
         name: bAppName,
       },
       type: 'execute_contract',
