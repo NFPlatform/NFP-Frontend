@@ -28,8 +28,8 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build"
+    "start": "set \"REACT_APP_ENV=local\" && react-scripts start",
+    "build": "set \"GENERATE_SOURCEMAP=false\" && set \"REACT_APP_ENV=production\" && react-scripts --max_old_space_size=20000 build"
   },
   "eslintConfig": {
     "extends": [
@@ -52,5 +52,5 @@
   "devDependencies": {
     "prettier": "^2.5.1"
   },
-  "proxy": "http://localhost:6040"
+  "proxy": "https://api.nfplatform.com"
 }
