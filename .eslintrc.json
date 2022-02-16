@@ -23,6 +23,7 @@
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-sort-props": ["warn", { "ignoreCase": false }],
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "no-useless-escape": "off"
   }
 }

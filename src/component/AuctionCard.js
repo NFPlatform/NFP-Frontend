@@ -3,29 +3,27 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import PieceCardImg01 from '../assets/img/pieceCardImg01.jpg';
-import ArtistImg06 from '../assets/img/artistImg06.png';
 import { Avatar, Box, CardActionArea, Stack } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link } from 'react-router-dom';
 
 const AuctionCard = ({
   auctionId,
-  auctionTokenId,
   klay,
   vote,
   sellerName,
   sellerId,
+  imgUri,
 }) => {
   return (
     <Card sx={{ maxWidth: 220, maxHeight: 320, borderRadius: 3, marginX: 2 }}>
-      <Link to={{ pathname: 'https://naver.com' }} target="_blank">
+      <Link to={`/main/piece/${auctionId}`}>
         <CardActionArea>
           <Box sx={{ padding: 2, paddingBottom: 0 }}>
             <CardMedia
               component="img"
               height="180"
-              image={PieceCardImg01}
+              image={imgUri}
               alt="PieceCardImg01"
               sx={{ borderRadius: 3 }}
             />
@@ -37,7 +35,10 @@ const AuctionCard = ({
               alignItems="center"
               marginBottom="15px"
             >
-              <Avatar alt="ArtistImg06" src={ArtistImg06} />
+              <Avatar
+                alt="ArtistImg06"
+                src={`http://localhost:6040/user/${sellerId}/img`}
+              />
               <Box>
                 <Typography
                   sx={{ lineHeight: '105%', letterSpacing: -0.1 }}

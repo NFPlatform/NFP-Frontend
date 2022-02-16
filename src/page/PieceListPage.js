@@ -239,12 +239,12 @@ const PieceListPage = () => {
         {auctionList.map((value, i) => (
           <Grid item xs={2} sm={3} md={3} key={i}>
             <AuctionCard
-              auctionId={value.auctionId}
-              auctionTokenId={value.auctionTokenId}
+              auctionId={value.id}
               klay={value.klay}
-              vote={value.vote}
-              sellerId={value.sellerId}
-              sellerName={value.sellerName}
+              vote={value.piece.vote}
+              sellerId={value.seller.id}
+              sellerName={value.seller.name}
+              imgUri={value.uri}
             />
           </Grid>
         ))}

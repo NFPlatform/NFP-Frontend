@@ -94,7 +94,7 @@ const auctionList = [
 ];
 
 const initialState = {
-  auctionList: auctionList,
+  auctionList: [],
 };
 
 const auctionSlice = createSlice({

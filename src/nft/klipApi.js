@@ -31,7 +31,10 @@ export const executeContractApi = (
   transactionValue,
   transactionParams,
   actionWithRedirectUrl,
+  modalCloseAction,
+  afterResultCallback = () => {},
 ) => {
+  const stringParams = generateParamsString(transactionParams);
   return klipWalletA2AApi
     .post('/prepare', {
       bapp: {
@@ -42,16 +45,26 @@ export const executeContractApi = (
         to: transactionTo,
         abi: transactionAbi,
         value: transactionValue,
-        params: transactionParams,
+        params: stringParams,
       },
     })
     .then((response) => {
-      prepareApiCallback(response, actionWithRedirectUrl);
+      prepareApiCallback(
+        response,
+        actionWithRedirectUrl,
+        modalCloseAction,
+        afterResultCallback,
+      );
     });
+};
+
+const generateParamsString = (transactionParams = []) => {
+  return '[' + transactionParams.map((param) => `\"${param}\"`).join(',') + ']';
 };
 
 export const getKlipAddressApi = (
   actionWithRedirectUrl,
+  modalCloseAction,
   afterResultCallback,
 ) => {
   return klipWalletA2AApi
@@ -62,13 +75,19 @@ export const getKlipAddressApi = (
       type: 'auth',
     })
     .then((response) => {
-      prepareApiCallback(response, actionWithRedirectUrl, afterResultCallback);
+      prepareApiCallback(
+        response,
+        actionWithRedirectUrl,
+        modalCloseAction,
+        afterResultCallback,
+      );
     });
 };
 
 const prepareApiCallback = (
   response,
   actionWithRedirectUrl,
+  modalCloseAction,
   afterResultCallback,
 ) => {
   const requestKey = response.data.request_key;
@@ -80,12 +99,35 @@ const prepareApiCallback = (
       const result = await getKlipResultApi(requestKey);
 
       if (result.data?.result) {
+        const requestStatus = result.data.status;
+        if (requestStatus === 'requested') {
+          toast.info({
+            content: '진행중 입니다.',
+            options: {
+              id: 'loading',
+            },
+          });
+        }
         if (result.data.status === 'completed') {
-          await afterResultCallback(result);
           clearInterval(intervalId);
-        } else if (result.data.status !== 'prepared') {
+          if (result.data.result.status === 'fail') {
+            modalCloseAction();
+            toast.error('오류가 발생하였습니다.');
+          } else {
+            modalCloseAction();
+            await afterResultCallback(result);
+            toast.info('완료되었습니다.');
+          }
+        }
+        if (requestStatus === 'canceled') {
+          modalCloseAction();
           clearInterval(intervalId);
-          toast.error('오류가 발생하였습니다!');
+          toast.info('취소되었습니다.');
+        }
+        if (requestStatus === 'error') {
+          modalCloseAction();
+          clearInterval(intervalId);
+          toast.error('오류가 발생하였습니다.');
         }
       }
     } catch (e) {

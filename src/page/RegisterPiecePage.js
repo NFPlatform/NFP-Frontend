@@ -1,8 +1,6 @@
 import bannerPieceRegistrationIcon from '../assets/img/banner_piece_registration_icon.png';
 import {
-  Box,
   Button,
-  drawerClasses,
   FormControl,
   MenuItem,
   Select,
@@ -19,6 +17,7 @@ import { useHistory } from 'react-router-dom';
 import categoryList from '../lib/category';
 import { styled } from '@mui/material/styles';
 import { registerPieceThunk } from '../features/piece/PieceThunks';
+import useKlipQrModal from '../hooks/useKlipQrModal';
 
 const RegisterPiecePage = () => {
   const dispatch = useDispatch();
@@ -31,6 +30,9 @@ const RegisterPiecePage = () => {
   const [documentName, setDocumentName] = useState(null);
 
   const [selectedCategory, setSelectedCategory] = useState('|카테고리');
+
+  const { klipQrComponent, actionWithRedirectUrl, modalCloseAction } =
+    useKlipQrModal();
 
   const registerPiece = async () => {
     const data = {
@@ -55,10 +57,9 @@ const RegisterPiecePage = () => {
     await dispatch(
       registerPieceThunk({
         data: formData,
-        actionWithRedirectUrl: (redirectUrl) => {
-          console.log(redirectUrl);
-        },
-        afterCallback: () => {
+        actionWithRedirectUrl: actionWithRedirectUrl,
+        modalCloseAction: modalCloseAction,
+        afterResultCallback: () => {
           history.push('/main/piece');
         },
       }),
@@ -329,6 +330,7 @@ const RegisterPiecePage = () => {
           </Button>
         </div>
       </div>
+      {klipQrComponent}
     </div>
   );
 };

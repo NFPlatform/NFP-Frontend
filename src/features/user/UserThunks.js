@@ -7,7 +7,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import userSlice from './UserSlice';
 import { getKlipAddressApi } from '../../nft/klipApi';
 import { getBalanceOfKlay, getNftListOfAddress } from '../../nft/caver';
-import { toast } from 'react-toastify';
+import getKlipAddressFromStore from '../../lib/util/getKlipAddress';
 
 export const loginUserThunk = createAsyncThunk(
   'user/loginUser',
@@ -65,19 +65,15 @@ export const getBalanceOfKlayThunk = createAsyncThunk(
 
 export const getOwnedPieceListThunk = createAsyncThunk(
   'user/getOwnedPieceList',
-  async (payload, { state, dispatch, rejectWithValue }) => {
-    const userWallet = state.user.klipAddressHex;
-    if (userWallet === '') {
-      toast.error('지갑 연동이 필요합니다.');
-      rejectWithValue('지갑 연동이 필요합니다.');
-      return;
-    }
+  async (payload, { getState, dispatch, rejectWithValue }) => {
+    const userWallet = getKlipAddressFromStore(getState, rejectWithValue);
+    if (userWallet === '') return;
 
     const pieceList = await getNftListOfAddress(
       userWallet,
       getOwnedPieceListApi,
     );
 
-    dispatch(userSlice.actions.setOwnedPiece(pieceList));
+    await dispatch(userSlice.actions.setOwnedPiece(pieceList));
   },
 );

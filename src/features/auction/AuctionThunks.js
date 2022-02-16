@@ -7,7 +7,7 @@ import {
   NFT_CONTRACT_ADDRESS,
 } from '../../nft/constants/cypress';
 import { getNftListOfAddress } from '../../nft/caver';
-import { toast } from 'react-toastify';
+import getKlipAddressFromStore from '../../lib/util/getKlipAddress';
 
 export const getAuctionListThunk = createAsyncThunk(
   'auction/getAuctionList',
@@ -18,19 +18,16 @@ export const getAuctionListThunk = createAsyncThunk(
       MARKET_CONTRACT_ADDRESS,
       getAuctionListApi,
     );
-    dispatch(auctionSlice.actions.setAuctionList(pieceList));
+
+    await dispatch(auctionSlice.actions.setAuctionList(pieceList));
   },
 );
 
 export const sendToAuctionThunk = createAsyncThunk(
   'auction/sendToAuction',
-  async (payload, { state, dispatch, rejectWithValue }) => {
-    const userWallet = state.user.klipAddressHex;
-    if (userWallet === '') {
-      toast.error('지갑 연동이 필요합니다.');
-      rejectWithValue('지갑 연동이 필요합니다.');
-      return;
-    }
+  async (payload, { getState, dispatch, rejectWithValue }) => {
+    const userWallet = getKlipAddressFromStore(getState, rejectWithValue);
+    if (userWallet === '') return;
 
     const { nftTokenId, actionWithRedirectUrl } = payload;
 
@@ -49,13 +46,9 @@ export const sendToAuctionThunk = createAsyncThunk(
 
 export const buyPieceThunk = createAsyncThunk(
   'auction/buyPiece',
-  async (payload, { state, dispatch, rejectWithValue }) => {
-    const userWallet = state.user.klipAddressHex;
-    if (userWallet === '') {
-      toast.error('지갑 연동이 필요합니다.');
-      rejectWithValue('지갑 연동이 필요합니다.');
-      return;
-    }
+  async (payload, { getState, dispatch, rejectWithValue }) => {
+    const userWallet = getKlipAddressFromStore(getState, rejectWithValue);
+    if (userWallet === '') return;
 
     const { nftTokenId, actionWithRedirectUrl } = payload;
 

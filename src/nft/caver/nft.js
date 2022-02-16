@@ -34,10 +34,13 @@ export const getNftListOfAddress = async (address, backendApi) => {
   const pieceListFromBackendResult = await backendApi();
   const pieceListFromBackend = pieceListFromBackendResult.data;
 
+  console.log('pieceListFromChain====================>', pieceListFromChain);
+  console.log('pieceListFromBackend==================>', pieceListFromBackend);
+
   const pieceList = pieceListFromChain.map((pieceFromChain) => {
     const { tokenId, uri } = pieceFromChain;
     const matchPiece = pieceListFromBackend.filter(
-      (pieceFromBackend) => pieceFromBackend.tokenId === tokenId,
+      (pieceFromBackend) => `${pieceFromBackend.piece.id + 1000}` === tokenId,
     );
     if (matchPiece.length === 0) {
       return { tokenId: tokenId, uri: uri };
@@ -48,5 +51,7 @@ export const getNftListOfAddress = async (address, backendApi) => {
     }
   });
 
-  return pieceList;
+  const result = pieceList.filter((piece) => piece.id);
+  console.log('result================================>', result);
+  return result;
 };
