@@ -7,12 +7,26 @@ import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { store } from './lib/store';
 import 'react-toastify/dist/ReactToastify.css';
+import { createTheme, ThemeProvider } from '@mui/material';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Noto Sans KR',
+  },
+  palette: {
+    secondary: {
+      main: '#714efe',
+    },
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
         <ToastContainer
           autoClose={2000}
           closeOnClick

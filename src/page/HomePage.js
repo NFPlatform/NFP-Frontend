@@ -7,10 +7,15 @@ import mainLeftImg from '../assets/img/home-main-left.png';
 import mainRightImg6 from '../assets/img/home-main-right6.png';
 import AuctionCard from '../component/AuctionCard';
 import categoryList from '../lib/category';
+import ArtistImg06 from '../assets/img/artistImg06.png';
 
-import { Container, Grid } from '@mui/material';
+import { Avatar, Container, Grid, Stack } from '@mui/material';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getAuctionListThunk } from '../features/auction/AuctionThunks';
+import { getTopCollectorListThunk } from '../features/main/MainThunks';
 
 const ImageButton = styled(ButtonBase)(({ height, theme }) => ({
   position: 'relative',
@@ -56,10 +61,17 @@ const ImageBackdrop = styled('span')(({ theme }) => ({
 
 const HomePage = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const topCollectorList = useSelector((state) => state.main.topCollectorList);
+  const auctionList = useSelector((state) => state.auction.auctionList);
+
+  useEffect(async () => {
+    await dispatch(getTopCollectorListThunk());
+  });
 
   return (
     <Container>
-      <Box sx={{ display: 'flex', minWidth: 300, paddingBottom: 5 }}>
+      <Box sx={{ display: 'flex', minWidth: 300, paddingBottom: 7 }}>
         <ImageButton
           focusRipple
           style={{
@@ -86,12 +98,12 @@ const HomePage = () => {
           </Typography>
         </ImageButton>
         <div style={{ flex: 3, height: '600px' }}>
-          <Grid container rowSpacing={2} columns={{ md: 6 }}>
+          <Grid columns={{ md: 6 }} container rowSpacing={2}>
             {categoryList.map((category, i) => (
               <Grid key={i} item md={2}>
                 <ImageButton
-                  height={'292px'}
                   focusRipple
+                  height={'292px'}
                   onClick={() => {
                     history.push(`/main/piece?category=${category.key}`);
                   }}
@@ -101,14 +113,14 @@ const HomePage = () => {
                   />
                   <ImageBackdrop className="MuiImageBackdrop-root" />
                   <Typography
-                    component="span"
-                    variant="h6"
                     color="white"
+                    component="span"
                     sx={{
                       position: 'absolute',
                       top: 15,
                       left: 15,
                     }}
+                    variant="h6"
                   >
                     {category.ko}
                   </Typography>
@@ -144,12 +156,118 @@ const HomePage = () => {
           </Grid>
         </div>
       </Box>
-      <Box sx={{ minWidth: 300, paddingBottom: 5 }}>
-        <Typography>내가 바로 TOP 콜렉터</Typography>
-      </Box>
-      <Box>
-        <AuctionCard />
-      </Box>
+      <Stack sx={{ minWidth: 300, paddingBottom: 7 }}>
+        <Box component="div" mb={3}>
+          <Typography
+            component="div"
+            style={{ fontFamily: 'Noto Sans KR' }}
+            letterSpacing={-1}
+            fontSize={28}
+          >
+            내가 바로{' '}
+            <Typography
+              component="span"
+              sx={{ fontWeight: 'bold', fontFamily: 'Noto Sans KR' }}
+              letterSpacing={-1}
+              fontSize={28}
+            >
+              TOP 콜렉터
+            </Typography>
+          </Typography>
+        </Box>
+        <Grid
+          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          container={true}
+          rowSpacing={2.5}
+          columns={10}
+        >
+          {topCollectorList.map((value, i) => (
+            <Grid
+              key={i}
+              container={true}
+              direction="row"
+              item={true}
+              xs={4}
+              md={2}
+            >
+              <Stack
+                direction="row"
+                spacing={1.5}
+                justifyContent={'space-between'}
+                alignItems={'center'}
+              >
+                <Box width={'17px'} textAlign={'center'}>
+                  <Typography
+                    variant={'body2'}
+                    component={'span'}
+                    letterSpacing={-2}
+                    fontWeight={'bold'}
+                  >
+                    {i + 1}
+                  </Typography>
+                </Box>
+                <Avatar alt="Remy Sharp" src={ArtistImg06} />
+                <Stack direction="column">
+                  <Typography
+                    component="div"
+                    letterSpacing={-0.7}
+                    lineHeight={'135%'}
+                  >
+                    {value.name}
+                  </Typography>
+                  <Typography
+                    component="div"
+                    letterSpacing={-0.7}
+                    lineHeight={'135%'}
+                    fontWeight={'bold'}
+                    color={'primary'}
+                  >
+                    KLAY {value.klay}
+                  </Typography>
+                </Stack>
+              </Stack>
+            </Grid>
+          ))}
+        </Grid>
+      </Stack>
+      <Stack sx={{ minWidth: 300, paddingBottom: 15 }}>
+        <Box component="div" mb={3}>
+          <Typography
+            component="div"
+            style={{ fontFamily: 'Noto Sans KR' }}
+            letterSpacing={-1}
+            fontSize={28}
+          >
+            실시간{' '}
+            <Typography
+              component="span"
+              sx={{ fontWeight: 'bold', fontFamily: 'Noto Sans KR' }}
+              letterSpacing={-1}
+              fontSize={28}
+            >
+              HOT한 작품들!
+            </Typography>
+          </Typography>
+        </Box>
+        <Grid
+          container
+          spacing={{ xs: 2, md: 2 }}
+          columns={{ xs: 6, sm: 12, md: 18 }}
+        >
+          {auctionList.map((value, i) => (
+            <Grid item xs={2} sm={3} md={3} key={i}>
+              <AuctionCard
+                auctionId={value.auctionId}
+                auctionTokenId={value.auctionTokenId}
+                klay={value.klay}
+                vote={value.vote}
+                sellerId={value.sellerId}
+                sellerName={value.sellerName}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Stack>
     </Container>
   );
 };
