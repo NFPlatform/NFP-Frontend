@@ -23,7 +23,6 @@ const RegisterPiecePage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [price, setPrice] = useState('');
   const [pieceName, setPieceName] = useState('');
   const [pieceExplanation, setPieceExplanation] = useState('');
   const [document, setDocument] = useState(null);
@@ -36,13 +35,10 @@ const RegisterPiecePage = () => {
 
   const registerPiece = async () => {
     const data = {
-      title: 'title',
+      title: pieceName,
       category: selectedCategory.split('|')[0],
-      price: price,
-      pieceName: pieceName,
       bio: pieceExplanation,
       subLink: 'https://naver.com',
-      contractHex: '0XSD89FWD890F8W2EF',
     };
 
     const formData = new FormData();
@@ -60,7 +56,7 @@ const RegisterPiecePage = () => {
         actionWithRedirectUrl: actionWithRedirectUrl,
         modalCloseAction: modalCloseAction,
         afterResultCallback: () => {
-          history.push('/main/piece');
+          history.push('/main/my');
         },
       }),
     );
@@ -230,30 +226,7 @@ const RegisterPiecePage = () => {
                   </Select>
                 </FormControl>
               </div>
-              <div>
-                <div
-                  style={{
-                    fontSize: '1.2rem',
-                    marginBottom: '20px',
-                  }}
-                >
-                  판매가격
-                </div>
-                <TextField
-                  sx={{
-                    minWidth: '280px',
-                    '& .MuiOutlinedInput-root': {
-                      fontSize: '0.9rem',
-                      borderRadius: '10px',
-                      boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.10)',
-                    },
-                  }}
-                  size="small"
-                  placeholder="가격을 입력해주세요"
-                  value={price}
-                  onChange={(event) => setPrice(event.target.value)}
-                />
-              </div>
+              <div style={{ minWidth: '280px' }} />
             </Stack>
             <Stack marginBottom="20px">
               <div

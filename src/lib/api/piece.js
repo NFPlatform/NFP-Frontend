@@ -7,3 +7,7 @@ export const registerPieceApi = (formData) => {
     },
   });
 };
+
+export const setToSellingApi = (data) => {
+  return api.post('/piece/sell', data);
+};

@@ -1,5 +1,6 @@
 import {
   getOwnedPieceListApi,
+  getSellingPieceListApi,
   getUserInfoApi,
   loginUserApi,
 } from '../../lib/api/user';
@@ -8,6 +9,7 @@ import userSlice from './UserSlice';
 import { getKlipAddressApi } from '../../nft/klipApi';
 import { getBalanceOfKlay, getNftListOfAddress } from '../../nft/caver';
 import getKlipAddressFromStore from '../../lib/util/getKlipAddress';
+import { MARKET_CONTRACT_ADDRESS } from '../../nft/constants/cypress';
 
 export const loginUserThunk = createAsyncThunk(
   'user/loginUser',
@@ -75,5 +77,20 @@ export const getOwnedPieceListThunk = createAsyncThunk(
     );
 
     await dispatch(userSlice.actions.setOwnedPiece(pieceList));
+  },
+);
+
+export const getSellingPieceListThunk = createAsyncThunk(
+  'user/getSellingPieceList',
+  async (payload, { getState, dispatch, rejectWithValue }) => {
+    const userWallet = getKlipAddressFromStore(getState, rejectWithValue);
+    if (userWallet === '') return;
+
+    const pieceList = await getNftListOfAddress(
+      MARKET_CONTRACT_ADDRESS,
+      getSellingPieceListApi,
+    );
+
+    await dispatch(userSlice.actions.setSellingPiece(pieceList));
   },
 );

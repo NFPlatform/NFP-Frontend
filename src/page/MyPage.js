@@ -16,10 +16,12 @@ import AuctionCard from '../component/AuctionCard';
 import {
   getBalanceOfKlayThunk,
   getOwnedPieceListThunk,
+  getSellingPieceListThunk,
   linkWithKlipWalletThunk,
 } from '../features/user/UserThunks';
 import { useEffect } from 'react';
 import useKlipQrModal from '../hooks/useKlipQrModal';
+import OwnedCard from '../component/OwnedCard';
 
 const theme = createTheme({
   palette: {
@@ -48,6 +50,12 @@ const MyPage = () => {
   useEffect(async () => {
     if (userInfo.klipAddressHex !== '') {
       await dispatch(getOwnedPieceListThunk());
+    }
+  }, [userInfo.balanceOfKlay]);
+
+  useEffect(async () => {
+    if (userInfo.klipAddressHex !== '') {
+      await dispatch(getSellingPieceListThunk());
     }
   }, [userInfo.balanceOfKlay]);
 
@@ -150,6 +158,36 @@ const MyPage = () => {
           padding: '0 20%',
         }}
       >
+        <div style={{ marginBottom: '10px' }}>판매 중인 작품</div>
+        <Divider color="grey" sx={{ width: '13%' }} />
+        <div style={{ margin: '50px 15px' }}>
+          <Grid
+            container
+            spacing={{ xs: 2, md: 2 }}
+            columns={{ xs: 4, sm: 9, md: 12 }}
+          >
+            {userInfo.sellingPieceList.map((value, i) => (
+              <Grid item xs={2} sm={3} md={3} key={i}>
+                <AuctionCard
+                  auctionId={value.id}
+                  klay={value.klay}
+                  vote={value.piece.vote}
+                  sellerId={value.seller.id}
+                  sellerName={value.seller.name}
+                  imgUri={value.uri}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+      </div>
+
+      <div
+        style={{
+          width: '60%',
+          padding: '0 20%',
+        }}
+      >
         <div style={{ marginBottom: '10px' }}>보유작품</div>
         <Divider color="grey" sx={{ width: '13%' }} />
         <div style={{ margin: '50px 15px' }}>
@@ -160,13 +198,14 @@ const MyPage = () => {
           >
             {userInfo.ownedPieceList.map((value, i) => (
               <Grid item xs={2} sm={3} md={3} key={i}>
-                <AuctionCard
-                  auctionId={value.id}
-                  klay={value.klay}
-                  vote={value.piece.vote}
-                  sellerId={value.seller.id}
-                  sellerName={value.seller.name}
+                <OwnedCard
+                  pieceId={value.id}
+                  klay={0}
+                  vote={value.vote}
+                  sellerId={value.artist.id}
+                  sellerName={value.artist.name}
                   imgUri={value.uri}
+                  forSelling={false}
                 />
               </Grid>
             ))}

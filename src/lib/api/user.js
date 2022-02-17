@@ -29,5 +29,9 @@ export const linkWithKlipWalletApi = (address) => {
 };
 
 export const getOwnedPieceListApi = () => {
-  return api.get(`/user/piece`);
+  return api.get(`/user/piece/owned`);
+};
+
+export const getSellingPieceListApi = () => {
+  return api.get('/user/piece/sell');
 };

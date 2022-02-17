@@ -1,19 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { executeContractApi } from '../../nft/klipApi';
-import { NFT_CONTRACT_ADDRESS } from '../../nft/constants/cypress';
-import { registerPieceApi } from '../../lib/api/piece';
-import { toast } from 'react-toastify';
+import {
+  MARKET_CONTRACT_ADDRESS,
+  NFT_CONTRACT_ADDRESS,
+} from '../../nft/constants/cypress';
+import { registerPieceApi, setToSellingApi } from '../../lib/api/piece';
+import getKlipAddressFromStore from '../../lib/util/getKlipAddress';
 
 export const registerPieceThunk = createAsyncThunk(
   'piece/registerPiece',
   async (payload, { getState, dispatch, rejectWithValue }) => {
-    const state = getState();
-    const userWallet = state.user.klipAddressHex;
-    if (userWallet === '') {
-      toast.error('지갑 연동이 필요합니다.');
-      rejectWithValue('지갑 연동이 필요합니다.');
-      return;
-    }
+    const userWallet = getKlipAddressFromStore(getState, rejectWithValue);
+    if (userWallet === '') return;
 
     const {
       data,
@@ -36,6 +34,36 @@ export const registerPieceThunk = createAsyncThunk(
       abi,
       '0',
       [userWallet, uniqueTokenId, url],
+      actionWithRedirectUrl,
+      modalCloseAction,
+      afterResultCallback,
+    );
+  },
+);
+
+export const sellingPieceThunk = createAsyncThunk(
+  'piece/sellingPiece',
+  async (payload, { getState, dispatch, rejectWithValue }) => {
+    const userWallet = getKlipAddressFromStore(getState, rejectWithValue);
+    if (userWallet === '') return;
+
+    const {
+      data,
+      actionWithRedirectUrl,
+      modalCloseAction,
+      afterResultCallback,
+    } = payload;
+
+    const response = await setToSellingApi(data);
+
+    const abi =
+      '{ "constant": false, "inputs": [ { "name": "from", "type": "address" }, { "name": "to", "type": "address" }, { "name": "tokenId", "type": "uint256" } ], "name": "safeTransferFrom", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }';
+
+    await executeContractApi(
+      NFT_CONTRACT_ADDRESS,
+      abi,
+      '0',
+      [userWallet, MARKET_CONTRACT_ADDRESS, data.pieceId + 1000],
       actionWithRedirectUrl,
       modalCloseAction,
       afterResultCallback,

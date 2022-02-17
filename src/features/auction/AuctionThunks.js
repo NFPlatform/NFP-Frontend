@@ -23,27 +23,6 @@ export const getAuctionListThunk = createAsyncThunk(
   },
 );
 
-export const sendToAuctionThunk = createAsyncThunk(
-  'auction/sendToAuction',
-  async (payload, { getState, dispatch, rejectWithValue }) => {
-    const userWallet = getKlipAddressFromStore(getState, rejectWithValue);
-    if (userWallet === '') return;
-
-    const { nftTokenId, actionWithRedirectUrl } = payload;
-
-    const abi =
-      '{ "constant": false, "inputs": [ { "name": "from", "type": "address" }, { "name": "to", "type": "address" }, { "name": "tokenId", "type": "uint256" } ], "name": "safeTransferFrom", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }';
-
-    await executeContractApi(
-      NFT_CONTRACT_ADDRESS,
-      abi,
-      0,
-      [userWallet, MARKET_CONTRACT_ADDRESS, nftTokenId],
-      actionWithRedirectUrl,
-    );
-  },
-);
-
 export const buyPieceThunk = createAsyncThunk(
   'auction/buyPiece',
   async (payload, { getState, dispatch, rejectWithValue }) => {

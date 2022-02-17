@@ -109,8 +109,8 @@ const prepareApiCallback = (
           });
         }
         if (result.data.status === 'completed') {
-          clearInterval(intervalId);
           if (result.data.result.status === 'fail') {
+            console.log('result.data.status === "fail"');
             modalCloseAction();
             toast.error('오류가 발생하였습니다.');
           } else {
@@ -118,19 +118,23 @@ const prepareApiCallback = (
             await afterResultCallback(result);
             toast.info('완료되었습니다.');
           }
+          clearInterval(intervalId);
         }
         if (requestStatus === 'canceled') {
+          console.log('result.data.status === "canceled"');
           modalCloseAction();
           clearInterval(intervalId);
           toast.info('취소되었습니다.');
         }
         if (requestStatus === 'error') {
+          console.log('result.data.status === "error"');
           modalCloseAction();
           clearInterval(intervalId);
           toast.error('오류가 발생하였습니다.');
         }
       }
     } catch (e) {
+      console.log(e);
       clearInterval(intervalId);
       toast.error('오류가 발생하였습니다!');
     }

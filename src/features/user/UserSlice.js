@@ -8,6 +8,7 @@ const initialState = {
   klipAddressHex: '',
   balanceOfKlay: 0,
   ownedPieceList: [],
+  sellingPieceList: [],
   topArtist: {
     id: -1,
     name: '',
@@ -39,6 +40,9 @@ const userSlice = createSlice({
     },
     setOwnedPiece(state, { payload }) {
       state.ownedPieceList = payload;
+    },
+    setSellingPiece(state, { payload }) {
+      state.sellingPieceList = payload;
     },
   },
 });
