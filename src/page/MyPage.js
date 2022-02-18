@@ -36,7 +36,7 @@ const MyPage = () => {
 
   const userInfo = useSelector((state) => state.user);
 
-  const { klipQrComponent, actionWithRedirectUrl, afterResultCallback } =
+  const { klipQrComponent, actionWithRedirectUrl, modalCloseAction } =
     useKlipQrModal();
 
   useEffect(async () => {
@@ -134,7 +134,7 @@ const MyPage = () => {
                   dispatch(
                     linkWithKlipWalletThunk({
                       actionWithRedirectUrl: actionWithRedirectUrl,
-                      afterResultCallback: afterResultCallback,
+                      afterResultCallback: modalCloseAction,
                     }),
                   );
                 }}
