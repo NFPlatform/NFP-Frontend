@@ -18,6 +18,7 @@ const useKlipQrModal = () => {
   };
 
   const modalCloseAction = () => {
+    clearInterval();
     setKlipQrModal(false);
   };
 

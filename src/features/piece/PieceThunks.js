@@ -31,7 +31,7 @@ export const registerPieceThunk = createAsyncThunk(
       (process.env.REACT_APP_ENV === 'production' ? 10000 : 1000);
 
     const resultImgUrl =
-      process.env.REACT_APP_ENC === 'production'
+      process.env.REACT_APP_ENV === 'production'
         ? `${PRODUCTION_BACKEND_URL}/piece/${contractPieceId}/img`
         : TEST_IMG_URL;
 
