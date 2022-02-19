@@ -1,5 +1,5 @@
 import bannerArtistRegistrationIcon from '../assets/img/banner_artist_registration_icon.png';
-import { Button, drawerClasses, TextField } from '@mui/material';
+import { Button, Container, drawerClasses, TextField } from '@mui/material';
 import { useState } from 'react';
 import { DriveFolderUpload } from '@mui/icons-material';
 
@@ -66,25 +66,32 @@ const RegisterArtistPage = () => {
             fontFamily: 'Gmarket Sans',
             marginLeft: '15px',
             fontSize: '2.6rem',
-            fontStyle: 'bold',
+            fontWeight: 'bold',
           }}
         >
           작가 등록하기
         </div>
       </div>
-      <div
+      <Container
+        maxWidth="md"
         style={{
-          width: 'calc(100% - 400px)',
-          padding: '100px 200px',
+          padding: '50px',
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
-        <div style={{ display: 'flex', width: '100%', marginBottom: '70px' }}>
-          <div style={{ marginRight: '140px' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            marginBottom: '35px',
+          }}
+        >
+          <div style={{ marginRight: 50 }}>
             <div
               style={{
                 fontSize: '1.2rem',
-                marginBottom: '20px',
-                fontFamily: 'Gmarket Sans',
+                marginBottom: '13px',
               }}
             >
               아티스트 명
@@ -92,9 +99,9 @@ const RegisterArtistPage = () => {
             <TextField
               sx={{
                 minWidth: '280px',
+                maxWidth: '310px',
                 '& .MuiOutlinedInput-root': {
                   fontSize: '0.9rem',
-                  fontFamily: 'Gmarket Sans',
                   borderRadius: '10px',
                   boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.10)',
                 },
@@ -105,12 +112,11 @@ const RegisterArtistPage = () => {
               onChange={(event) => setArtistName(event.target.value)}
             />
           </div>
-          <div style={{ marginRight: '140px' }}>
+          <div>
             <div
               style={{
                 fontSize: '1.2rem',
-                marginBottom: '20px',
-                fontFamily: 'Gmarket Sans',
+                marginBottom: '13px',
               }}
             >
               인스타그램 아이디
@@ -118,9 +124,9 @@ const RegisterArtistPage = () => {
             <TextField
               sx={{
                 minWidth: '280px',
+                maxWidth: '310px',
                 '& .MuiOutlinedInput-root': {
                   fontSize: '0.9rem',
-                  fontFamily: 'Gmarket Sans',
                   borderRadius: '10px',
                   boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.10)',
                 },
@@ -134,16 +140,13 @@ const RegisterArtistPage = () => {
         </div>
         <div
           style={{
-            paddingRight: '340px',
-            width: 'calc(100% - 340px)',
-            marginBottom: '70px',
+            marginBottom: '35px',
           }}
         >
           <div
             style={{
               fontSize: '1.2rem',
-              marginBottom: '20px',
-              fontFamily: 'Gmarket Sans',
+              marginBottom: '13px',
             }}
           >
             자기소개
@@ -153,7 +156,6 @@ const RegisterArtistPage = () => {
               width: '100%',
               '& .MuiOutlinedInput-root': {
                 fontSize: '0.9rem',
-                fontFamily: 'Gmarket Sans',
                 borderRadius: '10px',
                 boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.10)',
               },
@@ -166,12 +168,11 @@ const RegisterArtistPage = () => {
             onChange={(event) => setBio(event.target.value)}
           />
         </div>
-        <div style={{ paddingRight: '340px', width: 'calc(100% - 340px)' }}>
+        <div style={{}}>
           <div
             style={{
               fontSize: '1.2rem',
-              marginBottom: '20px',
-              fontFamily: 'Gmarket Sans',
+              marginBottom: '13px',
             }}
           >
             재학증명서
@@ -179,12 +180,7 @@ const RegisterArtistPage = () => {
           <div style={{ display: 'flex' }}>
             <label htmlFor="ex_file">
               <div className="file-button">
-                <div
-                  style={{
-                    fontFamily: 'Gmarket Sans',
-                    marginRight: '10px',
-                  }}
-                >
+                <div>
                   {documentName ? documentName : '재학증명서를 등록해주세요'}
                 </div>
                 <DriveFolderUpload
@@ -227,7 +223,7 @@ const RegisterArtistPage = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            margin: '50px 0',
+            margin: '80px 0 0',
           }}
         >
           <Button
@@ -244,7 +240,7 @@ const RegisterArtistPage = () => {
             작가등록 신청
           </Button>
         </div>
-      </div>
+      </Container>
     </div>
   );
 };

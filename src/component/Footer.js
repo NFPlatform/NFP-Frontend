@@ -1,6 +1,7 @@
 import logo_white from '../assets/svg/nfp_logo_white.svg';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import InstagramIcon from '../assets/img/instagram_glyph_gradient_RGB.png';
 
 const Footer = () => {
   return (
@@ -34,7 +35,7 @@ const Footer = () => {
               fontSize: '0.8rem',
             }}
           >
-            Copyright © nftplatform Inc. All rights reserved.
+            Copyright © nfplatform Inc. All rights reserved.
           </div>
         </div>
       </div>
@@ -52,7 +53,7 @@ const Footer = () => {
             이용약관
           </Link>
         </Button>
-        <Button style={{ marginRight: '20px' }} variant="text">
+        <Button style={{ marginRight: '10px' }} variant="text">
           <Link
             style={{
               color: 'white',
@@ -65,17 +66,16 @@ const Footer = () => {
             개인정보처리방침
           </Link>
         </Button>
-        <Button style={{ marginRight: '20px' }} variant="text">
+        <Button variant="text">
           <Link
             style={{
-              color: 'white',
-              textDecoration: 'none',
-              fontSize: '0.8rem',
+              display: 'flex',
+              alignItems: 'center',
             }}
-            to={{ pathname: 'https://naver.com' }}
+            to={{ pathname: 'https://www.instagram.com' }}
             target="_blank"
           >
-            INSTA
+            <img src={InstagramIcon} alt="InstagramIcon" width={15} />
           </Link>
         </Button>
       </div>
