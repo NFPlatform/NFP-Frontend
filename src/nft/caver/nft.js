@@ -40,7 +40,7 @@ export const getNftListOfAddress = async (address, backendApi) => {
     const matchPiece = pieceListFromBackend.filter(
       (pieceFromBackend) =>
         `${
-          pieceFromBackend.id +
+          pieceFromBackend.piece.id +
           (process.env.REACT_APP_ENV === 'production' ? 10000 : 1000)
         }` === tokenId,
     );
