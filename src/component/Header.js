@@ -19,7 +19,8 @@ const HeaderLink = ({ to, children }) => {
         style={{
           color: 'black',
           textDecoration: 'none',
-          fontFamily: 'BM Dohyeon',
+          fontFamily: 'Gmarket Sans',
+          fontWeight: 500,
           fontSize: '1.1rem',
         }}
         to={to}
@@ -84,9 +85,6 @@ const Header = () => {
           '& .MuiOutlinedInput-root': {
             borderRadius: '50px',
           },
-          '& .MuiOutlinedInput-input': {
-            fontFamily: 'Noto Sans KR',
-          },
         }}
         InputProps={{
           startAdornment: (
@@ -116,7 +114,7 @@ const Header = () => {
               color: 'white',
               textDecoration: 'none',
               fontSize: '1.1rem',
-              fontFamily: 'BM Dohyeon',
+              fontFamily: 'Gmarket Sans',
             }}
             to="/main/register/piece"
           >
@@ -138,7 +136,8 @@ const Header = () => {
               color: 'white',
               textDecoration: 'none',
               fontSize: '1.1rem',
-              fontFamily: 'BM Dohyeon',
+              fontFamily: 'Gmarket Sans',
+              fontWeight: 500,
             }}
           >
             🎨 작가등록
@@ -146,10 +145,19 @@ const Header = () => {
         </Button>
       )}
       <Link to="/main/my">
-        <Avatar sx={{ marginX: 1 }} alt="My" src={thumbnailImg} />
+        <Avatar
+          sx={{ marginX: 1, backgroundColor: 'white' }}
+          alt="My"
+          src={thumbnailImg}
+        />
       </Link>
       <Button
-        sx={{ color: 'black', fontFamily: 'BM Dohyeon', fontSize: '1.1rem' }}
+        sx={{
+          color: 'black',
+          fontFamily: 'Gmarket Sans',
+          fontWeight: 500,
+          fontSize: '1.1rem',
+        }}
         variant="text"
         onClick={() => {
           localStorage.removeItem('nfptoken');

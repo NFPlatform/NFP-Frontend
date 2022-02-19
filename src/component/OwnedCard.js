@@ -160,7 +160,7 @@ const OwnedCard = ({ pieceId, klay, vote, sellerName, sellerId, imgUri }) => {
               backgroundImage:
                 'linear-gradient(to right, #f0bbe8 0%, #deb1e3 25%, #d0a8de 51%, #c09eda 76%, #ad93d4 100%)',
               fontSize: '1.2rem',
-              fontFamily: 'BM Dohyeon',
+              fontFamily: 'Gmarket Sans',
             }}
             variant="contained"
             onClick={sellingPiece}

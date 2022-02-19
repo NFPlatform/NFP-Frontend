@@ -1,6 +1,6 @@
 html,
 body,
-/*div,*/
+div,
 span,
 applet,
 object,
@@ -84,7 +84,7 @@ input,
 button,
 ::placeholder {
   margin: 0;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Pretendard', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

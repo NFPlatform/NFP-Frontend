@@ -20,13 +20,12 @@ import { getTopCollectorListThunk } from '../features/main/MainThunks';
 const ImageButton = styled(ButtonBase)(({ height, theme }) => ({
   position: 'relative',
   height: `${height}`,
-  width: 'calc(100% - 40px)',
-  margin: '0 20px',
+  width: 'calc(100%)',
   [theme.breakpoints.down('sm')]: {
     width: '100% !important', // Overrides inline-style
     height: 100,
   },
-  top: 0,
+  top: 30,
   '&:hover, &.Mui-focusVisible': {
     zIndex: 1,
     '& .MuiImageBackdrop-root': {
@@ -46,6 +45,8 @@ const ImageSrc = styled('span')({
   bottom: 0,
   backgroundSize: 'cover',
   backgroundPosition: 'center 40%',
+  borderRadius: 15,
+  margin: '0 8px',
 });
 
 const ImageBackdrop = styled('span')(({ theme }) => ({
@@ -57,6 +58,8 @@ const ImageBackdrop = styled('span')(({ theme }) => ({
   backgroundColor: theme.palette.grey['700'],
   opacity: 0.4,
   transition: theme.transitions.create('opacity'),
+  borderRadius: 15,
+  margin: '0 8px',
 }));
 
 const HomePage = () => {
@@ -77,7 +80,7 @@ const HomePage = () => {
           style={{
             flex: 2,
           }}
-          height={'600px'}
+          height={'465px'}
           onClick={() => {
             toast.success('지원하지 않는 기능입니다.');
           }}
@@ -97,13 +100,13 @@ const HomePage = () => {
             지금 가장 HOT한 아티스트
           </Typography>
         </ImageButton>
-        <div style={{ flex: 3, height: '600px' }}>
+        <div style={{ flex: 3, height: '500px' }}>
           <Grid columns={{ md: 6 }} container rowSpacing={2}>
             {categoryList.map((category, i) => (
               <Grid key={i} item md={2}>
                 <ImageButton
                   focusRipple
-                  height={'292px'}
+                  height={'225px'}
                   onClick={() => {
                     history.push(`/main/piece?category=${category.key}`);
                   }}
@@ -129,7 +132,7 @@ const HomePage = () => {
             ))}
             <Grid item md={2}>
               <ImageButton
-                height={'292px'}
+                height={'225px'}
                 focusRipple
                 onClick={() => {
                   toast.success('지원하지 않는 기능입니다.');
@@ -157,19 +160,14 @@ const HomePage = () => {
         </div>
       </Box>
       <Stack sx={{ minWidth: 300, paddingBottom: 7 }}>
-        <Box component="div" mb={3}>
-          <Typography
-            component="div"
-            style={{ fontFamily: 'Noto Sans KR' }}
-            letterSpacing={-1}
-            fontSize={28}
-          >
-            내가 바로{' '}
+        <Box component="div" mb={3} letterSpacing={-1.5}>
+          <Typography component="div" fontSize={28} fontFamily="Gmarket Sans">
+            🏅 내가 바로{' '}
             <Typography
               component="span"
-              sx={{ fontWeight: 'bold', fontFamily: 'Noto Sans KR' }}
-              letterSpacing={-1}
+              sx={{ fontWeight: 700 }}
               fontSize={28}
+              fontFamily="Gmarket Sans"
             >
               TOP 콜렉터
             </Typography>
@@ -211,15 +209,16 @@ const HomePage = () => {
                   <Typography
                     component="div"
                     letterSpacing={-0.7}
-                    lineHeight={'135%'}
+                    lineHeight={'125%'}
                   >
                     {value.name}
                   </Typography>
                   <Typography
                     component="div"
-                    letterSpacing={-0.7}
-                    lineHeight={'135%'}
-                    fontWeight={'bold'}
+                    letterSpacing={-1}
+                    lineHeight={'125%'}
+                    fontWeight={500}
+                    fontSize={14}
                     color={'primary'}
                   >
                     KLAY {value.klay}
@@ -231,19 +230,14 @@ const HomePage = () => {
         </Grid>
       </Stack>
       <Stack sx={{ minWidth: 300, paddingBottom: 15 }}>
-        <Box component="div" mb={3}>
-          <Typography
-            component="div"
-            style={{ fontFamily: 'Noto Sans KR' }}
-            letterSpacing={-1}
-            fontSize={28}
-          >
-            실시간{' '}
+        <Box component="div" mb={3} letterSpacing={-1.5}>
+          <Typography component="div" fontSize={28} fontFamily={'Gmarket Sans'}>
+            🔥 실시간{' '}
             <Typography
               component="span"
-              sx={{ fontWeight: 'bold', fontFamily: 'Noto Sans KR' }}
-              letterSpacing={-1}
+              sx={{ fontWeight: 'bold' }}
               fontSize={28}
+              fontFamily={'Gmarket Sans'}
             >
               HOT한 작품들!
             </Typography>

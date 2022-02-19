@@ -2,52 +2,52 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const topCollectorList = [
   {
-    name: 'j.g',
+    name: 'J.G',
     klay: 120,
     thumbnailImg: '',
   },
   {
-    name: 'j.g',
+    name: '스란',
     klay: 120,
     thumbnailImg: '',
   },
   {
-    name: 'j.g',
+    name: '엉뽕양',
     klay: 120,
     thumbnailImg: '',
   },
   {
-    name: 'j.g',
+    name: '박땡글',
     klay: 120,
     thumbnailImg: '',
   },
   {
-    name: 'j.g',
+    name: '탱찌',
     klay: 120,
     thumbnailImg: '',
   },
   {
-    name: 'j.g',
+    name: '토깽이',
     klay: 120,
     thumbnailImg: '',
   },
   {
-    name: 'j.g',
+    name: '블루레몬에이드',
     klay: 120,
     thumbnailImg: '',
   },
   {
-    name: 'j.g',
+    name: '서이율',
     klay: 120,
     thumbnailImg: '',
   },
   {
-    name: 'j.g',
+    name: '우파',
     klay: 120,
     thumbnailImg: '',
   },
   {
-    name: 'j.g',
+    name: '핫구당근',
     klay: 120,
     thumbnailImg: '',
   },

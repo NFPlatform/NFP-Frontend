@@ -63,7 +63,7 @@ const RegisterArtistPage = () => {
         />
         <div
           style={{
-            fontFamily: 'BM Dohyeon',
+            fontFamily: 'Gmarket Sans',
             marginLeft: '15px',
             fontSize: '2.6rem',
             fontStyle: 'bold',
@@ -84,7 +84,7 @@ const RegisterArtistPage = () => {
               style={{
                 fontSize: '1.2rem',
                 marginBottom: '20px',
-                fontFamily: 'BM Dohyeon',
+                fontFamily: 'Gmarket Sans',
               }}
             >
               아티스트 명
@@ -94,7 +94,7 @@ const RegisterArtistPage = () => {
                 minWidth: '280px',
                 '& .MuiOutlinedInput-root': {
                   fontSize: '0.9rem',
-                  fontFamily: 'BM Dohyeon',
+                  fontFamily: 'Gmarket Sans',
                   borderRadius: '10px',
                   boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.10)',
                 },
@@ -110,7 +110,7 @@ const RegisterArtistPage = () => {
               style={{
                 fontSize: '1.2rem',
                 marginBottom: '20px',
-                fontFamily: 'BM Dohyeon',
+                fontFamily: 'Gmarket Sans',
               }}
             >
               인스타그램 아이디
@@ -120,7 +120,7 @@ const RegisterArtistPage = () => {
                 minWidth: '280px',
                 '& .MuiOutlinedInput-root': {
                   fontSize: '0.9rem',
-                  fontFamily: 'BM Dohyeon',
+                  fontFamily: 'Gmarket Sans',
                   borderRadius: '10px',
                   boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.10)',
                 },
@@ -143,7 +143,7 @@ const RegisterArtistPage = () => {
             style={{
               fontSize: '1.2rem',
               marginBottom: '20px',
-              fontFamily: 'BM Dohyeon',
+              fontFamily: 'Gmarket Sans',
             }}
           >
             자기소개
@@ -153,7 +153,7 @@ const RegisterArtistPage = () => {
               width: '100%',
               '& .MuiOutlinedInput-root': {
                 fontSize: '0.9rem',
-                fontFamily: 'BM Dohyeon',
+                fontFamily: 'Gmarket Sans',
                 borderRadius: '10px',
                 boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.10)',
               },
@@ -171,7 +171,7 @@ const RegisterArtistPage = () => {
             style={{
               fontSize: '1.2rem',
               marginBottom: '20px',
-              fontFamily: 'BM Dohyeon',
+              fontFamily: 'Gmarket Sans',
             }}
           >
             재학증명서
@@ -181,7 +181,7 @@ const RegisterArtistPage = () => {
               <div className="file-button">
                 <div
                   style={{
-                    fontFamily: 'BM Dohyeon',
+                    fontFamily: 'Gmarket Sans',
                     marginRight: '10px',
                   }}
                 >
@@ -236,7 +236,7 @@ const RegisterArtistPage = () => {
               backgroundImage:
                 'linear-gradient(to right, #f0bbe8 0%, #deb1e3 25%, #d0a8de 51%, #c09eda 76%, #ad93d4 100%)',
               fontSize: '1.2rem',
-              fontFamily: 'BM Dohyeon',
+              fontFamily: 'Gmarket Sans',
             }}
             variant="contained"
             onClick={registerArtist}
