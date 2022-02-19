@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 
 const AuctionCard = ({
   auctionId,
+  title,
   klay,
   vote,
   sellerName,
@@ -60,7 +61,7 @@ const AuctionCard = ({
                   component="div"
                   color="#616161"
                 >
-                  Always Awake
+                  {title}
                 </Typography>
               </Box>
             </Stack>

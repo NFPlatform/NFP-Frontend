@@ -177,6 +177,7 @@ const MyPage = () => {
               <Grid item xs={2} sm={3} md={3} key={i}>
                 <AuctionCard
                   auctionId={value.id}
+                  title={value.piece.name}
                   klay={value.klay}
                   vote={value.piece.vote}
                   sellerId={value.seller.id}
@@ -207,12 +208,15 @@ const MyPage = () => {
               <Grid item xs={2} sm={3} md={3} key={i}>
                 <OwnedCard
                   pieceId={value.id}
-                  klay={0}
+                  title={value.name}
                   vote={value.vote}
                   sellerId={value.artist.id}
                   sellerName={value.artist.name}
-                  imgUri={value.uri}
-                  forSelling={false}
+                  imgUri={
+                    process.env.REACT_APP_ENV === 'production'
+                      ? `https://api.nfplatform.com/piece/${value.id}/img`
+                      : `/piece/${value.id}/img`
+                  }
                 />
               </Grid>
             ))}

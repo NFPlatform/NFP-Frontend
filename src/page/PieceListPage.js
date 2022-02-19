@@ -252,6 +252,7 @@ const PieceListPage = () => {
           <Grid item xs={1} sm={1} md={2} key={i}>
             <AuctionCard
               auctionId={value.id}
+              title={value.piece.name}
               klay={value.klay}
               vote={value.piece.vote}
               sellerId={value.seller.id}

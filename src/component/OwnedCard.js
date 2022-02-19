@@ -19,8 +19,9 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { sellingPieceThunk } from '../features/piece/PieceThunks';
 import { toast } from 'react-toastify';
+import { clear } from '@testing-library/user-event/dist/clear';
 
-const OwnedCard = ({ pieceId, klay, vote, sellerName, sellerId, imgUri }) => {
+const OwnedCard = ({ pieceId, title, vote, sellerName, sellerId, imgUri }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -46,6 +47,7 @@ const OwnedCard = ({ pieceId, klay, vote, sellerName, sellerId, imgUri }) => {
           actionWithRedirectUrl: actionWithRedirectUrl,
           modalCloseAction: modalCloseAction,
           afterResultCallback: () => {
+            clearInterval();
             history.push('/main/piece');
           },
         }),
@@ -96,7 +98,7 @@ const OwnedCard = ({ pieceId, klay, vote, sellerName, sellerId, imgUri }) => {
                     component="div"
                     color="#616161"
                   >
-                    Always Awake
+                    {title}
                   </Typography>
                 </Box>
               </Stack>
@@ -107,8 +109,8 @@ const OwnedCard = ({ pieceId, klay, vote, sellerName, sellerId, imgUri }) => {
                 color="#3871c5"
               >
                 <Stack direction="row" spacing={2}>
-                  <Typography sx={{ letterSpacing: -0.7 }}>{klay}</Typography>
-                  <Typography sx={{ letterSpacing: -0.7 }}>KLAY</Typography>
+                  {/*<Typography sx={{ letterSpacing: -0.7 }}>{klay}</Typography>*/}
+                  {/*<Typography sx={{ letterSpacing: -0.7 }}>KLAY</Typography>*/}
                 </Stack>
                 <Stack direction="row" spacing={0.5} alignItems="center">
                   <FavoriteIcon sx={{ color: '#f35154', fontSize: 16 }} />
@@ -128,6 +130,7 @@ const OwnedCard = ({ pieceId, klay, vote, sellerName, sellerId, imgUri }) => {
       <Modal
         open={sellingModal}
         onClose={() => {
+          clearInterval();
           setSellingModal(false);
         }}
       >
