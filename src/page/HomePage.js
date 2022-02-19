@@ -28,6 +28,10 @@ const ImageButton = styled(ButtonBase)(({ height, theme }) => ({
     height: 100,
   },
   top: 30,
+  '& .MuiTouchRipple-root': {
+    margin: '0 8px',
+    borderRadius: 15,
+  },
   '&:hover, &.Mui-focusVisible': {
     zIndex: 1,
     '& .MuiImageBackdrop-root': {
@@ -95,26 +99,30 @@ const HomePage = () => {
           <ImageSrc style={{ backgroundImage: `url(${mainLeftImg})` }} />
           <ImageBackdrop className="MuiImageBackdrop-root" />
           <Typography
-            component="span"
-            variant="h6"
+            component="div"
+            variant="h5"
             color="white"
             sx={{
               position: 'absolute',
-              top: 15,
-              left: 15,
+              top: 20,
+              left: 25,
             }}
+            fontFamily={'Gmarket Sans'}
+            fontWeight={700}
+            letterSpacing={-1}
           >
             지금 가장 HOT한 아티스트
           </Typography>
           <Typography
-            component="span"
-            variant="h6"
+            component="div"
+            variant="h5"
             color="white"
             sx={{
               position: 'absolute',
-              top: 45,
-              left: 15,
+              top: 55,
+              left: 25,
             }}
+            fontFamily={'Gmarket Sans'}
           >
             {hotArtist.name}
           </Typography>
@@ -140,9 +148,10 @@ const HomePage = () => {
                     sx={{
                       position: 'absolute',
                       top: 15,
-                      left: 15,
+                      left: 25,
                     }}
-                    variant="h6"
+                    variant="h5"
+                    fontFamily={'Gmarket Sans'}
                   >
                     {category.ko}
                   </Typography>
@@ -163,13 +172,14 @@ const HomePage = () => {
                 <ImageBackdrop className="MuiImageBackdrop-root" />
                 <Typography
                   component="span"
-                  variant="h6"
+                  variant="h5"
                   color="white"
                   sx={{
                     position: 'absolute',
                     top: 15,
-                    left: 15,
+                    left: 25,
                   }}
+                  fontFamily={'Gmarket Sans'}
                 >
                   이벤트
                 </Typography>

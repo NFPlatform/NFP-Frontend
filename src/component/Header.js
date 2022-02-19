@@ -14,7 +14,7 @@ import '../assets/fonts/font.css';
 
 const HeaderLink = ({ to, children }) => {
   return (
-    <Button variant="text">
+    <Button variant="text" sx={{ mr: 2.5, borderRadius: 10 }}>
       <Link
         style={{
           color: 'black',
@@ -61,7 +61,7 @@ const Header = () => {
         height: '62px',
       }}
     >
-      <Box sx={{ marginX: 1, marginRight: '60px', marginLeft: '30px' }}>
+      <Box sx={{ marginX: 1, marginRight: '40px', marginLeft: '30px' }}>
         <Link
           style={{
             width: '80px',
@@ -81,7 +81,7 @@ const Header = () => {
       <TextField
         sx={{
           flexGrow: 1,
-          marginRight: '15px',
+          marginRight: '16px',
           '& .MuiOutlinedInput-root': {
             borderRadius: '50px',
           },
@@ -103,7 +103,11 @@ const Header = () => {
       {isArtist ? (
         <Button
           sx={{
+            marginRight: 1.5,
             borderRadius: '20px',
+            paddingTop: '4px',
+            paddingBottom: '1.7px',
+            paddingRight: '22px',
             backgroundImage:
               'linear-gradient(to right, #f091f7 0%, #f184d8 25%, #f279be 51%, #f36ea2 76%, #f4638a 100%)',
           }}
@@ -124,7 +128,11 @@ const Header = () => {
       ) : (
         <Button
           sx={{
+            marginRight: 1.5,
             borderRadius: '20px',
+            paddingTop: '4px',
+            paddingBottom: '1.7px',
+            paddingRight: '22px',
             backgroundImage:
               'linear-gradient(to right, #f0bbe8 0%, #deb1e3 25%, #d0a8de 51%, #c09eda 76%, #ad93d4 100%)',
           }}
@@ -154,9 +162,11 @@ const Header = () => {
       <Button
         sx={{
           color: 'black',
-          fontFamily: 'Gmarket Sans',
           fontWeight: 500,
-          fontSize: '1.1rem',
+          fontSize: '1rem',
+          letterSpacing: -0.5,
+          marginLeft: 0.3,
+          borderRadius: 10,
         }}
         variant="text"
         onClick={() => {

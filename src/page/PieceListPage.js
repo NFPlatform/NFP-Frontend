@@ -4,7 +4,7 @@ import AuctionCard from '../component/AuctionCard';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import qs from 'qs';
-import { Sell, Sort } from '@mui/icons-material';
+import { Paid, Collections, Sort } from '@mui/icons-material';
 import categoryList from '../lib/category';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuctionListThunk } from '../features/auction/AuctionThunks';
@@ -41,7 +41,7 @@ const PieceListPage = () => {
   return (
     <Box sx={{ minWidth: 300, paddingX: 16, paddingY: 3 }}>
       <div
-        style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}
+        style={{ display: 'flex', alignItems: 'center', marginBottom: '25px' }}
       >
         <div
           style={{
@@ -77,7 +77,8 @@ const PieceListPage = () => {
       >
         <FormControl
           sx={{
-            minWidth: '135px',
+            minWidth: '115px',
+            maxWidth: '115px',
             '& .MuiInputBase-root': {
               borderRadius: '20px',
             },
@@ -103,11 +104,14 @@ const PieceListPage = () => {
               boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
               borderColor: 'none',
               '& .MuiSelect-select': {
-                padding: '7px 26px',
+                padding: '5px 0px 5px 20px',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 fontSize: '0.8rem',
+              },
+              '& .MuiOutlinedInput-notchedOutline': {
+                border: 'none',
               },
             }}
           >
@@ -137,7 +141,8 @@ const PieceListPage = () => {
         <FormControl
           sx={{
             marginX: 2,
-            minWidth: '120px',
+            minWidth: '92px',
+            maxWidth: '92px',
             '& .MuiInputBase-root': {
               borderRadius: '20px',
             },
@@ -154,7 +159,7 @@ const PieceListPage = () => {
             renderValue={(value) => {
               return (
                 <>
-                  <Sort sx={{ fontSize: '1rem', marginRight: '10px' }} />
+                  <Paid sx={{ fontSize: '1rem', marginRight: '10px' }} />
                   {value.split('|')[1]}
                 </>
               );
@@ -163,11 +168,14 @@ const PieceListPage = () => {
               boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
               borderColor: 'none',
               '& .MuiSelect-select': {
-                padding: '7px 26px',
+                padding: '5px 0px 5px 20px',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 fontSize: '0.8rem',
+              },
+              '& .MuiOutlinedInput-notchedOutline': {
+                border: 'none',
               },
             }}
           >
@@ -196,7 +204,8 @@ const PieceListPage = () => {
         </FormControl>
         <FormControl
           sx={{
-            minWidth: '120px',
+            minWidth: '100px',
+            maxWidth: '100px',
             '& .MuiInputBase-root': {
               borderRadius: '20px',
             },
@@ -212,7 +221,7 @@ const PieceListPage = () => {
             renderValue={(value) => {
               return (
                 <>
-                  <Sell sx={{ fontSize: '1rem', marginRight: '10px' }} />
+                  <Collections sx={{ fontSize: '1rem', marginRight: '10px' }} />
                   콜렉션
                 </>
               );
@@ -221,11 +230,14 @@ const PieceListPage = () => {
               boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
               borderColor: 'none',
               '& .MuiSelect-select': {
-                padding: '7px 26px',
+                padding: '5px 0px 5px 20px',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 fontSize: '0.8rem',
+              },
+              '& .MuiOutlinedInput-notchedOutline': {
+                border: 'none',
               },
             }}
           />
@@ -233,11 +245,11 @@ const PieceListPage = () => {
       </div>
       <Grid
         container
-        spacing={{ xs: 2, md: 2 }}
-        columns={{ xs: 6, sm: 12, md: 15 }}
+        spacing={{ xs: 2, md: 4 }}
+        columns={{ xs: 1, sm: 2, md: 10 }}
       >
         {auctionList.map((value, i) => (
-          <Grid item xs={2} sm={3} md={3} key={i}>
+          <Grid item xs={1} sm={1} md={2} key={i}>
             <AuctionCard
               auctionId={value.id}
               klay={value.klay}
