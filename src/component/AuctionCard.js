@@ -16,7 +16,14 @@ const AuctionCard = ({
   imgUri,
 }) => {
   return (
-    <Card sx={{ maxWidth: 220, maxHeight: 320, borderRadius: 3, marginX: 2 }}>
+    <Card
+      sx={{
+        minWidth: 215,
+        maxWidth: 215,
+        maxHeight: 320,
+        borderRadius: 3,
+      }}
+    >
       <Link to={`/main/auction/${auctionId}`}>
         <CardActionArea>
           <Box sx={{ padding: 2, paddingBottom: 0 }}>
