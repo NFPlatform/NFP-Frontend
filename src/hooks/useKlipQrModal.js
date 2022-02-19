@@ -26,6 +26,7 @@ const useKlipQrModal = () => {
     <Modal
       open={klipQrModal}
       onClose={() => {
+        clearInterval();
         setKlipQrModal(false);
       }}
     >

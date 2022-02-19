@@ -26,13 +26,13 @@ export const registerPieceThunk = createAsyncThunk(
     } = payload;
 
     const response = await registerPieceApi(data);
+    const pieceId = response.data.pieceId;
     const contractPieceId =
-      response.data.pieceId +
-      (process.env.REACT_APP_ENV === 'production' ? 10000 : 1000);
+      pieceId + (process.env.REACT_APP_ENV === 'production' ? 10000 : 1000);
 
     const resultImgUrl =
       process.env.REACT_APP_ENV === 'production'
-        ? `${PRODUCTION_BACKEND_URL}/piece/${contractPieceId}/img`
+        ? `${PRODUCTION_BACKEND_URL}/piece/${pieceId}/img`
         : TEST_IMG_URL;
 
     await executeContractApi(
