@@ -1,100 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const auctionList = [
-  {
-    auctionId: 1,
-    auctionTokenId: 'sdf',
-    klay: 120,
-    vote: 0,
-    category: 'art',
-    sellerName: 'wavvism',
-    sellerId: 1,
-  },
-  {
-    auctionId: 2,
-    auctionTokenId: 'sdf',
-    klay: 120,
-    vote: 0,
-    category: 'art',
-    sellerName: 'wavvism',
-    sellerId: 1,
-  },
-  {
-    auctionId: 3,
-    auctionTokenId: 'sdf',
-    klay: 120,
-    vote: 0,
-    category: 'art',
-    sellerName: 'wavvism',
-    sellerId: 1,
-  },
-  {
-    auctionId: 4,
-    auctionTokenId: 'sdf',
-    klay: 120,
-    vote: 0,
-    category: 'art',
-    sellerName: 'wavvism',
-    sellerId: 1,
-  },
-  {
-    auctionId: 5,
-    auctionTokenId: 'sdf',
-    klay: 120,
-    vote: 0,
-    category: 'art',
-    sellerName: 'wavvism',
-    sellerId: 1,
-  },
-  {
-    auctionId: 6,
-    auctionTokenId: 'sdf',
-    klay: 120,
-    vote: 0,
-    category: 'art',
-    sellerName: 'wavvism',
-    sellerId: 1,
-  },
-  {
-    auctionId: 1,
-    auctionTokenId: 'sdf',
-    klay: 120,
-    vote: 0,
-    category: 'art',
-    sellerName: 'wavvism',
-    sellerId: 1,
-  },
-  {
-    auctionId: 1,
-    auctionTokenId: 'sdf',
-    klay: 120,
-    vote: 0,
-    category: 'art',
-    sellerName: 'wavvism',
-    sellerId: 1,
-  },
-  {
-    auctionId: 7,
-    auctionTokenId: 'sdf',
-    klay: 120,
-    vote: 0,
-    category: 'art',
-    sellerName: 'wavvism',
-    sellerId: 1,
-  },
-  {
-    auctionId: 8,
-    auctionTokenId: 'sdf',
-    klay: 120,
-    vote: 0,
-    category: 'art',
-    sellerName: 'wavvism',
-    sellerId: 1,
-  },
-];
-
 const initialState = {
   auctionList: [],
+  auctionDetail: {
+    id: -1,
+    piece: {
+      id: 0,
+      name: '',
+      artist: {
+        id: 0,
+        name: '',
+      },
+      vote: 0,
+      title: '',
+      bio: '',
+      subLink: '',
+    },
+    seller: {
+      id: 0,
+      name: '',
+    },
+    klay: 0,
+    nfpToken: 0,
+    isVote: false,
+  },
 };
 
 const auctionSlice = createSlice({
@@ -103,6 +32,15 @@ const auctionSlice = createSlice({
   reducers: {
     setAuctionList(state, { payload }) {
       state.auctionList = payload;
+    },
+    setAuctionDetail(state, { payload }) {
+      state.auctionDetail = payload;
+    },
+    voteToPiece(state) {
+      state.auctionDetail.piece.vote += 1;
+    },
+    deVoteToPiece(state) {
+      state.auctionDetail.piece.vote -= 1;
     },
   },
 });

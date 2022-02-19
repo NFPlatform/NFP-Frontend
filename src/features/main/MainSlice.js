@@ -1,93 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const topCollectorList = [
-  {
-    name: 'j.g',
-    klay: 120,
-    thumbnailImg: '',
-  },
-  {
-    name: 'j.g',
-    klay: 120,
-    thumbnailImg: '',
-  },
-  {
-    name: 'j.g',
-    klay: 120,
-    thumbnailImg: '',
-  },
-  {
-    name: 'j.g',
-    klay: 120,
-    thumbnailImg: '',
-  },
-  {
-    name: 'j.g',
-    klay: 120,
-    thumbnailImg: '',
-  },
-  {
-    name: 'j.g',
-    klay: 120,
-    thumbnailImg: '',
-  },
-  {
-    name: 'j.g',
-    klay: 120,
-    thumbnailImg: '',
-  },
-  {
-    name: 'j.g',
-    klay: 120,
-    thumbnailImg: '',
-  },
-  {
-    name: 'j.g',
-    klay: 120,
-    thumbnailImg: '',
-  },
-  {
-    name: 'j.g',
-    klay: 120,
-    thumbnailImg: '',
-  },
-  {
-    name: 'j.g',
-    klay: 120,
-    thumbnailImg: '',
-  },
-  {
-    name: 'j.g',
-    klay: 120,
-    thumbnailImg: '',
-  },
-  {
-    name: 'j.g',
-    klay: 120,
-    thumbnailImg: '',
-  },
-  {
-    name: 'j.g',
-    klay: 120,
-    thumbnailImg: '',
-  },
-  {
-    name: 'j.g',
-    klay: 120,
-    thumbnailImg: '',
-  },
-];
-
 const initialState = {
-  topCollectorList: topCollectorList,
+  topCollectorList: [],
+  hotArtist: {},
 };
 
 const mainSlice = createSlice({
   name: 'main',
   initialState,
   reducers: {
-    setCollectorList(state, { payload }) {
+    setTopCollectorList(state, { payload }) {
       state.topCollectorList = payload;
+    },
+    setHotArtist(state, { payload }) {
+      state.hotArtist = payload;
     },
   },
 });

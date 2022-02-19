@@ -1,7 +1,9 @@
 import axios from 'axios';
+import { PRODUCTION_BACKEND_URL } from './constant';
 
 const api = axios.create({
-  baseURL: '',
+  baseURL:
+    process.env.REACT_APP_ENV === 'production' ? PRODUCTION_BACKEND_URL : '',
 });
 
 api.interceptors.request.use(

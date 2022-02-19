@@ -17,7 +17,7 @@ const AuctionCard = ({
 }) => {
   return (
     <Card sx={{ maxWidth: 220, maxHeight: 320, borderRadius: 3, marginX: 2 }}>
-      <Link to={`/main/piece/${auctionId}`}>
+      <Link to={`/main/auction/${auctionId}`}>
         <CardActionArea>
           <Box sx={{ padding: 2, paddingBottom: 0 }}>
             <CardMedia

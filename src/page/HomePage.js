@@ -14,8 +14,10 @@ import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getAuctionListThunk } from '../features/auction/AuctionThunks';
-import { getTopCollectorListThunk } from '../features/main/MainThunks';
+import {
+  getHotArtistThunk,
+  getTopCollectorListThunk,
+} from '../features/main/MainThunks';
 
 const ImageButton = styled(ButtonBase)(({ height, theme }) => ({
   position: 'relative',
@@ -63,11 +65,16 @@ const HomePage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const topCollectorList = useSelector((state) => state.main.topCollectorList);
+  const hotArtist = useSelector((state) => state.main.hotArtist);
   const auctionList = useSelector((state) => state.auction.auctionList);
 
   useEffect(async () => {
     await dispatch(getTopCollectorListThunk());
-  });
+  }, []);
+
+  useEffect(async () => {
+    await dispatch(getHotArtistThunk());
+  }, []);
 
   return (
     <Container>
@@ -95,6 +102,18 @@ const HomePage = () => {
             }}
           >
             지금 가장 HOT한 아티스트
+          </Typography>
+          <Typography
+            component="span"
+            variant="h6"
+            color="white"
+            sx={{
+              position: 'absolute',
+              top: 45,
+              left: 15,
+            }}
+          >
+            {hotArtist.name}
           </Typography>
         </ImageButton>
         <div style={{ flex: 3, height: '600px' }}>

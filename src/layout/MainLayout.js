@@ -6,7 +6,7 @@ import RegisterArtistPage from '../page/RegisterArtistPage';
 import MyPage from '../page/MyPage';
 import PieceListPage from '../page/PieceListPage';
 import RegisterPiecePage from '../page/RegisterPiecePage';
-import PieceDetailPage from '../page/PieceDetailPage';
+import AuctionDetailPage from '../page/AuctionDetailPage';
 import ArtistDetailPage from '../page/ArtistDetailPage';
 import { useEffect } from 'react';
 
@@ -53,8 +53,8 @@ const MainLayout = ({ match }) => {
             />
             <Route
               exact
-              path={`${match.path}/piece/:pieceId`}
-              component={PieceDetailPage}
+              path={`${match.path}/auction/:auctionId`}
+              component={AuctionDetailPage}
             />
             <Route exact path={`${match.path}/my`} component={MyPage} />
           </Switch>

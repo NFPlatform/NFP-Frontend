@@ -1,5 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getAuctionListApi } from '../../lib/api/auction';
+import {
+  buyPieceApi,
+  getAuctionDetailApi,
+  getAuctionListApi,
+} from '../../lib/api/auction';
 import auctionSlice from './AuctionSlice';
 import { executeContractApi } from '../../nft/klipApi';
 import {
@@ -8,6 +12,7 @@ import {
 } from '../../nft/constants/cypress';
 import { getNftListOfAddress } from '../../nft/caver';
 import getKlipAddressFromStore from '../../lib/util/getKlipAddress';
+import { BUY_NFT_ABI } from '../../nft/constants/abi';
 
 export const getAuctionListThunk = createAsyncThunk(
   'auction/getAuctionList',
@@ -23,23 +28,40 @@ export const getAuctionListThunk = createAsyncThunk(
   },
 );
 
+export const getAuctionDetailThunk = createAsyncThunk(
+  'auction/getDetail',
+  async (payload, { dispatch }) => {
+    const { auctionId } = payload;
+
+    const result = await getAuctionDetailApi(auctionId);
+    await dispatch(auctionSlice.actions.setAuctionDetail(result.data));
+  },
+);
+
 export const buyPieceThunk = createAsyncThunk(
   'auction/buyPiece',
   async (payload, { getState, dispatch, rejectWithValue }) => {
     const userWallet = getKlipAddressFromStore(getState, rejectWithValue);
     if (userWallet === '') return;
 
-    const { nftTokenId, actionWithRedirectUrl } = payload;
+    const {
+      auctionId,
+      pieceId,
+      actionWithRedirectUrl,
+      modalCloseAction,
+      afterResultCallback,
+    } = payload;
 
-    const abi =
-      '{ "constant": false, "inputs": [ { "name": "tokenId", "type": "uint256" }, { "name": "NFTAddress", "type": "address" } ], "name": "buyNFT", "outputs": [ { "name": "", "type": "bool" } ], "payable": true, "stateMutability": "payable", "type": "function" }';
+    const result = await buyPieceApi(auctionId);
 
     await executeContractApi(
-      NFT_CONTRACT_ADDRESS,
-      abi,
-      10000000000000000,
-      [nftTokenId, NFT_CONTRACT_ADDRESS],
+      MARKET_CONTRACT_ADDRESS,
+      BUY_NFT_ABI,
+      '10000000000000000',
+      [pieceId + 1000, NFT_CONTRACT_ADDRESS],
       actionWithRedirectUrl,
+      modalCloseAction,
+      afterResultCallback,
     );
   },
 );

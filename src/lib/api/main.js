@@ -1,5 +1,9 @@
 import { api } from '../axios';
 
 export const getTopCollectorListApi = () => {
-  return api.get(`/main/top-collector`);
+  return api.get(`/user/top`);
+};
+
+export const getHotArtistApi = () => {
+  return api.get('/artist/top');
 };

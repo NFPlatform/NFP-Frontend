@@ -5,7 +5,7 @@ import {
   Button,
   Container,
   Grid,
-  Icon,
+  Modal,
   Stack,
   Tooltip,
   tooltipClasses,
@@ -16,8 +16,16 @@ import NfpLogoBlack from '../assets/img/nfp_logo_black.png';
 import ArtistImg03 from '../assets/img/artistImg03.png';
 import ChonnamUnivLogo from '../assets/img/icon_chonnam_univ_logo@2x.png';
 import '../styles/PieceDetailPage.css';
-import { Favorite, HelpOutline } from '@mui/icons-material';
+import { CloseRounded, Favorite, HelpOutline } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import {
+  buyPieceThunk,
+  getAuctionDetailThunk,
+} from '../features/auction/AuctionThunks';
+import useKlipQrModal from '../hooks/useKlipQrModal';
 
 const CustomTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -31,8 +39,39 @@ const CustomTooltip = styled(({ className, ...props }) => (
   },
 }));
 
-const PieceDetailPage = ({ match }) => {
-  const { pieceId } = match.params;
+const AuctionDetailPage = ({ match }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const [buyModal, setBuyModal] = useState(false);
+
+  const auctionDetail = useSelector((state) => state.auction.auctionDetail);
+
+  const { klipQrComponent, actionWithRedirectUrl, modalCloseAction } =
+    useKlipQrModal();
+
+  const { auctionId } = match.params;
+
+  useEffect(async () => {
+    await dispatch(getAuctionDetailThunk({ auctionId: auctionId }));
+  }, [auctionId]);
+
+  const buyPiece = async () => {
+    if (auctionDetail.id !== -1) {
+      await dispatch(
+        buyPieceThunk({
+          auctionId: auctionDetail.id,
+          pieceId: auctionDetail.piece.id,
+          actionWithRedirectUrl: actionWithRedirectUrl,
+          modalCloseAction: modalCloseAction,
+          afterResultCallback: () => {
+            history.push('/main/my');
+          },
+        }),
+      );
+    }
+  };
+
   return (
     <Container maxWidth={'lg'}>
       <Box
@@ -57,7 +96,7 @@ const PieceDetailPage = ({ match }) => {
               fontWeight={'medium'}
               letterSpacing={-1}
             >
-              체리조개행성
+              {auctionDetail.piece.name}
             </Typography>
             <Stack
               direction={'row'}
@@ -74,8 +113,7 @@ const PieceDetailPage = ({ match }) => {
             >
               <Favorite sx={{ color: '#f35154', fontSize: 16 }} />
               <Typography variant={'body2'} color={'#616161'}>
-                {/*  임시 테스트용으로 넣어본 것*/}
-                {pieceId}
+                {auctionDetail.piece.vote}
               </Typography>
             </Stack>
           </Stack>
@@ -93,7 +131,7 @@ const PieceDetailPage = ({ match }) => {
                 letterSpacing={-1}
                 color={'primary'}
               >
-                100
+                {auctionDetail.klay}
               </Typography>
               <Typography
                 component={'span'}
@@ -121,7 +159,7 @@ const PieceDetailPage = ({ match }) => {
                   letterSpacing={-1}
                   fontWeight={'bold'}
                 >
-                  5
+                  {auctionDetail.nfpToken}
                 </Typography>
                 <Typography variant={'h6'} letterSpacing={-1}>
                   NFPT
@@ -141,8 +179,7 @@ const PieceDetailPage = ({ match }) => {
               letterSpacing={-0.5}
               color={'#616161'}
             >
-              진주가 있을 줄 알았던 조개 안에 체리가 들어있으면 재밌지 않을까?
-              하는 상상에서 만든 작품입니다.
+              {auctionDetail.piece.bio}
             </Typography>
           </Stack>
           <Grid
@@ -163,7 +200,7 @@ const PieceDetailPage = ({ match }) => {
                   letterSpacing={-0.5}
                   fontWeight={'medium'}
                 >
-                  wavvism
+                  {auctionDetail.piece.artist.name}
                 </Typography>
               </Stack>
             </Grid>
@@ -193,7 +230,7 @@ const PieceDetailPage = ({ match }) => {
                   letterSpacing={-0.5}
                   fontWeight={'medium'}
                 >
-                  wavvism
+                  {auctionDetail.seller.name}
                 </Typography>
               </Stack>
             </Grid>
@@ -220,6 +257,9 @@ const PieceDetailPage = ({ match }) => {
                 boxShadow: '0 2px 5px rgba(0, 0, 0, 0.15)',
               }}
               fullWidth
+              onClick={() => {
+                setBuyModal(true);
+              }}
             >
               작품 소유하기
             </Button>
@@ -237,8 +277,52 @@ const PieceDetailPage = ({ match }) => {
           </Stack>
         </Stack>
       </Box>
+      <Modal
+        open={buyModal}
+        onClose={() => {
+          setBuyModal(false);
+        }}
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 220,
+            height: 230,
+            bgcolor: 'background.paper',
+            borderRadius: 5,
+            boxShadow: 3,
+            p: 4,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          여기 채워줘요 여기 채워줘요 여기 채워줘요 여기 채워줘요 여기 채워줘요
+          여기 채워줘요 여기 채워줘요 여기 채워줘요 여기 채워줘요 여기 채워줘요
+          여기 채워줘요 여기 채워줘요 여기 채워줘요
+          <CloseRounded
+            sx={{
+              position: 'absolute',
+              top: '5%',
+              right: '5%',
+              cursor: 'pointer',
+            }}
+            onClick={() => {
+              setBuyModal(false);
+            }}
+          />
+          <Button variant="contained" color="primary" onClick={buyPiece}>
+            구매버튼
+          </Button>
+        </Box>
+      </Modal>
+      {klipQrComponent}
     </Container>
   );
 };
 
-export default PieceDetailPage;
+export default AuctionDetailPage;
