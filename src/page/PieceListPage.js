@@ -47,7 +47,7 @@ const PieceListPage = () => {
           style={{
             color: '#000000',
             marginRight: '5px',
-            fontFamily: 'BM Dohyeon',
+            fontFamily: 'Gmarket Sans',
             fontSize: '1.8rem',
           }}
         >
@@ -56,7 +56,7 @@ const PieceListPage = () => {
         <div
           style={{
             color: '#724ffe',
-            fontFamily: 'BM Dohyeon',
+            fontFamily: 'Gmarket Sans',
             fontSize: '1.8rem',
           }}
         >
@@ -65,7 +65,7 @@ const PieceListPage = () => {
         <div
           style={{
             color: '#000000',
-            fontFamily: 'BM Dohyeon',
+            fontFamily: 'Gmarket Sans',
             fontSize: '1.8rem',
           }}
         >

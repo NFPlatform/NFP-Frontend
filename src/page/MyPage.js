@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Box,
   Button,
   createTheme,
   Divider,
@@ -22,14 +23,7 @@ import {
 import { useEffect } from 'react';
 import useKlipQrModal from '../hooks/useKlipQrModal';
 import OwnedCard from '../component/OwnedCard';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: brown[500],
-    },
-  },
-});
+import KlipButton from '../assets/img/klip-login-center.png';
 
 const MyPage = () => {
   const dispatch = useDispatch();
@@ -85,6 +79,7 @@ const MyPage = () => {
             sx={{
               width: '100%',
               height: '100%',
+              backgroundColor: 'white',
             }}
             src={userInfo.thumbnailImg}
           />
@@ -125,23 +120,30 @@ const MyPage = () => {
           }}
         >
           {userInfo.klipAddressHex === '' ? (
-            <ThemeProvider theme={theme}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={(e) => {
-                  e.preventDefault();
-                  dispatch(
-                    linkWithKlipWalletThunk({
-                      actionWithRedirectUrl: actionWithRedirectUrl,
-                      afterResultCallback: modalCloseAction,
-                    }),
-                  );
-                }}
-              >
-                Klip 지갑 연결하기
-              </Button>
-            </ThemeProvider>
+            <Box
+              style={{
+                position: 'relative',
+                display: 'flex',
+                justifyContent: 'center',
+                cursor: 'pointer',
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                dispatch(
+                  linkWithKlipWalletThunk({
+                    actionWithRedirectUrl: actionWithRedirectUrl,
+                    afterResultCallback: modalCloseAction,
+                  }),
+                );
+              }}
+            >
+              <img
+                src={KlipButton}
+                alt="KlipButton"
+                width="230"
+                style={{ maxWidth: 230, minWidth: 210 }}
+              />
+            </Box>
           ) : (
             <div>
               <div>address</div>
