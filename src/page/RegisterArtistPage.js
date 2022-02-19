@@ -103,7 +103,10 @@ const RegisterArtistPage = () => {
                 '& .MuiOutlinedInput-root': {
                   fontSize: '0.9rem',
                   borderRadius: '10px',
-                  boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.10)',
+                  boxShadow: '0 2px 5px rgba(0, 0, 0, 0.20)',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  border: 'none',
                 },
               }}
               size="small"
@@ -128,7 +131,10 @@ const RegisterArtistPage = () => {
                 '& .MuiOutlinedInput-root': {
                   fontSize: '0.9rem',
                   borderRadius: '10px',
-                  boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.10)',
+                  boxShadow: '0 2px 5px rgba(0, 0, 0, 0.20)',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  border: 'none',
                 },
               }}
               size="small"
@@ -157,7 +163,10 @@ const RegisterArtistPage = () => {
               '& .MuiOutlinedInput-root': {
                 fontSize: '0.9rem',
                 borderRadius: '10px',
-                boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.10)',
+                boxShadow: '0 2px 5px rgba(0, 0, 0, 0.20)',
+              },
+              '& .MuiOutlinedInput-notchedOutline': {
+                border: 'none',
               },
             }}
             multiline
