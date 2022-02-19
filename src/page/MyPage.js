@@ -166,7 +166,7 @@ const MyPage = () => {
           <Grid
             container
             spacing={{ xs: 2, md: 2 }}
-            columns={{ xs: 4, sm: 9, md: 12 }}
+            columns={{ xs: 4, sm: 9, md: 9 }}
           >
             {userInfo.sellingPieceList.map((value, i) => (
               <Grid item xs={2} sm={3} md={3} key={i}>
@@ -196,7 +196,7 @@ const MyPage = () => {
           <Grid
             container
             spacing={{ xs: 2, md: 2 }}
-            columns={{ xs: 4, sm: 9, md: 12 }}
+            columns={{ xs: 4, sm: 9, md: 9 }}
           >
             {userInfo.ownedPieceList.map((value, i) => (
               <Grid item xs={2} sm={3} md={3} key={i}>

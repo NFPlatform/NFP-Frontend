@@ -26,18 +26,20 @@ export const registerPieceThunk = createAsyncThunk(
     } = payload;
 
     const response = await registerPieceApi(data);
-    const uniqueTokenId = response.data.pieceId + 1000;
+    const contractPieceId =
+      response.data.pieceId +
+      (process.env.REACT_APP_ENV === 'production' ? 10000 : 1000);
 
     const resultImgUrl =
       process.env.REACT_APP_ENC === 'production'
-        ? `${PRODUCTION_BACKEND_URL}/piece/${uniqueTokenId}/img`
+        ? `${PRODUCTION_BACKEND_URL}/piece/${contractPieceId}/img`
         : TEST_IMG_URL;
 
     await executeContractApi(
       NFT_CONTRACT_ADDRESS,
       MINT_WITH_TOKEN_URI_ABI,
       '0',
-      [userWallet, uniqueTokenId, resultImgUrl],
+      [userWallet, contractPieceId, resultImgUrl],
       actionWithRedirectUrl,
       modalCloseAction,
       afterResultCallback,
@@ -60,11 +62,15 @@ export const sellingPieceThunk = createAsyncThunk(
 
     const response = await setToSellingApi(data);
 
+    const contractPieceId =
+      data.pieceId +
+      (process.env.REACT_APP_ENV === 'production' ? 10000 : 1000);
+
     await executeContractApi(
       NFT_CONTRACT_ADDRESS,
       SAFE_TRANSFER_FROM_ABI,
       '0',
-      [userWallet, MARKET_CONTRACT_ADDRESS, data.pieceId + 1000],
+      [userWallet, MARKET_CONTRACT_ADDRESS, contractPieceId],
       actionWithRedirectUrl,
       modalCloseAction,
       afterResultCallback,

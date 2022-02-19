@@ -1,6 +1,4 @@
 import { caver, NFTContract } from './index';
-import { MARKET_CONTRACT_ADDRESS } from '../constants/cypress';
-import { getAuctionListApi } from '../../lib/api/auction';
 
 const getNftTokenPromise = async (address, i) => {
   const id = await NFTContract.methods.tokenOfOwnerByIndex(address, i).call();
@@ -40,7 +38,11 @@ export const getNftListOfAddress = async (address, backendApi) => {
   const pieceList = pieceListFromChain.map((pieceFromChain) => {
     const { tokenId, uri } = pieceFromChain;
     const matchPiece = pieceListFromBackend.filter(
-      (pieceFromBackend) => `${pieceFromBackend.id + 1000}` === tokenId,
+      (pieceFromBackend) =>
+        `${
+          pieceFromBackend.id +
+          (process.env.REACT_APP_ENV === 'production' ? 10000 : 1000)
+        }` === tokenId,
     );
     if (matchPiece.length === 0) {
       return { tokenId: tokenId, uri: uri };

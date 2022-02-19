@@ -52,13 +52,16 @@ export const buyPieceThunk = createAsyncThunk(
       afterResultCallback,
     } = payload;
 
+    const contractPieceId =
+      pieceId + (process.env.REACT_APP_ENV === 'production' ? 10000 : 1000);
+
     const result = await buyPieceApi(auctionId);
 
     await executeContractApi(
       MARKET_CONTRACT_ADDRESS,
       BUY_NFT_ABI,
       '10000000000000000',
-      [pieceId + 1000, NFT_CONTRACT_ADDRESS],
+      [contractPieceId + 1000, NFT_CONTRACT_ADDRESS],
       actionWithRedirectUrl,
       modalCloseAction,
       afterResultCallback,

@@ -41,7 +41,7 @@ const OwnedCard = ({ pieceId, klay, vote, sellerName, sellerId, imgUri }) => {
         sellingPieceThunk({
           data: {
             pieceId: pieceId,
-            klay: parseFloat(sellingKlay),
+            klay: parseInt(sellingKlay),
           },
           actionWithRedirectUrl: actionWithRedirectUrl,
           modalCloseAction: modalCloseAction,
