@@ -28,8 +28,8 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "set \"REACT_APP_ENV=local\" && react-scripts start",
-    "build": "set \"GENERATE_SOURCEMAP=false\" && set \"REACT_APP_ENV=production\" && react-scripts --max_old_space_size=20000 build"
+    "start": "REACT_APP_ENV=local react-scripts start",
+    "build": "GENERATE_SOURCEMAP=false REACT_APP_ENV=production react-scripts --max_old_space_size=20000 build"
   },
   "eslintConfig": {
     "extends": [
