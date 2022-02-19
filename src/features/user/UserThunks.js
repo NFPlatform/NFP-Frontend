@@ -32,15 +32,20 @@ export const getUserInfoThunk = createAsyncThunk(
 export const linkWithKlipWalletThunk = createAsyncThunk(
   'user/linkWithKlip',
   async (payload, { dispatch }) => {
-    const { actionWithRedirectUrl, afterResultCallback } = payload;
+    const { actionWithRedirectUrl, modalCloseAction, afterResultCallback } =
+      payload;
 
-    await getKlipAddressApi(actionWithRedirectUrl, async (result) => {
-      const klaytnAddress = result.data.result.klaytn_address;
+    await getKlipAddressApi(
+      actionWithRedirectUrl,
+      modalCloseAction,
+      async (result) => {
+        const klaytnAddress = result.data.result.klaytn_address;
 
-      localStorage.setItem('klaytnAddress', klaytnAddress);
-      dispatch(userSlice.actions.setKlipAddressHex(klaytnAddress));
-      await afterResultCallback();
-    });
+        localStorage.setItem('klaytnAddress', klaytnAddress);
+        dispatch(userSlice.actions.setKlipAddressHex(klaytnAddress));
+        await afterResultCallback();
+      },
+    );
   },
 );
 

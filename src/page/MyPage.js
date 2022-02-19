@@ -24,9 +24,11 @@ import { useEffect } from 'react';
 import useKlipQrModal from '../hooks/useKlipQrModal';
 import OwnedCard from '../component/OwnedCard';
 import KlipButton from '../assets/img/klip-login-center.png';
+import { useHistory } from 'react-router-dom';
 
 const MyPage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const userInfo = useSelector((state) => state.user);
 
@@ -132,7 +134,10 @@ const MyPage = () => {
                 dispatch(
                   linkWithKlipWalletThunk({
                     actionWithRedirectUrl: actionWithRedirectUrl,
-                    afterResultCallback: modalCloseAction,
+                    modalCloseAction: modalCloseAction,
+                    afterResultCallback: () => {
+                      history.push('/main');
+                    },
                   }),
                 );
               }}
