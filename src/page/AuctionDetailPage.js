@@ -3,8 +3,14 @@ import {
   Avatar,
   Box,
   Button,
+  Checkbox,
   Container,
   Grid,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   Modal,
   Stack,
   Tooltip,
@@ -16,7 +22,12 @@ import NfpLogoBlack from '../assets/img/nfp_logo_black.png';
 import ArtistImg03 from '../assets/img/artistImg03.png';
 import ChonnamUnivLogo from '../assets/img/icon_chonnam_univ_logo@2x.png';
 import '../styles/PieceDetailPage.css';
-import { CloseRounded, Favorite, HelpOutline } from '@mui/icons-material';
+import {
+  CloseRounded,
+  Favorite,
+  HelpOutline,
+  Check,
+} from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -71,6 +82,28 @@ const AuctionDetailPage = ({ match }) => {
       );
     }
   };
+  const [checked, setChecked] = useState([]);
+
+  const handleToggle = (value) => () => {
+    const currentIndex = checked.indexOf(value);
+    console.log('currentIndex================>', currentIndex);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+    console.log('newChecked================>', newChecked);
+
+    setChecked(newChecked);
+  };
+
+  const consentList = [
+    '[필수] 양수도계약 조건 및 유의사항을 확인하였으며 동의함',
+    '[필수] 청약철회 및 환불에 대한 규정을 확인하였으며 동의함',
+    '[필수] 양수도계약 체결을 위한 개인정보 제3자 제공에 동의함',
+  ];
 
   return (
     <Container maxWidth={'lg'}>
@@ -92,23 +125,19 @@ const AuctionDetailPage = ({ match }) => {
           }
         />
         <Stack mt={4}>
-          <Stack
-            direction={'row'}
-            justifyContent={'space-between'}
-            alignItems={'center'}
-            mb={1.5}
-          >
+          <Stack direction={'row'} mb={1.5}>
             <Typography
               component={'div'}
-              variant={'h4'}
               fontWeight={'medium'}
               letterSpacing={-1}
+              variant={'h4'}
             >
               {auctionDetail.piece.name}
             </Typography>
             <Stack
-              direction={'row'}
               alignItems={'center'}
+              direction={'row'}
+              height={30}
               justifyContent={'center'}
               spacing={1}
               sx={{
@@ -117,7 +146,6 @@ const AuctionDetailPage = ({ match }) => {
                 borderRadius: 5,
               }}
               width={50}
-              height={30}
             >
               <Favorite sx={{ color: '#f35154', fontSize: 16 }} />
               <Typography variant={'body2'} color={'#616161'}>
@@ -297,25 +325,27 @@ const AuctionDetailPage = ({ match }) => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 220,
-            height: 230,
+            width: 390,
+            height: 260,
             bgcolor: 'background.paper',
-            borderRadius: 5,
+            borderRadius: 3,
             boxShadow: 3,
-            p: 4,
+            paddingTop: 6,
+            paddingBottom: 3,
+            px: 4,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
             alignItems: 'center',
           }}
         >
-          여기 채워줘요 여기 채워줘요 여기 채워줘요 여기 채워줘요 여기 채워줘요
-          여기 채워줘요 여기 채워줘요 여기 채워줘요 여기 채워줘요 여기 채워줘요
-          여기 채워줘요 여기 채워줘요 여기 채워줘요
+          <Typography fontWeight={600} sx={{ position: 'absolute', top: '6%' }}>
+            작품 구매
+          </Typography>
           <CloseRounded
             sx={{
               position: 'absolute',
-              top: '5%',
+              top: '6%',
               right: '5%',
               cursor: 'pointer',
             }}
@@ -323,8 +353,100 @@ const AuctionDetailPage = ({ match }) => {
               setBuyModal(false);
             }}
           />
-          <Button variant="contained" color="primary" onClick={buyPiece}>
-            구매버튼
+          <List sx={{ mt: 0.5, width: '100%', maxWidth: 400 }}>
+            {consentList.map((value, valueIndex) => {
+              const labelId = `checkbox-list-label-${valueIndex}`;
+
+              return (
+                <ListItem key={valueIndex} disablePadding sx={{ mt: 1 }}>
+                  <ListItemButton
+                    role={undefined}
+                    onClick={handleToggle(valueIndex)}
+                    dense
+                    sx={{
+                      borderRadius: 2,
+                      paddingY: 0.3,
+                      border: `${
+                        checked.indexOf(valueIndex) !== -1
+                          ? '1.4px solid rgba(0, 0, 0, 0.8)'
+                          : '1.2px solid rgba(0, 0, 0, 0.05)'
+                      }`,
+                    }}
+                  >
+                    <ListItemIcon sx={{ minWidth: 30 }}>
+                      <Checkbox
+                        edge="start"
+                        icon={
+                          <Check
+                            sx={{
+                              fontSize: 15,
+                              color: `${
+                                checked.indexOf(valueIndex) !== -1
+                                  ? 'rgba(0, 0, 0, 0.8)'
+                                  : 'rgba(0, 0, 0, 0.3)'
+                              }`,
+                            }}
+                          />
+                        }
+                        tabIndex={-1}
+                        disableRipple
+                        inputProps={{ 'aria-labelledby': labelId }}
+                      />
+                    </ListItemIcon>
+                    <ListItemText
+                      id={labelId}
+                      primary={value}
+                      sx={{
+                        color: `${
+                          checked.indexOf(valueIndex) !== -1
+                            ? 'rgba(0, 0, 0, 0.8)'
+                            : 'rgba(0, 0, 0, 0.3)'
+                        }`,
+                        letterSpacing: -0.5,
+                        '& .MuiTypography-root': {
+                          fontSize: 14,
+                          fontWeight: `${
+                            checked.indexOf(valueIndex) !== -1 ? 500 : 400
+                          }`,
+                        },
+                      }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              );
+            })}
+          </List>
+
+          <Stack direction={'row'} spacing={1} alignItems={'center'} mb={2.5}>
+            <Avatar
+              alt="nfp_logo"
+              src={NfpLogoBlack}
+              sx={{ width: 18, height: 18, border: '0.5px solid black' }}
+            />
+            <Typography
+              variant={'body2'}
+              letterSpacing={-1}
+              fontWeight={'bold'}
+              color={'secondary'}
+            >
+              {auctionDetail.nfpToken}
+            </Typography>
+            <Typography variant={'body2'} letterSpacing={-1} fontWeight={500}>
+              NFPT 획득 가능
+            </Typography>
+          </Stack>
+
+          <Button
+            variant={'contained'}
+            color={'secondary'}
+            style={{
+              borderRadius: '20px',
+              boxShadow: '0 2px 5px rgba(0, 0, 0, 0.15)',
+            }}
+            fullWidth
+            onClick={buyPiece}
+          >
+            작품 소유하기
           </Button>
         </Box>
       </Modal>

@@ -4,6 +4,13 @@
     object-fit: cover;
     border-radius: 20px;
 }
+.piece-detail-modal {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 10px;
+}
 /*.piece-detail {*/
 /*    object-fit: contain;*/
 /*}*/
