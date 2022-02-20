@@ -27,7 +27,6 @@ const ImageButton = styled(ButtonBase)(({ height, theme }) => ({
     width: '100% !important', // Overrides inline-style
     height: 100,
   },
-  top: 30,
   '& .MuiTouchRipple-root': {
     margin: '0 8px',
     borderRadius: 15,
@@ -84,8 +83,8 @@ const HomePage = () => {
   }, []);
 
   return (
-    <Container>
-      <Box sx={{ display: 'flex', minWidth: 300, paddingBottom: 7 }}>
+    <Container sx={{ marginTop: 3 }}>
+      <Box sx={{ display: 'flex', minWidth: 300, paddingBottom: 5 }}>
         <ImageButton
           focusRipple
           style={{
@@ -127,7 +126,7 @@ const HomePage = () => {
             {hotArtist.name}
           </Typography>
         </ImageButton>
-        <div style={{ flex: 3, height: '500px' }}>
+        <div style={{ flex: 3, height: '465px' }}>
           <Grid columns={{ md: 6 }} container rowSpacing={2}>
             {categoryList.map((category, i) => (
               <Grid key={i} item md={2}>
@@ -188,8 +187,8 @@ const HomePage = () => {
           </Grid>
         </div>
       </Box>
-      <Stack sx={{ minWidth: 300, paddingBottom: 7 }}>
-        <Box component="div" mb={3} letterSpacing={-1.5}>
+      <Stack sx={{ minWidth: 300, paddingBottom: 5 }}>
+        <Box component="div" mb={2} letterSpacing={-1.5}>
           <Typography component="div" fontSize={28} fontFamily="Gmarket Sans">
             🏅 내가 바로{' '}
             <Typography
@@ -259,7 +258,7 @@ const HomePage = () => {
         </Grid>
       </Stack>
       <Stack sx={{ minWidth: 300, paddingBottom: 15 }}>
-        <Box component="div" mb={3} letterSpacing={-1.5}>
+        <Box component="div" mb={2} letterSpacing={-1.5}>
           <Typography component="div" fontSize={28} fontFamily={'Gmarket Sans'}>
             🔥 실시간{' '}
             <Typography

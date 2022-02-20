@@ -5,10 +5,12 @@ import {
   createTheme,
   Divider,
   Grid,
+  Stack,
   ThemeProvider,
+  Tooltip,
+  Typography,
 } from '@mui/material';
-import { Edit } from '@mui/icons-material';
-import { brown } from '@mui/material/colors';
+import { Edit, ContentCopy } from '@mui/icons-material';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -24,7 +26,10 @@ import { useEffect } from 'react';
 import useKlipQrModal from '../hooks/useKlipQrModal';
 import OwnedCard from '../component/OwnedCard';
 import KlipButton from '../assets/img/klip-login-center.png';
+import KlaytnLogo from '../assets/img/klaytn-klay-logo.png';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import ProfileBackgroundImg from '../assets/img/my-background-camera.png';
 
 const MyPage = () => {
   const dispatch = useDispatch();
@@ -34,6 +39,24 @@ const MyPage = () => {
 
   const { klipQrComponent, actionWithRedirectUrl, modalCloseAction } =
     useKlipQrModal();
+
+  const CopyKlipAddressHex = (text) => {
+    if (!document.queryCommandSupported('copy')) {
+      return toast.error('복사하기가 지원되지 않는 브라우저입니다.');
+    }
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.top = 0;
+    textarea.style.left = 0;
+    textarea.style.position = 'fixed';
+
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    toast.success('클립보드에 복사되었습니다.');
+  };
 
   useEffect(async () => {
     if (userInfo.klipAddressHex !== '') {
@@ -57,20 +80,32 @@ const MyPage = () => {
 
   return (
     <div style={{ width: '100%' }}>
-      <div style={{ minHeight: '400px' }}>
-        <div
+      <div style={{ minHeight: '500px' }}>
+        {/*<div*/}
+        {/*  style={{*/}
+        {/*    position: 'absolute',*/}
+        {/*    minHeight: '200px',*/}
+        {/*    maxHeight: '200px',*/}
+        {/*    width: '100%',*/}
+        {/*    backgroundColor: '#e5e8eb',*/}
+        {/*  }}*/}
+        {/*/>*/}
+        <img
+          src={ProfileBackgroundImg}
+          alt="ProfileBackgroundImg"
           style={{
             position: 'absolute',
-            minHeight: '120px',
             width: '100%',
-            backgroundColor: '#e5e8eb',
+            minHeight: '200px',
+            maxHeight: '200px',
+            objectFit: 'cover',
           }}
         />
         <div
           style={{
             display: 'flex',
             position: 'relative',
-            top: '70px',
+            top: '110px',
             left: 'calc(50% - 70px)',
             width: '140px',
             height: '140px',
@@ -91,7 +126,7 @@ const MyPage = () => {
         <div
           style={{
             position: 'relative',
-            top: '90px',
+            top: '130px',
             width: '100%',
             display: 'flex',
             flexDirection: 'row',
@@ -104,6 +139,7 @@ const MyPage = () => {
               fontSize: '2rem',
               marginLeft: '40px',
               marginRight: '20px',
+              letterSpacing: -1,
             }}
           >
             {userInfo.name}
@@ -113,7 +149,7 @@ const MyPage = () => {
         <div
           style={{
             position: 'relative',
-            top: '120px',
+            top: '170px',
             width: '100%',
             display: 'flex',
             flexDirection: 'row',
@@ -150,12 +186,113 @@ const MyPage = () => {
               />
             </Box>
           ) : (
-            <div>
-              <div>address</div>
-              <div>{userInfo.klipAddressHex}</div>
-              <div>klay</div>
-              <div>{userInfo.balanceOfKlay}</div>
-            </div>
+            <Stack direction={'row'} spacing={5}>
+              <Box
+                component={'span'}
+                display={'flex'}
+                flexDirection={'column'}
+                alignItems={'center'}
+              >
+                <Typography
+                  component={'div'}
+                  letterSpacing={-0.5}
+                  fontWeight={500}
+                  lineHeight={'120%'}
+                  fontSize={14}
+                >
+                  보유 KLAY
+                </Typography>
+                <Box
+                  display={'flex'}
+                  flexDirection={'row'}
+                  justifyContent={'space-between'}
+                  width={53}
+                >
+                  <img
+                    src={KlaytnLogo}
+                    alt="KlaytnLogo"
+                    style={{ width: 25, objectFit: 'contain' }}
+                  />
+                  <Typography
+                    component={'div'}
+                    letterSpacing={-0.5}
+                    fontWeight={500}
+                    fontSize={25}
+                  >
+                    {userInfo.balanceOfKlay}
+                  </Typography>
+                </Box>
+              </Box>
+              <Box
+                component={'span'}
+                display={'flex'}
+                flexDirection={'column'}
+                alignItems={'center'}
+              >
+                <Typography
+                  component={'div'}
+                  letterSpacing={-0.5}
+                  fontWeight={500}
+                  lineHeight={'120%'}
+                  fontSize={14}
+                >
+                  내 지갑 주소
+                </Typography>
+                <Tooltip
+                  title="내 지갑 주소를 복사하세요!"
+                  placement="bottom"
+                  arrow
+                >
+                  <Box
+                    display={'flex'}
+                    flexDirection={'row'}
+                    justifyContent={'space-between'}
+                    alignItems={'center'}
+                    width={125}
+                    sx={{ cursor: 'pointer' }}
+                    onClick={() => CopyKlipAddressHex(userInfo.klipAddressHex)}
+                  >
+                    <Typography
+                      component={'div'}
+                      letterSpacing={-0.5}
+                      fontWeight={500}
+                      fontSize={25}
+                      overflow={'hidden'}
+                      textOverflow={'ellipsis'}
+                      whiteSpace={'nowrap'}
+                      width={110}
+                    >
+                      {userInfo.klipAddressHex}
+                    </Typography>
+                    <ContentCopy sx={{ fontSize: 15 }} />
+                  </Box>
+                </Tooltip>
+              </Box>
+              <Box
+                component={'span'}
+                display={'flex'}
+                flexDirection={'column'}
+                alignItems={'center'}
+              >
+                <Typography
+                  component={'div'}
+                  letterSpacing={-0.5}
+                  fontWeight={500}
+                  lineHeight={'120%'}
+                  fontSize={14}
+                >
+                  보유 NFPT
+                </Typography>
+                <Typography
+                  component={'div'}
+                  letterSpacing={-0.5}
+                  fontWeight={500}
+                  fontSize={25}
+                >
+                  0
+                </Typography>
+              </Box>
+            </Stack>
           )}
         </div>
       </div>
@@ -165,7 +302,11 @@ const MyPage = () => {
           padding: '0 20%',
         }}
       >
-        <div style={{ marginBottom: '10px' }}>판매 중인 작품</div>
+        <div
+          style={{ marginBottom: '8px', letterSpacing: -0.5, fontWeight: 500 }}
+        >
+          판매 중인 작품
+        </div>
         <Divider color="grey" sx={{ width: '13%' }} />
         <div style={{ margin: '50px 15px' }}>
           <Grid
@@ -196,7 +337,11 @@ const MyPage = () => {
           padding: '0 20%',
         }}
       >
-        <div style={{ marginBottom: '10px' }}>보유작품</div>
+        <div
+          style={{ marginBottom: '8px', letterSpacing: -0.5, fontWeight: 500 }}
+        >
+          보유작품
+        </div>
         <Divider color="grey" sx={{ width: '13%' }} />
         <div style={{ margin: '50px 15px' }}>
           <Grid
