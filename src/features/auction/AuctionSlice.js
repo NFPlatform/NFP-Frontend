@@ -4,6 +4,7 @@ const initialState = {
   auctionList: [],
   auctionDetail: {
     id: -1,
+    pieceId: -1,
     piece: {
       id: 0,
       name: '',
