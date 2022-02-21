@@ -24,8 +24,13 @@ export const loginUserThunk = createAsyncThunk(
 export const getUserInfoThunk = createAsyncThunk(
   'user/getUserInfo',
   async (payload, { dispatch }) => {
+    const { forbiddenCallback } = payload;
     const result = await getUserInfoApi();
-    dispatch(userSlice.actions.setUserInfo(result.data));
+    if (result.data === 'FORBIDDEN') {
+      forbiddenCallback();
+    } else {
+      dispatch(userSlice.actions.setUserInfo(result.data));
+    }
   },
 );
 

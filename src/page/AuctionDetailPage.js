@@ -118,11 +118,7 @@ const AuctionDetailPage = ({ match }) => {
         <img
           alt="pieceDetail"
           className={'piece-detail'}
-          src={
-            process.env.REACT_APP_ENV === 'production'
-              ? `https://api.nfplatform.com/piece/${auctionDetail.piece.id}/img`
-              : `http://localhost:6040/piece/${auctionDetail.piece.id}/img`
-          }
+          src={`https://api.nfplatform.com/piece/${auctionDetail.piece.id}/img`}
         />
         <Stack mt={4}>
           <Stack direction={'row'} mb={1.5}>

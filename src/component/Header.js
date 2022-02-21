@@ -43,7 +43,14 @@ const Header = () => {
     if (token === null || token === undefined) {
       history.push('/login');
     } else {
-      await dispatch(getUserInfoThunk());
+      await dispatch(
+        getUserInfoThunk({
+          forbiddenCallback: () => {
+            localStorage.removeItem('nfptoken');
+            history.push('/login');
+          },
+        }),
+      );
     }
 
     const klaytnAddress = localStorage.getItem('klaytnAddress');

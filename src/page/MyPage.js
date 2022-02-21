@@ -357,11 +357,7 @@ const MyPage = () => {
                   vote={value.vote}
                   sellerId={value.artist.id}
                   sellerName={value.artist.name}
-                  imgUri={
-                    process.env.REACT_APP_ENV === 'production'
-                      ? `https://api.nfplatform.com/piece/${value.id}/img`
-                      : `/piece/${value.id}/img`
-                  }
+                  imgUri={`https://api.nfplatform.com/piece/${value.id}/img`}
                 />
               </Grid>
             ))}

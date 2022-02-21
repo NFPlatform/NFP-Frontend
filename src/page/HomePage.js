@@ -285,11 +285,7 @@ const HomePage = () => {
                 vote={value.piece.vote}
                 sellerId={value.seller.id}
                 sellerName={value.seller.name}
-                imgUri={
-                  process.env.REACT_APP_ENV === 'production'
-                    ? `https://api.nfplatform.com/piece/${value.piece.id}/img`
-                    : `/piece/${value.piece.id}/img`
-                }
+                imgUri={`https://api.nfplatform.com/piece/${value.piece.id}/img`}
               />
             </Grid>
           ))}

@@ -38,11 +38,7 @@ export const getNftListOfAddress = async (address, backendApi) => {
   const pieceList = pieceListFromChain.map((pieceFromChain) => {
     const { tokenId, uri } = pieceFromChain;
     const matchPiece = pieceListFromBackend.filter(
-      (pieceFromBackend) =>
-        `${
-          pieceFromBackend.piece.id +
-          (process.env.REACT_APP_ENV === 'production' ? 10000 : 1000)
-        }` === tokenId,
+      (pieceFromBackend) => `${pieceFromBackend.piece.id + 10000}` === tokenId,
     );
     if (matchPiece.length === 0) {
       return { tokenId: tokenId, uri: uri };

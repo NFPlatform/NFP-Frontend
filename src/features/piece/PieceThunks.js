@@ -27,13 +27,9 @@ export const registerPieceThunk = createAsyncThunk(
 
     const response = await registerPieceApi(data);
     const pieceId = response.data.pieceId;
-    const contractPieceId =
-      pieceId + (process.env.REACT_APP_ENV === 'production' ? 10000 : 1000);
+    const contractPieceId = pieceId + 10000;
 
-    const resultImgUrl =
-      process.env.REACT_APP_ENV === 'production'
-        ? `${PRODUCTION_BACKEND_URL}/piece/${pieceId}/img`
-        : TEST_IMG_URL;
+    const resultImgUrl = `${PRODUCTION_BACKEND_URL}/piece/${pieceId}/img`;
 
     await executeContractApi(
       NFT_CONTRACT_ADDRESS,
@@ -62,9 +58,7 @@ export const sellingPieceThunk = createAsyncThunk(
 
     const response = await setToSellingApi(data);
 
-    const contractPieceId =
-      data.pieceId +
-      (process.env.REACT_APP_ENV === 'production' ? 10000 : 1000);
+    const contractPieceId = data.pieceId + 10000;
 
     await executeContractApi(
       NFT_CONTRACT_ADDRESS,
