@@ -4,6 +4,7 @@ const initialState = {
   id: -1,
   thumbnailImg: '',
   name: '',
+  nfpt: 0,
   isArtist: false,
   klipAddressHex: '',
   balanceOfKlay: 0,
@@ -24,6 +25,7 @@ const userSlice = createSlice({
       state.thumbnailImg = `/user/${payload.id}/img`;
       state.name = payload.name;
       state.isArtist = payload.artist;
+      state.nfpt = payload.nfpt;
     },
     setArtist(state) {
       state.isArtist = true;
@@ -32,7 +34,7 @@ const userSlice = createSlice({
       state.klipAddressHex = payload;
     },
     setBalanceOfKlay(state, { payload }) {
-      state.balanceOfKlay = payload;
+      state.balanceOfKlay = Math.round(payload * 1000) / 1000;
     },
     setTopArtist(state, { payload }) {
       state.topArtist.id = payload.id;

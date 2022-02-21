@@ -20,6 +20,7 @@ import { useDispatch } from 'react-redux';
 import { sellingPieceThunk } from '../features/piece/PieceThunks';
 import { toast } from 'react-toastify';
 import { clear } from '@testing-library/user-event/dist/clear';
+import { CloseRounded } from '@mui/icons-material';
 
 const OwnedCard = ({ pieceId, title, vote, sellerName, sellerId, imgUri }) => {
   const dispatch = useDispatch();
@@ -140,32 +141,69 @@ const OwnedCard = ({ pieceId, title, vote, sellerName, sellerId, imgUri }) => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 400,
+            width: 250,
+            height: 110,
             bgcolor: 'background.paper',
-            border: '2px solid #000000',
-            boxShadow: 2,
-            p: 4,
+            borderRadius: 3,
+            boxShadow: 3,
+            paddingTop: 6,
+            paddingBottom: 3,
+            px: 4,
             display: 'flex',
-            justifyContent: 'center',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
-          <TextField
-            sx={{ minWidth: '280px' }}
-            inputProps={{ inputMode: 'numeric' }}
-            value={sellingKlay}
-            onChange={(event) => {
-              setSellingKlay(event.target.value);
+          <Typography fontWeight={600} sx={{ position: 'absolute', top: '6%' }}>
+            작품 판매
+          </Typography>
+          <CloseRounded
+            sx={{
+              position: 'absolute',
+              top: '6%',
+              right: '5%',
+              cursor: 'pointer',
+            }}
+            onClick={() => {
+              setSellingModal(false);
             }}
           />
+          <Box
+            component={'div'}
+            display={'flex'}
+            flexDirection={'row'}
+            alignItems={'center'}
+          >
+            <TextField
+              id="outlined-number"
+              type="number"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  border: 'none',
+                },
+              }}
+              value={sellingKlay}
+              onChange={(event) => {
+                setSellingKlay(event.target.value);
+              }}
+            />
+            <Typography variant={'body2'} fontWeight={500}>
+              KLAY
+            </Typography>
+          </Box>
+
           <Button
-            sx={{
-              borderRadius: '10px',
-              backgroundImage:
-                'linear-gradient(to right, #f0bbe8 0%, #deb1e3 25%, #d0a8de 51%, #c09eda 76%, #ad93d4 100%)',
-              fontSize: '1.2rem',
-              fontFamily: 'Gmarket Sans',
+            variant={'contained'}
+            color={'secondary'}
+            style={{
+              borderRadius: '20px',
+              boxShadow: '0 2px 5px rgba(0, 0, 0, 0.15)',
             }}
-            variant="contained"
+            fullWidth
             onClick={sellingPiece}
           >
             작품 판매하기

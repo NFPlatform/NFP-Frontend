@@ -1,6 +1,8 @@
 import bannerPieceRegistrationIcon from '../assets/img/banner_piece_registration_icon.png';
 import {
+  Box,
   Button,
+  Container,
   FormControl,
   MenuItem,
   Select,
@@ -86,21 +88,26 @@ const RegisterPiecePage = () => {
             fontFamily: 'Gmarket Sans',
             marginLeft: '15px',
             fontSize: '2.6rem',
-            fontStyle: 'bold',
+            fontWeight: 700,
           }}
         >
           작품 등록하기
         </div>
       </div>
-      <div
+      <Container
+        maxWidth="md"
         style={{
-          width: 'calc(100% - 400px)',
-          padding: '100px 200px',
+          padding: '50px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        <Stack
-          direction="row"
+        <Box
+          display={'flex'}
+          flexDirection={'row'}
           justifyContent="space-between"
+          // spacing={5}
           style={{ marginBottom: '70px' }}
         >
           <div>
@@ -130,8 +137,8 @@ const RegisterPiecePage = () => {
               <Button
                 component="div"
                 sx={{
-                  width: 440,
-                  height: 440,
+                  width: 350,
+                  height: 350,
                   boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.15)',
                   borderRadius: 2,
                   '&:hover': {
@@ -167,6 +174,7 @@ const RegisterPiecePage = () => {
                 <FormControl
                   sx={{
                     minWidth: '135px',
+                    maxWidth: '135px',
                     '& .MuiInputBase-root': {
                       borderRadius: '20px',
                     },
@@ -239,7 +247,8 @@ const RegisterPiecePage = () => {
               </div>
               <TextField
                 sx={{
-                  minWidth: '280px',
+                  minWidth: '320px',
+                  maxWidth: '320px',
                   '& .MuiOutlinedInput-root': {
                     fontSize: '0.9rem',
                     borderRadius: '10px',
@@ -263,7 +272,8 @@ const RegisterPiecePage = () => {
               </div>
               <TextField
                 sx={{
-                  width: '100%',
+                  minWidth: '320px',
+                  maxWidth: '320px',
                   '& .MuiOutlinedInput-root': {
                     fontSize: '0.9rem',
                     borderRadius: '10px',
@@ -279,7 +289,7 @@ const RegisterPiecePage = () => {
               />
             </Stack>
           </Stack>
-        </Stack>
+        </Box>
         <div
           style={{
             display: 'flex',
@@ -302,7 +312,7 @@ const RegisterPiecePage = () => {
             작품 등록
           </Button>
         </div>
-      </div>
+      </Container>
       {klipQrComponent}
     </div>
   );

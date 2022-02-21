@@ -5,12 +5,14 @@ import {
   createTheme,
   Divider,
   Grid,
+  Modal,
   Stack,
+  TextField,
   ThemeProvider,
   Tooltip,
   Typography,
 } from '@mui/material';
-import { Edit, ContentCopy } from '@mui/icons-material';
+import { Edit, ContentCopy, CloseRounded } from '@mui/icons-material';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -30,6 +32,7 @@ import KlaytnLogo from '../assets/img/klaytn-klay-logo.png';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ProfileBackgroundImg from '../assets/img/my-background-camera.png';
+import * as React from 'react';
 
 const MyPage = () => {
   const dispatch = useDispatch();
@@ -202,11 +205,13 @@ const MyPage = () => {
                 >
                   보유 KLAY
                 </Typography>
-                <Box
-                  display={'flex'}
-                  flexDirection={'row'}
-                  justifyContent={'space-between'}
-                  width={53}
+                <Stack
+                  spacing={1.6}
+                  direction={'row'}
+                  minWidth={53}
+                  maxWidth={110}
+                  overflow={'hidden'}
+                  whiteSpace={'nowrap'}
                 >
                   <img
                     src={KlaytnLogo}
@@ -221,7 +226,7 @@ const MyPage = () => {
                   >
                     {userInfo.balanceOfKlay}
                   </Typography>
-                </Box>
+                </Stack>
               </Box>
               <Box
                 component={'span'}
@@ -289,7 +294,7 @@ const MyPage = () => {
                   fontWeight={500}
                   fontSize={25}
                 >
-                  0
+                  {userInfo.nfpt}
                 </Typography>
               </Box>
             </Stack>
