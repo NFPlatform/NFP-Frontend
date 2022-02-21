@@ -3,6 +3,7 @@ import { api } from '../axios';
 export const loginUserApi = (token) => {
   return api.post('/user/login', {
     token: token,
+    local: process.env.REACT_APP_ENV === 'local',
   });
 };
 
