@@ -13,6 +13,7 @@ import {
 import { getNftListOfAddress } from '../../nft/caver';
 import getKlipAddressFromStore from '../../lib/util/getKlipAddress';
 import { BUY_NFT_ABI } from '../../nft/constants/abi';
+import { TOKEN_OFFSET } from '../../nft/constants/offset';
 
 export const getAuctionListThunk = createAsyncThunk(
   'auction/getAuctionList',
@@ -52,7 +53,7 @@ export const buyPieceThunk = createAsyncThunk(
       afterResultCallback,
     } = payload;
 
-    const contractPieceId = pieceId + 10000;
+    const contractPieceId = pieceId + TOKEN_OFFSET;
 
     const result = await buyPieceApi(auctionId);
 

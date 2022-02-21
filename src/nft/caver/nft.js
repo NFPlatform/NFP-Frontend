@@ -1,4 +1,5 @@
 import { caver, NFTContract } from './index';
+import { TOKEN_OFFSET } from '../constants/offset';
 
 const getNftTokenPromise = async (address, i) => {
   const id = await NFTContract.methods.tokenOfOwnerByIndex(address, i).call();
@@ -38,7 +39,8 @@ export const getNftListOfAddress = async (address, backendApi) => {
   const pieceList = pieceListFromChain.map((pieceFromChain) => {
     const { tokenId, uri } = pieceFromChain;
     const matchPiece = pieceListFromBackend.filter(
-      (pieceFromBackend) => `${pieceFromBackend.piece.id + 10000}` === tokenId,
+      (pieceFromBackend) =>
+        `${pieceFromBackend.piece.id + TOKEN_OFFSET}` === tokenId,
     );
     if (matchPiece.length === 0) {
       return { tokenId: tokenId, uri: uri };

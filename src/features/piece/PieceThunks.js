@@ -11,6 +11,7 @@ import {
   MINT_WITH_TOKEN_URI_ABI,
   SAFE_TRANSFER_FROM_ABI,
 } from '../../nft/constants/abi';
+import { TOKEN_OFFSET } from '../../nft/constants/offset';
 
 export const registerPieceThunk = createAsyncThunk(
   'piece/registerPiece',
@@ -27,7 +28,7 @@ export const registerPieceThunk = createAsyncThunk(
 
     const response = await registerPieceApi(data);
     const pieceId = response.data.pieceId;
-    const contractPieceId = pieceId + 10000;
+    const contractPieceId = pieceId + TOKEN_OFFSET;
 
     const resultImgUrl = `${PRODUCTION_BACKEND_URL}/piece/${pieceId}/img`;
 
@@ -58,7 +59,7 @@ export const sellingPieceThunk = createAsyncThunk(
 
     const response = await setToSellingApi(data);
 
-    const contractPieceId = data.pieceId + 10000;
+    const contractPieceId = data.pieceId + TOKEN_OFFSET;
 
     await executeContractApi(
       NFT_CONTRACT_ADDRESS,
