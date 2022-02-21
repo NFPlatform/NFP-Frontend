@@ -23,7 +23,7 @@ const initialState = {
     },
     klay: 0,
     nfpToken: 0,
-    isVote: false,
+    userVote: false,
   },
 };
 
@@ -39,9 +39,11 @@ const auctionSlice = createSlice({
     },
     voteToPiece(state) {
       state.auctionDetail.piece.vote += 1;
+      state.auctionDetail.userVote = true;
     },
     deVoteToPiece(state) {
       state.auctionDetail.piece.vote -= 1;
+      state.auctionDetail.userVote = false;
     },
   },
 });

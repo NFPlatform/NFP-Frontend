@@ -37,6 +37,10 @@ import {
   getAuctionDetailThunk,
 } from '../features/auction/AuctionThunks';
 import useKlipQrModal from '../hooks/useKlipQrModal';
+import {
+  deVoteToPieceThunk,
+  voteToPieceThunk,
+} from '../features/vote/VoteThunks';
 
 const CustomTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -105,6 +109,14 @@ const AuctionDetailPage = ({ match }) => {
     '[필수] 양수도계약 체결을 위한 개인정보 제3자 제공에 동의함',
   ];
 
+  const handleVoteButton = () => {
+    if (auctionDetail.userVote) {
+      dispatch(deVoteToPieceThunk({ pieceId: auctionDetail.pieceId }));
+    } else {
+      dispatch(voteToPieceThunk({ pieceId: auctionDetail.pieceId }));
+    }
+  };
+
   return (
     <Container maxWidth={'lg'}>
       <Box
@@ -121,7 +133,7 @@ const AuctionDetailPage = ({ match }) => {
           src={`https://api.nfplatform.com/piece/${auctionDetail.piece.id}/img`}
         />
         <Stack mt={4}>
-          <Stack direction={'row'} mb={1.5}>
+          <Stack direction={'row'} mb={1.5} justifyContent={'space-between'}>
             <Typography
               component={'div'}
               fontWeight={'medium'}
@@ -142,6 +154,7 @@ const AuctionDetailPage = ({ match }) => {
                 borderRadius: 5,
               }}
               width={50}
+              onClick={handleVoteButton}
             >
               <Favorite sx={{ color: '#f35154', fontSize: 16 }} />
               <Typography variant={'body2'} color={'#616161'}>
