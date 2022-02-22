@@ -4,7 +4,11 @@ import {
   MARKET_CONTRACT_ADDRESS,
   NFT_CONTRACT_ADDRESS,
 } from '../../nft/constants/cypress';
-import { registerPieceApi, setToSellingApi } from '../../lib/api/piece';
+import {
+  registerPieceApi,
+  setToSellingApi,
+  validateSetToSellingApi,
+} from '../../lib/api/piece';
 import getKlipAddressFromStore from '../../lib/util/getKlipAddress';
 import { PRODUCTION_BACKEND_URL, TEST_IMG_URL } from '../../lib/constant';
 import {
@@ -12,6 +16,7 @@ import {
   SAFE_TRANSFER_FROM_ABI,
 } from '../../nft/constants/abi';
 import { TOKEN_OFFSET } from '../../nft/constants/offset';
+import { validateBuyPieceApi } from '../../lib/api/auction';
 
 export const registerPieceThunk = createAsyncThunk(
   'piece/registerPiece',
@@ -37,7 +42,9 @@ export const registerPieceThunk = createAsyncThunk(
       MINT_WITH_TOKEN_URI_ABI,
       '0',
       [userWallet, contractPieceId, resultImgUrl],
-      actionWithRedirectUrl,
+      async (redirectUrl, prepareResponse) => {
+        await actionWithRedirectUrl(redirectUrl);
+      },
       modalCloseAction,
       afterResultCallback,
     );
@@ -57,8 +64,6 @@ export const sellingPieceThunk = createAsyncThunk(
       afterResultCallback,
     } = payload;
 
-    const response = await setToSellingApi(data);
-
     const contractPieceId = data.pieceId + TOKEN_OFFSET;
 
     await executeContractApi(
@@ -66,9 +71,18 @@ export const sellingPieceThunk = createAsyncThunk(
       SAFE_TRANSFER_FROM_ABI,
       '0',
       [userWallet, MARKET_CONTRACT_ADDRESS, contractPieceId],
-      actionWithRedirectUrl,
+      async (redirectUrl, prepareResponse) => {
+        const result = await validateSetToSellingApi(data, {
+          requestKey: prepareResponse.request_key,
+          timestamp: prepareResponse.expiration_time,
+        });
+        await actionWithRedirectUrl(redirectUrl);
+      },
       modalCloseAction,
-      afterResultCallback,
+      async (klipResult, requestKey) => {
+        const result = await setToSellingApi(data, requestKey);
+        await afterResultCallback();
+      },
     );
   },
 );

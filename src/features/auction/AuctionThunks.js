@@ -3,6 +3,7 @@ import {
   buyPieceApi,
   getAuctionDetailApi,
   getAuctionListApi,
+  validateBuyPieceApi,
 } from '../../lib/api/auction';
 import auctionSlice from './AuctionSlice';
 import { executeContractApi } from '../../nft/klipApi';
@@ -55,16 +56,23 @@ export const buyPieceThunk = createAsyncThunk(
 
     const contractPieceId = pieceId + TOKEN_OFFSET;
 
-    const result = await buyPieceApi(auctionId);
-
     await executeContractApi(
       MARKET_CONTRACT_ADDRESS,
       BUY_NFT_ABI,
       '10000000000000000',
       [contractPieceId, NFT_CONTRACT_ADDRESS],
-      actionWithRedirectUrl,
+      async (redirectUrl, prepareResponse) => {
+        const result = await validateBuyPieceApi(auctionId, {
+          requestKey: prepareResponse.request_key,
+          timestamp: prepareResponse.expiration_time,
+        });
+        await actionWithRedirectUrl(redirectUrl);
+      },
       modalCloseAction,
-      afterResultCallback,
+      async (klipResult, requestKey) => {
+        const result = await buyPieceApi(auctionId, requestKey);
+        await afterResultCallback();
+      },
     );
   },
 );

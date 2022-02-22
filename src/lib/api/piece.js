@@ -8,6 +8,13 @@ export const registerPieceApi = (formData) => {
   });
 };
 
-export const setToSellingApi = (data) => {
-  return api.post('/piece/sell', data);
+export const validateSetToSellingApi = (data, payload) => {
+  const { requestKey, timestamp } = payload;
+  data.requestKey = requestKey;
+  data.timestamp = timestamp;
+  return api.post('/smart-transaction/piece/sell', data);
+};
+
+export const setToSellingApi = (data, requestKey) => {
+  return api.post(`/piece/sell?requestKey=${requestKey}`, data);
 };
