@@ -9,6 +9,9 @@ import RegisterPiecePage from '../page/RegisterPiecePage';
 import AuctionDetailPage from '../page/AuctionDetailPage';
 import ArtistDetailPage from '../page/ArtistDetailPage';
 import { useEffect } from 'react';
+import ArtistRankPage from '../page/ArtistRankPage';
+import CommunityPage from '../page/CommunityPage';
+import OpinionPage from '../page/OpinionPage';
 
 const MainLayout = ({ match }) => {
   useEffect(() => {}, []);
@@ -55,6 +58,21 @@ const MainLayout = ({ match }) => {
               exact
               path={`${match.path}/auction/:auctionId`}
               component={AuctionDetailPage}
+            />
+            <Route
+              exact
+              path={`${match.path}/community`}
+              component={CommunityPage}
+            />
+            <Route
+              exact
+              path={`${match.path}/community/rank`}
+              component={ArtistRankPage}
+            />
+            <Route
+              exact
+              path={`${match.path}/community/opinion`}
+              component={OpinionPage}
             />
             <Route exact path={`${match.path}/my`} component={MyPage} />
           </Switch>

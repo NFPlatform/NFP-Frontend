@@ -63,8 +63,9 @@ const OwnedCard = ({ pieceId, title, vote, sellerName, sellerId, imgUri }) => {
           onClick={() => {
             setSellingModal(true);
           }}
+          sx={{ width: '100%' }}
         >
-          <CardActionArea>
+          <CardActionArea sx={{ width: '100%' }}>
             <Box sx={{ padding: 2, paddingBottom: 0 }}>
               <CardMedia
                 component="img"
@@ -83,9 +84,15 @@ const OwnedCard = ({ pieceId, title, vote, sellerName, sellerId, imgUri }) => {
               >
                 <Avatar
                   alt="ArtistImg06"
-                  src={`http://localhost:6040/user/${sellerId}/img`}
+                  src={`https://api.nfplatform.com/user/${sellerId}/img`}
                 />
-                <Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                  }}
+                >
                   <Typography
                     sx={{ lineHeight: '105%', letterSpacing: -0.1 }}
                     variant="caption"

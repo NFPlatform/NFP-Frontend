@@ -105,7 +105,7 @@ const Header = () => {
       />
       <HeaderLink to="/main/piece">작품구경</HeaderLink>
       <HeaderLink to="/hi">전시회</HeaderLink>
-      <HeaderLink to="/hi">커뮤티니</HeaderLink>
+      <HeaderLink to="/main/community">커뮤티니</HeaderLink>
       <HeaderLink to="/hi">NFT카페</HeaderLink>
       {isArtist ? (
         <Button

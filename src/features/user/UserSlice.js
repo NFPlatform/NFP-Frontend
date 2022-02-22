@@ -22,7 +22,7 @@ const userSlice = createSlice({
   reducers: {
     setUserInfo(state, { payload }) {
       state.id = payload.id;
-      state.thumbnailImg = `/user/${payload.id}/img`;
+      state.thumbnailImg = `https://api.nfplatform.com/user/${payload.id}/img`;
       state.name = payload.name;
       state.isArtist = payload.artist;
       state.nfpt = payload.nfpt;

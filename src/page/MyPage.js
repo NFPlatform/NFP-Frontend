@@ -122,6 +122,7 @@ const MyPage = () => {
               backgroundColor: 'white',
             }}
             src={userInfo.thumbnailImg}
+            alt="AImage"
           />
           <Edit />
         </div>
