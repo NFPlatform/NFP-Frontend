@@ -25,7 +25,7 @@ export const getKlipResultApi = (requestKey) => {
   });
 };
 
-export const executeContractApi = (
+export const executeContractApi = async (
   transactionTo,
   transactionAbi,
   transactionValue,
@@ -35,56 +35,51 @@ export const executeContractApi = (
   afterResultCallback = () => {},
 ) => {
   const stringParams = generateParamsString(transactionParams);
-  return klipWalletA2AApi
-    .post('/prepare', {
-      bapp: {
-        name: bAppName,
-      },
-      type: 'execute_contract',
-      transaction: {
-        to: transactionTo,
-        abi: transactionAbi,
-        value: transactionValue,
-        params: stringParams,
-      },
-    })
-    .then((response) => {
-      prepareApiCallback(
-        response,
-        actionWithRedirectUrl,
-        modalCloseAction,
-        afterResultCallback,
-      );
-    });
+  const response = await klipWalletA2AApi.post('/prepare', {
+    bapp: {
+      name: bAppName,
+    },
+    type: 'execute_contract',
+    transaction: {
+      to: transactionTo,
+      abi: transactionAbi,
+      value: transactionValue,
+      params: stringParams,
+    },
+  });
+
+  await prepareApiCallback(
+    response,
+    actionWithRedirectUrl,
+    modalCloseAction,
+    afterResultCallback,
+  );
 };
 
 const generateParamsString = (transactionParams = []) => {
   return '[' + transactionParams.map((param) => `\"${param}\"`).join(',') + ']';
 };
 
-export const getKlipAddressApi = (
+export const getKlipAddressApi = async (
   actionWithRedirectUrl,
   modalCloseAction,
   afterResultCallback,
 ) => {
-  return klipWalletA2AApi
-    .post('/prepare', {
-      bapp: {
-        name: bAppName,
-      },
-      type: 'auth',
-    })
-    .then((response) => {
-      prepareApiCallback(
-        response,
-        actionWithRedirectUrl,
-        modalCloseAction,
-        afterResultCallback,
-      );
-    });
+  const response = await klipWalletA2AApi.post('/prepare', {
+    bapp: {
+      name: bAppName,
+    },
+    type: 'auth',
+  });
+  await prepareApiCallback(
+    response,
+    actionWithRedirectUrl,
+    modalCloseAction,
+    afterResultCallback,
+  );
 };
 
-const prepareApiCallback = (
+const prepareApiCallback = async (
   response,
   actionWithRedirectUrl,
   modalCloseAction,
@@ -92,7 +87,7 @@ const prepareApiCallback = (
 ) => {
   const requestKey = response.data.request_key;
   const redirectUrl = getKlipAccessUrl(requestKey);
-  actionWithRedirectUrl(redirectUrl);
+  await actionWithRedirectUrl(redirectUrl, response.data);
 
   const intervalId = setInterval(async () => {
     try {
@@ -115,7 +110,7 @@ const prepareApiCallback = (
             toast.error('오류가 발생하였습니다.');
           } else {
             modalCloseAction();
-            await afterResultCallback(result);
+            await afterResultCallback(result, requestKey);
             toast.info('완료되었습니다.');
           }
           clearInterval(intervalId);
