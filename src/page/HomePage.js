@@ -274,7 +274,7 @@ const HomePage = () => {
         <Grid
           container
           spacing={{ xs: 2, md: 2 }}
-          columns={{ xs: 6, sm: 12, md: 18 }}
+          columns={{ xs: 6, sm: 12, md: 15 }}
         >
           {auctionList.map((value, i) => (
             <Grid item xs={2} sm={3} md={3} key={i}>
