@@ -30,10 +30,20 @@ const RegisterPiecePage = () => {
   const [document, setDocument] = useState(null);
   const [documentName, setDocumentName] = useState(null);
 
+  const [previewImg, setPreviewImg] = useState({ file: null, url: null });
+
   const [selectedCategory, setSelectedCategory] = useState('|카테고리');
 
   const { klipQrComponent, actionWithRedirectUrl, modalCloseAction } =
     useKlipQrModal();
+
+  const setImageFromFile = ({ file, setImageUrl }) => {
+    let reader = new FileReader();
+    reader.onload = function () {
+      setImageUrl({ result: reader.result });
+    };
+    reader.readAsDataURL(file);
+  };
 
   const registerPiece = async () => {
     const data = {
@@ -94,15 +104,7 @@ const RegisterPiecePage = () => {
           작품 등록하기
         </div>
       </div>
-      <Container
-        maxWidth="md"
-        style={{
-          padding: '50px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
+      <Container maxWidth="md" sx={{ paddingY: 8 }}>
         <Box
           display={'flex'}
           flexDirection={'row'}
@@ -114,7 +116,9 @@ const RegisterPiecePage = () => {
             <div
               style={{
                 fontSize: '1.2rem',
-                marginBottom: '20px',
+                marginBottom: '15px',
+                letterSpacing: -0.7,
+                fontWeight: 500,
               }}
             >
               작품 업로드
@@ -132,15 +136,25 @@ const RegisterPiecePage = () => {
                     setDocument(file);
                     setDocumentName(file.name);
                   }
+                  if (event.target.files.length) {
+                    setImageFromFile({
+                      file: event.target.files[0],
+                      setImageUrl: ({ result }) =>
+                        setPreviewImg({
+                          file: event.target.files[0],
+                          url: result,
+                        }),
+                    });
+                  }
                 }}
               />
               <Button
                 component="div"
                 sx={{
-                  width: 350,
-                  height: 350,
+                  width: 445,
+                  height: 445,
                   boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.15)',
-                  borderRadius: 2,
+                  borderRadius: 3,
                   '&:hover': {
                     cursor: 'pointer',
                   },
@@ -151,8 +165,23 @@ const RegisterPiecePage = () => {
                   color: '#9e9e9e',
                 }}
               >
-                <AddPhotoAlternate sx={{ fontSize: 40, marginBottom: 1 }} />
-                <div>마우스로 클릭 또는 드래그해서 이미지를 추가해주세요.</div>
+                {previewImg.file ? (
+                  <img
+                    src={previewImg.url}
+                    alt={previewImg.file.name}
+                    style={{
+                      objectFit: 'cover',
+                      minWidth: 200,
+                      maxWidth: 400,
+                      borderRadius: 10,
+                    }}
+                  />
+                ) : (
+                  <>
+                    <AddPhotoAlternate sx={{ fontSize: 40, marginBottom: 1 }} />
+                    <div>마우스로 클릭해서 이미지를 추가해주세요.</div>
+                  </>
+                )}
               </Button>
             </label>
           </div>
@@ -166,7 +195,9 @@ const RegisterPiecePage = () => {
                 <div
                   style={{
                     fontSize: '1.2rem',
-                    marginBottom: '20px',
+                    marginBottom: '15px',
+                    letterSpacing: -0.7,
+                    fontWeight: 500,
                   }}
                 >
                   카테고리
@@ -192,21 +223,30 @@ const RegisterPiecePage = () => {
                       return (
                         <>
                           <Sort
-                            sx={{ fontSize: '1rem', marginRight: '10px' }}
+                            sx={{
+                              fontSize: '1rem',
+                              marginRight: '10px',
+                              color: '#3a3a3a',
+                            }}
                           />
                           {value.split('|')[1]}
                         </>
                       );
                     }}
                     sx={{
-                      boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
+                      boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.15)',
                       borderColor: 'none',
                       '& .MuiSelect-select': {
                         padding: '7px 26px',
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        fontSize: '0.8rem',
+                        fontSize: '0.9rem',
+                        fontWeight: 500,
+                        color: '#3a3a3a',
+                      },
+                      '& .MuiOutlinedInput-notchedOutline': {
+                        border: 'none',
                       },
                     }}
                   >
@@ -214,6 +254,7 @@ const RegisterPiecePage = () => {
                       sx={{
                         fontSize: '0.8rem',
                         justifyContent: 'center',
+                        color: '#3a3a3a',
                       }}
                       value={'|카테고리'}
                     >
@@ -224,6 +265,7 @@ const RegisterPiecePage = () => {
                         sx={{
                           fontSize: '0.8rem',
                           justifyContent: 'center',
+                          color: '#3a3a3a',
                         }}
                         key={i}
                         value={`${value.key}|${value.ko}`}
@@ -234,13 +276,14 @@ const RegisterPiecePage = () => {
                   </Select>
                 </FormControl>
               </div>
-              <div style={{ minWidth: '280px' }} />
             </Stack>
             <Stack marginBottom="20px">
               <div
                 style={{
                   fontSize: '1.2rem',
-                  marginBottom: '20px',
+                  marginBottom: '15px',
+                  letterSpacing: -0.7,
+                  fontWeight: 500,
                 }}
               >
                 작품 제목
@@ -252,7 +295,10 @@ const RegisterPiecePage = () => {
                   '& .MuiOutlinedInput-root': {
                     fontSize: '0.9rem',
                     borderRadius: '10px',
-                    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.10)',
+                    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.15)',
+                  },
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    border: 'none',
                   },
                 }}
                 size="small"
@@ -265,7 +311,9 @@ const RegisterPiecePage = () => {
               <div
                 style={{
                   fontSize: '1.2rem',
-                  marginBottom: '20px',
+                  marginBottom: '15px',
+                  letterSpacing: -0.7,
+                  fontWeight: 500,
                 }}
               >
                 작품 설명
@@ -277,7 +325,10 @@ const RegisterPiecePage = () => {
                   '& .MuiOutlinedInput-root': {
                     fontSize: '0.9rem',
                     borderRadius: '10px',
-                    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.10)',
+                    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.15)',
+                  },
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    border: 'none',
                   },
                 }}
                 multiline
@@ -305,6 +356,8 @@ const RegisterPiecePage = () => {
                 'linear-gradient(to right, #f0bbe8 0%, #deb1e3 25%, #d0a8de 51%, #c09eda 76%, #ad93d4 100%)',
               fontSize: '1.2rem',
               fontFamily: 'Gmarket Sans',
+              minWidth: 170,
+              maxWidth: 250,
             }}
             variant="contained"
             onClick={registerPiece}
