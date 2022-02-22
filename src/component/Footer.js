@@ -72,7 +72,7 @@ const Footer = () => {
               display: 'flex',
               alignItems: 'center',
             }}
-            to={{ pathname: 'https://www.instagram.com' }}
+            to={{ pathname: 'https://www.instagram.com/nfplatform.official/' }}
             target="_blank"
           >
             <img src={InstagramIcon} alt="InstagramIcon" width={15} />
