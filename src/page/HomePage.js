@@ -96,9 +96,6 @@ const HomePage = () => {
             flex: 2,
           }}
           height={'465px'}
-          onClick={() => {
-            toast.success('지원하지 않는 기능입니다.');
-          }}
         >
           <ImageSrc style={{ backgroundImage: `url(${mainLeftImg})` }} />
           <ImageBackdrop className="MuiImageBackdrop-root" />
@@ -167,7 +164,9 @@ const HomePage = () => {
                 height={'225px'}
                 focusRipple
                 onClick={() => {
-                  toast.success('지원하지 않는 기능입니다.');
+                  toast.success('지원하지 않는 기능입니다.', {
+                    toastId: 'main',
+                  });
                 }}
               >
                 <ImageSrc

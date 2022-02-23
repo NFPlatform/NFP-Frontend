@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { FormControl, Grid, MenuItem, Select } from '@mui/material';
+import { Container, FormControl, Grid, MenuItem, Select } from '@mui/material';
 import AuctionCard from '../component/AuctionCard';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -39,7 +39,8 @@ const PieceListPage = () => {
   }, [selectedCategory, sort]);
 
   return (
-    <Box sx={{ minWidth: 300, paddingX: 16, paddingY: 3 }}>
+    <Container sx={{ marginTop: 3 }}>
+      {/*<Box sx={{ minWidth: 300, paddingX: 16, paddingY: 3 }}>*/}
       <div
         style={{ display: 'flex', alignItems: 'center', marginBottom: '25px' }}
       >
@@ -262,7 +263,8 @@ const PieceListPage = () => {
           </Grid>
         ))}
       </Grid>
-    </Box>
+      {/*</Box>*/}
+    </Container>
   );
 };
 

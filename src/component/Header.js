@@ -22,7 +22,9 @@ import { toast } from 'react-toastify';
 
 const HeaderLink = ({ to, children }) => {
   const preparingToast = () => {
-    toast.success('아직 준비중입니다.');
+    toast.success('아직 준비중입니다.', {
+      toastId: 'main',
+    });
   };
   return (
     <>

@@ -58,7 +58,9 @@ const MyPage = () => {
     textarea.select();
     document.execCommand('copy');
     document.body.removeChild(textarea);
-    toast.success('클립보드에 복사되었습니다.');
+    toast.success('클립보드에 복사되었습니다.', {
+      toastId: 'main',
+    });
   };
 
   useEffect(async () => {
