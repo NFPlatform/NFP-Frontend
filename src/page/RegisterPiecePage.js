@@ -173,6 +173,8 @@ const RegisterPiecePage = () => {
                       objectFit: 'cover',
                       minWidth: 200,
                       maxWidth: 400,
+                      minHeight: 200,
+                      maxHeight: 400,
                       borderRadius: 10,
                     }}
                   />

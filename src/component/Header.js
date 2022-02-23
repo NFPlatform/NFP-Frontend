@@ -1,6 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Avatar, Box, Button, InputAdornment, TextField } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Button,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { Search } from '@mui/icons-material';
 
 import nfpLogo from '../assets/img/nfp_logo.png';
@@ -11,23 +18,50 @@ import {
 } from '../features/user/UserThunks';
 
 import '../assets/fonts/font.css';
+import { toast } from 'react-toastify';
 
 const HeaderLink = ({ to, children }) => {
+  const preparingToast = () => {
+    toast.success('아직 준비중입니다.');
+  };
   return (
-    <Button variant="text" sx={{ mr: 2.5, borderRadius: 10 }}>
-      <Link
-        style={{
-          color: 'black',
-          textDecoration: 'none',
-          fontFamily: 'Gmarket Sans',
-          fontWeight: 500,
-          fontSize: '1.1rem',
-        }}
-        to={to}
-      >
-        {children}
-      </Link>
-    </Button>
+    <>
+      {to === '/hi' ? (
+        <Button
+          variant="text"
+          sx={{ mr: 2.5, borderRadius: 10 }}
+          onClick={preparingToast}
+        >
+          <Typography
+            style={{
+              color: 'black',
+              textDecoration: 'none',
+              fontFamily: 'Gmarket Sans',
+              fontWeight: 500,
+              fontSize: '1.1rem',
+            }}
+            to={to}
+          >
+            {children}
+          </Typography>
+        </Button>
+      ) : (
+        <Button variant="text" sx={{ mr: 2.5, borderRadius: 10 }}>
+          <Link
+            style={{
+              color: 'black',
+              textDecoration: 'none',
+              fontFamily: 'Gmarket Sans',
+              fontWeight: 500,
+              fontSize: '1.1rem',
+            }}
+            to={to}
+          >
+            {children}
+          </Link>
+        </Button>
+      )}
+    </>
   );
 };
 
@@ -37,6 +71,9 @@ const Header = () => {
 
   const isArtist = useSelector((state) => state.user.isArtist);
   const thumbnailImg = useSelector((state) => state.user.thumbnailImg);
+
+  const [searchValue, setSearchValue] = useState('');
+  const searchInputRef = useRef();
 
   useEffect(async () => {
     const token = localStorage.getItem('nfptoken');
@@ -100,12 +137,21 @@ const Header = () => {
             </InputAdornment>
           ),
         }}
+        inputRef={searchInputRef}
         size="small"
         placeholder="찾고 싶은 키워드나 작품을 검색해 주세요!"
+        onKeyPress={(event) => {
+          if (event.key === 'Enter') {
+            history.push('/main/piece');
+            searchInputRef.current.blur();
+          }
+        }}
+        value={searchValue}
+        onChange={(event) => setSearchValue(event.target.value)}
       />
       <HeaderLink to="/main/piece">작품구경</HeaderLink>
       <HeaderLink to="/hi">전시회</HeaderLink>
-      <HeaderLink to="/main/community">커뮤티니</HeaderLink>
+      <HeaderLink to="/main/community">커뮤니티</HeaderLink>
       <HeaderLink to="/hi">NFT카페</HeaderLink>
       {isArtist ? (
         <Button

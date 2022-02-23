@@ -141,8 +141,8 @@ const PieceListPage = () => {
         <FormControl
           sx={{
             marginX: 2,
-            minWidth: '92px',
-            maxWidth: '92px',
+            minWidth: '130px',
+            maxWidth: '130px',
             '& .MuiInputBase-root': {
               borderRadius: '20px',
             },

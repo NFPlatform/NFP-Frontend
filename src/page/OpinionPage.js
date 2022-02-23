@@ -1,15 +1,23 @@
 import React from 'react';
-import ArtistRankImg from '../assets/img/artistRankImg.png';
+import daoPageImage from '../assets/img/daoPage.png';
+import { Box } from '@mui/material';
 
 const OpinionPage = () => {
   return (
-    <div>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        mb: 10,
+      }}
+    >
       <img
-        src={ArtistRankImg}
-        alt="ArtistRankImg"
+        src={daoPageImage}
+        alt="daoPageImage"
         style={{ objectFit: 'contain', minWidth: 700, maxWidth: 1280 }}
       />
-    </div>
+    </Box>
   );
 };
 
