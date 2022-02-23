@@ -8,7 +8,7 @@ export const readCount = async () => {
   const _count = await CountContract.methods.count().call();
   const _getBlockNumber = await CountContract.methods.getBlockNumber().call();
 
-  console.log(_count, _getBlockNumber);
+  // console.log(_count, _getBlockNumber);
 };
 
 export const setCount = async (newCount) => {
@@ -24,8 +24,8 @@ export const setCount = async (newCount) => {
       gas: '2000000',
     });
 
-    console.log(_receipt);
+    // console.log(_receipt);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 };

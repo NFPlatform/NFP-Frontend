@@ -39,7 +39,7 @@ const PieceListPage = () => {
   }, [selectedCategory, sort]);
 
   return (
-    <Container sx={{ marginTop: 3 }}>
+    <Container sx={{ marginTop: 3, marginBottom: 15 }}>
       {/*<Box sx={{ minWidth: 300, paddingX: 16, paddingY: 3 }}>*/}
       <div
         style={{ display: 'flex', alignItems: 'center', marginBottom: '25px' }}

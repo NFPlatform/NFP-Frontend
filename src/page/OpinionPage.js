@@ -15,7 +15,7 @@ const OpinionPage = () => {
       <img
         src={daoPageImage}
         alt="daoPageImage"
-        style={{ objectFit: 'contain', minWidth: 700, maxWidth: 1280 }}
+        style={{ objectFit: 'contain', minWidth: 700, maxWidth: 1286 }}
       />
     </Box>
   );

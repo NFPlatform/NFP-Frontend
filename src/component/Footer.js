@@ -2,6 +2,7 @@ import logo_white from '../assets/svg/nfp_logo_white.svg';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import InstagramIcon from '../assets/img/instagram_glyph_gradient_RGB.png';
+import Typography from '@mui/material/Typography';
 
 const Footer = () => {
   return (
@@ -41,30 +42,26 @@ const Footer = () => {
       </div>
       <div style={{ display: 'flex' }}>
         <Button style={{ marginRight: '20px' }} variant="text">
-          <Link
+          <Typography
             style={{
               color: 'white',
               textDecoration: 'none',
               fontSize: '0.8rem',
             }}
-            to={{ pathname: 'https://naver.com' }}
-            target="_blank"
           >
             이용약관
-          </Link>
+          </Typography>
         </Button>
         <Button style={{ marginRight: '10px' }} variant="text">
-          <Link
+          <Typography
             style={{
               color: 'white',
               textDecoration: 'none',
               fontSize: '0.8rem',
             }}
-            to={{ pathname: 'https://naver.com' }}
-            target="_blank"
           >
             개인정보처리방침
-          </Link>
+          </Typography>
         </Button>
         <Button variant="text">
           <Link

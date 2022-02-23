@@ -105,7 +105,7 @@ const prepareApiCallback = async (
         }
         if (result.data.status === 'completed') {
           if (result.data.result.status === 'fail') {
-            console.log('result.data.status === "fail"');
+            // console.log('result.data.status === "fail"');
             modalCloseAction();
             toast.error('오류가 발생하였습니다.');
           } else {
@@ -116,20 +116,20 @@ const prepareApiCallback = async (
           clearInterval(intervalId);
         }
         if (requestStatus === 'canceled') {
-          console.log('result.data.status === "canceled"');
+          // console.log('result.data.status === "canceled"');
           modalCloseAction();
           clearInterval(intervalId);
           toast.info('취소되었습니다.');
         }
         if (requestStatus === 'error') {
-          console.log('result.data.status === "error"');
+          // console.log('result.data.status === "error"');
           modalCloseAction();
           clearInterval(intervalId);
           toast.error('오류가 발생하였습니다.');
         }
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       clearInterval(intervalId);
       toast.error('오류가 발생하였습니다!');
     }

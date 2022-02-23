@@ -15,7 +15,7 @@ const ArtistRankPage = () => {
       <img
         src={artistRankPageImage}
         alt="artistRankPageImage"
-        style={{ objectFit: 'contain', minWidth: 700, maxWidth: 1280 }}
+        style={{ objectFit: 'contain', minWidth: 700, maxWidth: 1286 }}
       />
     </Box>
   );

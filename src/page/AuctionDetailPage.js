@@ -91,7 +91,7 @@ const AuctionDetailPage = ({ match }) => {
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
-    console.log('currentIndex================>', currentIndex);
+    // console.log('currentIndex================>', currentIndex);
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
@@ -99,7 +99,7 @@ const AuctionDetailPage = ({ match }) => {
     } else {
       newChecked.splice(currentIndex, 1);
     }
-    console.log('newChecked================>', newChecked);
+    // console.log('newChecked================>', newChecked);
 
     setChecked(newChecked);
   };

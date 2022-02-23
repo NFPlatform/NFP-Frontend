@@ -30,6 +30,22 @@ export const getAuctionListThunk = createAsyncThunk(
   },
 );
 
+export const getSortedAuctionListThunk = createAsyncThunk(
+  'auction/getSortedAuctionList',
+  async (payload, { dispatch }) => {
+    let pieceList = await getNftListOfAddress(
+      MARKET_CONTRACT_ADDRESS,
+      getAuctionListApi,
+    );
+
+    pieceList.sort((a, b) => {
+      return b.piece.vote - a.piece.vote;
+    });
+
+    await dispatch(auctionSlice.actions.setSortedAuctionList(pieceList));
+  },
+);
+
 export const getAuctionDetailThunk = createAsyncThunk(
   'auction/getDetail',
   async (payload, { dispatch }) => {

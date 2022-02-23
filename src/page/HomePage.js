@@ -18,7 +18,10 @@ import {
   getHotArtistThunk,
   getTopCollectorListThunk,
 } from '../features/main/MainThunks';
-import { getAuctionListThunk } from '../features/auction/AuctionThunks';
+import {
+  getAuctionListThunk,
+  getSortedAuctionListThunk,
+} from '../features/auction/AuctionThunks';
 
 const ImageButton = styled(ButtonBase)(({ height, theme }) => ({
   position: 'relative',
@@ -73,7 +76,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const topCollectorList = useSelector((state) => state.main.topCollectorList);
   const hotArtist = useSelector((state) => state.main.hotArtist);
-  const auctionList = useSelector((state) => state.auction.auctionList);
+  const auctionList = useSelector((state) => state.auction.sortedAuctionList);
 
   useEffect(async () => {
     await dispatch(getTopCollectorListThunk());
@@ -84,7 +87,7 @@ const HomePage = () => {
   }, []);
 
   useEffect(async () => {
-    await dispatch(getAuctionListThunk({ category: '', sort: '' }));
+    await dispatch(getSortedAuctionListThunk());
   }, []);
 
   return (

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   auctionList: [],
+  sortedAuctionList: [],
   auctionDetail: {
     id: -1,
     pieceId: -1,
@@ -33,6 +34,9 @@ const auctionSlice = createSlice({
   reducers: {
     setAuctionList(state, { payload }) {
       state.auctionList = payload;
+    },
+    setSortedAuctionList(state, { payload }) {
+      state.sortedAuctionList = payload;
     },
     setAuctionDetail(state, { payload }) {
       state.auctionDetail = payload;
