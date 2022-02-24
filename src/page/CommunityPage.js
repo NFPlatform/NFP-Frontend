@@ -14,12 +14,16 @@ const CommunityPage = () => {
       <img
         src={communityBackgroundImage}
         alt="communityBackgroundImage"
-        style={{ objectFit: 'contain', minWidth: 700, maxWidth: 1286 }}
+        style={{
+          objectFit: 'cover',
+          height: '100%',
+          width: '100%',
+        }}
       />
       <Stack
         direction={'row'}
-        spacing={30}
-        style={{ position: 'absolute', top: '575px' }}
+        spacing={50}
+        style={{ position: 'absolute', top: '830px' }}
       >
         <img
           src={moveVoteBtn}

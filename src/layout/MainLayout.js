@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import ArtistRankPage from '../page/ArtistRankPage';
 import CommunityPage from '../page/CommunityPage';
 import OpinionPage from '../page/OpinionPage';
+import GiveOpinionPage from '../page/GiveOpinionPage';
 
 const MainLayout = ({ match }) => {
   useEffect(() => {}, []);
@@ -73,6 +74,11 @@ const MainLayout = ({ match }) => {
               exact
               path={`${match.path}/community/opinion`}
               component={OpinionPage}
+            />
+            <Route
+              exact
+              path={`${match.path}/community/opinion/give`}
+              component={GiveOpinionPage}
             />
             <Route exact path={`${match.path}/my`} component={MyPage} />
           </Switch>
