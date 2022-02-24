@@ -45,7 +45,7 @@ const AuctionCard = ({
             >
               <Avatar
                 alt="ArtistImg06"
-                src={`http://localhost:6040/user/${sellerId}/img`}
+                src={`https://api.nfplatform.com/user/${sellerId}/img`}
               />
               <Box>
                 <Typography

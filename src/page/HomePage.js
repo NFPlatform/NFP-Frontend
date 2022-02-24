@@ -239,7 +239,10 @@ const HomePage = () => {
                     {i + 1}
                   </Typography>
                 </Box>
-                <Avatar alt="Remy Sharp" src={ArtistImg06} />
+                <Avatar
+                  alt={ArtistImg06}
+                  src={`https://api.nfplatform.com/user/${value.id}/img`}
+                />
                 <Stack direction="column">
                   <Typography
                     component="div"

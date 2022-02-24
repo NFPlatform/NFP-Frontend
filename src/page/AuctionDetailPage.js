@@ -240,7 +240,10 @@ const AuctionDetailPage = ({ match }) => {
                 아티스트
               </Typography>
               <Stack direction={'row'} spacing={2} alignItems={'center'}>
-                <Avatar alt="ArtistImg03" src={ArtistImg03} />
+                <Avatar
+                  alt={ArtistImg03}
+                  src={`https://api.nfplatform.com/user/${auctionDetail.piece.artist.id}/img`}
+                />
                 <Typography
                   variant={'body2'}
                   letterSpacing={-0.5}
@@ -270,7 +273,10 @@ const AuctionDetailPage = ({ match }) => {
                 소유자
               </Typography>
               <Stack direction={'row'} spacing={2} alignItems={'center'}>
-                <Avatar alt="ArtistImg03" src={ArtistImg03} />
+                <Avatar
+                  alt={ArtistImg03}
+                  src={`https://api.nfplatform.com/user/${auctionDetail.seller.id}/img`}
+                />
                 <Typography
                   variant={'body2'}
                   letterSpacing={-0.5}
