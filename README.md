@@ -1,6 +1,2 @@
-# 서비스 플로우
-![image](https://user-images.githubusercontent.com/75825682/155685911-1a2d7998-ce9a-4c21-a289-cde305dd615c.png)
-
-# 개발 환경
-
-![image](https://user-images.githubusercontent.com/75825682/155685936-63d3b179-d44f-4404-a60f-41f0e615b024.png)
+![서비스 플로우](https://user-images.githubusercontent.com/75825682/155686050-002cf6f8-9f3d-4f05-a308-d1556f82726a.png)
+![개발환경](https://user-images.githubusercontent.com/75825682/155686063-d97eb374-cd5d-434e-885f-7aaa7aceaff0.png)
